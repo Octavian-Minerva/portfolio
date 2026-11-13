@@ -183,7 +183,7 @@ WORK = [
 
 # ---------------------------------------------------------------- 5. skills audit and reflection (marked requirement)
 SKILLS_HEAD = "Skills audit and reflection"
-SKILLS_KICKER = "Skills developed in ART20003 and beyond"
+SKILLS_KICKER = "Research, technology and communication"
 # Skill areas: each card has a heading, a short paragraph of evidence and a few labels.
 SKILL_GROUPS = [
     {
