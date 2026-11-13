@@ -1,0 +1,8 @@
+# Whitelist: only the site source and the built site are published.
+/*
+!/.gitignore
+!/README.md
+!/site-src/
+!/site/
+site-src/.venv/
+__pycache__/
