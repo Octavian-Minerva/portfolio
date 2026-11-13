@@ -56,7 +56,7 @@ PHOTO = ("ryan-portrait.jpg", "Ryan sitting on a rocky summit above a layer of c
 
 # ---------------------------------------------------------------- 2. about
 ABOUT_HEAD = "About"
-PURPOSE = Draft("I am most interested in studying how power is held and reproduced over time, particularly through the organisation of work, and how increasing automation may redistribute it. I am drawn to difficult problems that reward sustained attention, and I would rather be challenged than settle into routine.")
+PURPOSE = Draft("I am most interested in studying how power is held and reproduced over time, particularly through the organisation of work, and how increasing automation may redistribute it. Difficult problems that reward sustained attention suit me best, and I would rather be challenged than settle into routine.")
 ABOUT_BIO = Draft("Since I was eighteen I have worked in street fundraising, hospitality, COVID-19 pathology collection (including hotel quarantine) and, for nearly four years, customer service and administration at a self-storage business. Each of these workplaces organised labour differently, and observing them first-hand has shaped my interest in how work is structured and whom it serves. Time spent travelling, often well away from the usual tourist routes, has shaped my thinking in a similar way, particularly about how differently inequality is lived from place to place. I returned to study in 2025 through a university pathway diploma.")
 INTERESTS_LABEL = "Questions I'm interested in"
 INTERESTS = Draft(["Who holds power, how is it maintained over time, and why do those without it so often accept arrangements that work against them?", "How would power be distributed in a society whose economy no longer needs most people's labour?", "Why do people with shared material interests come to see themselves as opponents, divided by race or income, while the wealthiest go largely unchallenged?"])
@@ -121,7 +121,7 @@ WORK = [
         "unit_code": "PHI10009", "unit_name": "Introduction to Power in the Digital Age", "year": "2026",
         "topic": Draft("Does technological progress distribute power or concentrate it?"),
         "tags": ["Power", "Automation", "Platform monopolies"],
-        "blurb": Draft("I argue that the outcome depends less on the technology than on the social and institutional frameworks into which it emerges. Drawing on Lukes and Clegg, I trace how platform monopolies and a research agenda tilted towards labour-replacing automation concentrate power, and how policy intervention could distribute its gains more widely."),
+        "blurb": Draft("Whether progress distributes or concentrates power depends less on the technology than on the social and institutional frameworks into which it emerges. Drawing on Lukes and Clegg, I trace how platform monopolies and a research agenda tilted towards labour-replacing automation concentrate power, and how policy intervention could distribute its gains more widely."),
     },
     {
         "title": "Deterring Arrival: Asylum Policy in Australia and the United States",
@@ -132,7 +132,7 @@ WORK = [
         "unit_code": "SOC20013", "unit_name": "Race, Ethnicity and Migration", "year": "2026",
         "topic": Draft("How do Australia and the United States keep asylum seekers from reaching the territory where they could claim protection?"),
         "tags": ["Asylum policy", "Migration", "Comparative policy"],
-        "blurb": Draft("I argue that both countries have constructed similar architectures of deterrence in response to comparable moral panics. Differences in form, offshore detention in Australia and land buffers in the United States, are largely attributable to geography. The more significant contrast is durability: Australia's bipartisan consensus differs from US policy, which shifts between administrations and is contested in the courts."),
+        "blurb": Draft("Both countries have constructed similar architectures of deterrence in response to comparable moral panics. Geography explains most differences in form, offshore detention in Australia and land buffers in the United States. The more significant contrast is durability: Australia's bipartisan consensus differs from US policy, which shifts between administrations and is contested in the courts."),
     },
     {
         "title": "Insulating News from the Market and the State",
@@ -165,7 +165,7 @@ WORK = [
         "unit_code": "HIS10003", "unit_name": "Global History", "year": "2026",
         "topic": Draft("Why do three major accounts of the Cold War, written before, shortly after and a decade after the Soviet collapse, reach different conclusions?"),
         "tags": ["Cold War", "International relations", "Historiography"],
-        "blurb": Draft("Comparing Hobsbawm, Gaddis and Jervis, I argue that the period in which each wrote, the information available to them and their theoretical frameworks shaped their accounts. They largely agree on the observable features of the conflict, diverge on what drove the superpower rivalry, and converge, by different routes, on the Soviet role in ending it."),
+        "blurb": Draft("The period in which Hobsbawm, Gaddis and Jervis each wrote, the information available to them and their theoretical frameworks all shaped their accounts. They largely agree on the observable features of the conflict, diverge on what drove the superpower rivalry, and converge, by different routes, on the Soviet role in ending it."),
     },
     {
         "title": "Not Our Game",
@@ -201,7 +201,7 @@ SKILL_GROUPS = [
     },
 ]
 REFLECTION_HEAD = "Reflection: the Not Our Game campaign"
-SKILLS_AUDIT = Draft("""Not Our Game was the first social campaign I have planned from inception to delivery, and its messaging strategy was the aspect from which I learnt most. The most striking available figure was the 40.7% rise in recorded domestic assaults in New South Wales on State of Origin nights, yet the research advised against leading with it. Publicising the prevalence of a harmful behaviour can normalise it, and a campaign that treats every fan as part of the problem risks alienating the audience it most needs to reach. The fan-facing material therefore begins from a view most men already hold, that disrespect is unacceptable, and suggests practical ways to act on it.
+SKILLS_AUDIT = Draft("""Not Our Game was the first social campaign I have planned from inception to delivery, and its messaging strategy was the aspect from which I learnt most. The most striking available figure was the 40.7% rise in domestic assaults on Origin nights, yet the research advised against leading with it. Publicising the prevalence of a harmful behaviour can normalise it, and a campaign that treats every fan as part of the problem risks alienating the audience it most needs to reach. The fan-facing material therefore begins from a view most men already hold, that disrespect is unacceptable, and suggests practical ways to act on it.
 
 The experience has made me more attentive to how framing shapes the reception of an argument, independently of its accuracy. Working within a group also required me to coordinate my sections with others' work and deadlines. In future research and writing, I intend to test my assumptions about framing against the available evidence.""")
 SKILLS_LIST_LABEL = "Skills"
@@ -214,7 +214,7 @@ EXPERIENCE = [
         "role": Draft("AI systems developer"),
         "org": "AI agent platform, contract",
         "dates": "June 2026 to present",
-        "text": Draft("I built an independent review agent that checks proposed code changes against the existing codebase, suggests fixes and re-reviews them until they pass; a 'factory floor' view that shows the status of every agent at a glance, with an assistant agent that summarises activity on request; and an orchestration mode that divides a plan into tickets for separate agents and assembles their output. I tested this work in a separate development deployment. I am now beginning work adapting the platform to the needs of client businesses."),
+        "text": Draft("Work so far includes an independent review agent that checks proposed code changes against the existing codebase, suggests fixes and re-reviews them until they pass; a 'factory floor' view that shows the status of every agent at a glance, with an assistant agent that summarises activity on request; and an orchestration mode that divides a plan into tickets for separate agents and assembles their output. Each feature was tested in a separate development deployment. I am now beginning work adapting the platform to the needs of client businesses."),
     },
     {
         "role": "Arx, personal project",

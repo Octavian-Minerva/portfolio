@@ -164,7 +164,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;lette
 p{margin:0 0 1em}
 /* Ryan's preference: justified body text, with hyphenation (lang="en-AU") to keep word gaps even in narrow columns */
 main p{text-align:justify;-webkit-hyphens:auto;hyphens:auto;hyphenate-limit-chars:8 4 3}
-main p.lede,main p.kicker,main p.unit,main p.org,main p.actions,main p.crumb,main p.big,main p.name,main p.email-row{text-align:left;-webkit-hyphens:manual;hyphens:manual}
+main .descriptor p,main p.topic,main p.lede,main p.kicker,main p.unit,main p.org,main p.actions,main p.crumb,main p.big,main p.name,main p.email-row{text-align:left;-webkit-hyphens:manual;hyphens:manual}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad)}
 .skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:4px;z-index:10;text-decoration:none}
 .skip:focus{top:12px;color:var(--bg)}
@@ -200,7 +200,7 @@ html{scroll-padding-top:96px}
 /* hero */
 .hero{padding:clamp(56px,9vw,120px) 0 clamp(56px,8vw,104px)}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:clamp(32px,6vw,88px);align-items:end}
-.hero h1{font-size:clamp(54px,9vw,120px);line-height:.94;letter-spacing:-.025em;font-weight:380;margin:0 0 28px}
+.hero h1{font-size:clamp(54px,9vw,120px);line-height:1.02;letter-spacing:-.025em;font-weight:380;margin:0 0 28px}
 .hero .descriptor{font-family:var(--serif);font-size:clamp(22px,2.4vw,28px);line-height:1.35;max-width:30ch}
 .portrait{margin:0;position:relative}
 .portrait img{border-radius:4px;aspect-ratio:4/5;object-fit:cover;width:100%}
