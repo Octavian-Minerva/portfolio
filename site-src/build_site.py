@@ -537,6 +537,7 @@ if __name__ == '__main__':
     for src, pub in PDFS: shutil.copyfile(os.path.join(ESSAYS, src), os.path.join(OUT, 'files', pub))
     open(os.path.join(OUT, 'style.css'), 'w').write(CSS)
     open(os.path.join(OUT, 'favicon.svg'), 'w').write(FAVICON)
+    open(os.path.join(OUT, '.nojekyll'), 'w').write('')   # GitHub Pages: publish files untouched, no Jekyll
     open(os.path.join(OUT, '_headers'), 'w').write(
         "/*\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: DENY\n"
         "/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n/images/*\n  Cache-Control: public, max-age=604800\n")
