@@ -35,6 +35,31 @@
     });
   };
   addEventListener('scroll', spy, { passive: true }); spy();
+  // Selected work carousel: arrows, a position counter, and buttons that disable at either end
+  const rail = d.querySelector('.rail'), ctl = d.querySelector('.rail-controls');
+  if (rail && ctl) {
+    const cards = [...rail.children], prev = ctl.querySelector('.prev'), next = ctl.querySelector('.next'), count = ctl.querySelector('.rail-count');
+    const step = () => cards[1] ? cards[1].offsetLeft - cards[0].offsetLeft : rail.clientWidth;
+    const update = () => {
+      const scrollable = rail.scrollWidth > rail.clientWidth + 4;
+      ctl.hidden = !scrollable;
+      if (!scrollable) return;
+      const first = Math.round(rail.scrollLeft / step());
+      const shown = Math.max(1, Math.round(rail.clientWidth / step()));
+      count.textContent = `${first + 1}\u2013${Math.min(cards.length, first + shown)} of ${cards.length}`;
+      prev.disabled = rail.scrollLeft <= 2;
+      next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2;
+    };
+    prev.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => rail.scrollBy({ left: step(), behavior: 'smooth' }));
+    rail.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    addEventListener('resize', update); update();
+    rail.addEventListener('keydown', e => {
+      if (e.target !== rail) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+    });
+  }
   // Light and dark themes: follow the system unless the visitor has chosen
   const mq = matchMedia('(prefers-color-scheme: dark)');
   const now = () => root.dataset.theme || (mq.matches ? 'dark' : 'light');

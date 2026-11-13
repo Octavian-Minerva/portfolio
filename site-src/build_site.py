@@ -84,7 +84,7 @@ def read_and_pdf(w):
     if not w.get('read'):
         return pdf_button(w)
     pdf = pdf_button(w)
-    pdf_link = re.search(r'<a class="btn".*?</a>', pdf, flags=re.S).group(0) if pdf else ''
+    pdf_link = re.search(r'<a class="btn".*?</a>', pdf, flags=re.S).group(0).replace('Download PDF', 'PDF', 1) if pdf else ''
     return (f'<p class="actions"><a class="btn solid" href="{w["read"]["page"]}">Read the essay '
             f'<span class="arr" aria-hidden="true">&rarr;</span></a>{pdf_link}</p>')
 
@@ -384,6 +384,50 @@ html[data-theme=dark]{--ink:#ebe7e0;--muted:#b4aca0;--bg:#141619;--paper:#1d2024
 @media (prefers-color-scheme:dark){html:not([data-theme=light]){--ink:#ebe7e0;--muted:#b4aca0;--bg:#141619;--paper:#1d2024;--line:#363a41;--soft:#1b1e22;--accent:#8db4e8;--accent-ink:#b8d1f2;--tint:#18202b;--on-accent:#0f141a;--topic:#d8d2c8;--bar:#23272c;--dot:#4a4f57;--head-bg:rgba(20,22,25,.86);color-scheme:dark}}
 html[data-theme-now=dark] .card .thumb,html[data-theme-now=dark] .frame{border-color:#2b2f35}
 @media print{.site-head,.skip,.actions,.copy,.theme-toggle,.progress{display:none!important}html,body{background:#fff!important;color:#000!important}body{font-size:11pt}.sec{padding:14pt 0;border-top:1px solid #ccc}.skills{background:none!important}.hero,.card,.skill-group,.xp li,.exploring{break-inside:avoid}.thumb,.portrait{display:none}main a[href^=http]::after,main a[href$='.pdf']::after{content:' (' attr(href) ')';font-size:9pt;color:#444;word-break:break-all}}
+.work-head{display:flex;align-items:end;justify-content:space-between;gap:16px 32px;flex-wrap:wrap}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 2 * clamp(20px,2.4vw,32px)) / 3);gap:clamp(20px,2.4vw,32px);
+ overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 18px;margin:0 -2px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.rail:focus-visible{outline:3px solid var(--accent);outline-offset:6px}
+.rail>.card{scroll-snap-align:start;border:1px solid var(--line);border-radius:8px;background:var(--paper);overflow:hidden;display:flex;flex-direction:column;padding:0}
+.card .media{height:168px;border-bottom:1px solid var(--line);overflow:hidden;background:var(--tint)}
+.card .media a{display:block;height:100%}
+.card .media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .35s ease}
+.card .media.fit img{object-fit:cover}
+.card .media a:hover img{transform:scale(1.03)}
+.page-preview{height:100%;padding:30px 20px 0;position:relative;
+ background:repeating-linear-gradient(180deg,transparent 0 25px,rgba(29,78,137,.10) 25px 26px),var(--tint)}
+.page-preview p{margin:0;font-family:var(--serif);font-size:15.5px;line-height:26px;color:var(--topic);text-align:left!important;hyphens:manual}
+.page-preview::after{content:"";position:absolute;inset:auto 0 0 0;height:70%;background:linear-gradient(transparent,var(--tint))}
+.card-body{display:flex;flex-direction:column;flex:1;padding:18px 20px 20px}
+.card-body .unit{margin-bottom:10px}
+.card-body h3{font-size:clamp(21px,1.7vw,24px);margin:0 0 10px}
+.card-body .topic{font-size:16.5px;margin:0 0 12px}
+.card-body .tags{margin:0 0 12px}
+.card-actions{margin-top:auto}
+.card-actions .actions{margin:14px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.card-actions .btn{padding:10px 16px;font-size:15px}
+.card-actions .btn:first-child{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.card-actions .btn:first-child:hover{background:var(--accent-ink);border-color:var(--accent-ink);color:var(--on-accent)}
+.card-actions .btn:not(:first-child){border-color:transparent;background:none;color:var(--accent);padding-left:2px;padding-right:2px}
+.card-actions .btn:not(:first-child):hover{background:none;color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px}
+.more summary{cursor:pointer;font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);list-style:none;display:inline-flex;align-items:center;gap:6px;padding:4px 0}
+.more summary::-webkit-details-marker{display:none}
+.more summary::after{content:"+";font-size:17px;line-height:1;font-weight:400}
+.more[open] summary::after{content:"\2212"}
+.more[open] summary{margin-bottom:8px}
+.more p{font-size:16px}
+.rail-controls{display:flex;align-items:center;gap:12px}
+.rail-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;font-size:18px;display:grid;place-items:center}
+.rail-btn:hover:not(:disabled){background:var(--ink);color:var(--bg)}
+.rail-btn:disabled{opacity:.3;cursor:default}
+.rail-count{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:5.5em;text-align:center}
+.xp .more summary{font-size:13px}
+@media (max-width:1100px){.rail{grid-auto-columns:calc((100% - clamp(20px,2.4vw,32px)) / 2)}}
+@media (max-width:700px){
+ .rail{grid-auto-flow:row;grid-auto-columns:auto;overflow:visible;scroll-snap-type:none;padding:0;margin:0}
+ .rail-controls{display:none!important}
+}
+@media (prefers-reduced-motion:reduce){.rail{scroll-behavior:auto}.card .media img{transition:none}}
 @media (max-width:900px){.site-head{transition:transform .25s ease,box-shadow .2s ease}.site-head.head-hidden{transform:translateY(-100%)}}
 @media (max-width:900px) and (prefers-reduced-motion:reduce){.site-head{transition:none}}
 @media (max-width:600px){
@@ -405,7 +449,7 @@ html[data-theme-now=dark] .card .thumb,html[data-theme-now=dark] .frame{border-c
 }
 """.replace('ACCENT', ACCENT)
 
-SITE_JS = '(() => {\n  const d = document, root = d.documentElement;\n  const head = d.querySelector(\'.site-head\'), bar = d.querySelector(\'.progress\');\n  // Header shadow and reading progress\n  const onScroll = () => {\n    const max = root.scrollHeight - innerHeight;\n    if (head) head.classList.toggle(\'scrolled\', scrollY > 4);\n    if (bar) bar.style.setProperty(\'--p\', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0);\n  };\n  addEventListener(\'scroll\', onScroll, { passive: true }); addEventListener(\'resize\', onScroll); onScroll();\n  // On small screens, tuck the header away while scrolling down and bring it back on the way up\n  let lastY = scrollY;\n  const small = matchMedia(\'(max-width: 900px)\');\n  addEventListener(\'scroll\', () => {\n    const y = scrollY;\n    if (head && small.matches) {\n      if (y > lastY + 6 && y > 140 && !head.contains(d.activeElement)) head.classList.add(\'head-hidden\');\n      else if (y < lastY - 6 || y <= 140) head.classList.remove(\'head-hidden\');\n    } else if (head) head.classList.remove(\'head-hidden\');\n    lastY = y;\n  }, { passive: true });\n  if (head) head.addEventListener(\'focusin\', () => head.classList.remove(\'head-hidden\'));\n  // Highlight the section currently in view: the last section whose top has passed 40% of the screen\n  const pairs = [...d.querySelectorAll(\'.nav a[href*="#"]\')]\n    .map(a => [d.getElementById(a.hash.slice(1)), a]).filter(([sec]) => sec);\n  const spy = () => {\n    if (!pairs.length) return;\n    let hit = null;\n    for (const p of pairs) if (p[0].getBoundingClientRect().top <= innerHeight * 0.4) hit = p;\n    if (innerHeight + scrollY >= root.scrollHeight - 2) hit = pairs[pairs.length - 1];\n    pairs.forEach(([, a]) => {\n      const on = hit && a === hit[1];\n      a.classList.toggle(\'is-current\', on);\n      if (on) a.setAttribute(\'aria-current\', \'location\'); else a.removeAttribute(\'aria-current\');\n    });\n  };\n  addEventListener(\'scroll\', spy, { passive: true }); spy();\n  // Light and dark themes: follow the system unless the visitor has chosen\n  const mq = matchMedia(\'(prefers-color-scheme: dark)\');\n  const now = () => root.dataset.theme || (mq.matches ? \'dark\' : \'light\');\n  const toggle = d.querySelector(\'.theme-toggle\');\n  const sync = () => {\n    root.dataset.themeNow = now();\n    if (toggle) toggle.setAttribute(\'aria-label\', now() === \'dark\' ? \'Switch to light theme\' : \'Switch to dark theme\');\n  };\n  if (toggle) {\n    toggle.hidden = false;\n    toggle.addEventListener(\'click\', () => {\n      root.dataset.theme = now() === \'dark\' ? \'light\' : \'dark\';\n      try { localStorage.setItem(\'theme\', root.dataset.theme); } catch (e) {}\n      sync();\n    });\n  }\n  if (mq.addEventListener) mq.addEventListener(\'change\', sync);\n  sync();\n  // Copy email addresses\n  const live = d.getElementById(\'live\');\n  if (navigator.clipboard) d.querySelectorAll(\'.copy\').forEach(b => {\n    b.hidden = false;\n    b.addEventListener(\'click\', async () => {\n      try {\n        await navigator.clipboard.writeText(b.dataset.copy);\n        b.textContent = \'Copied\'; if (live) live.textContent = \'Email address copied\';\n        setTimeout(() => { b.textContent = \'Copy\'; }, 1800);\n      } catch (e) {}\n    });\n  });\n})();\n'
+SITE_JS = '(() => {\n  const d = document, root = d.documentElement;\n  const head = d.querySelector(\'.site-head\'), bar = d.querySelector(\'.progress\');\n  // Header shadow and reading progress\n  const onScroll = () => {\n    const max = root.scrollHeight - innerHeight;\n    if (head) head.classList.toggle(\'scrolled\', scrollY > 4);\n    if (bar) bar.style.setProperty(\'--p\', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0);\n  };\n  addEventListener(\'scroll\', onScroll, { passive: true }); addEventListener(\'resize\', onScroll); onScroll();\n  // On small screens, tuck the header away while scrolling down and bring it back on the way up\n  let lastY = scrollY;\n  const small = matchMedia(\'(max-width: 900px)\');\n  addEventListener(\'scroll\', () => {\n    const y = scrollY;\n    if (head && small.matches) {\n      if (y > lastY + 6 && y > 140 && !head.contains(d.activeElement)) head.classList.add(\'head-hidden\');\n      else if (y < lastY - 6 || y <= 140) head.classList.remove(\'head-hidden\');\n    } else if (head) head.classList.remove(\'head-hidden\');\n    lastY = y;\n  }, { passive: true });\n  if (head) head.addEventListener(\'focusin\', () => head.classList.remove(\'head-hidden\'));\n  // Highlight the section currently in view: the last section whose top has passed 40% of the screen\n  const pairs = [...d.querySelectorAll(\'.nav a[href*="#"]\')]\n    .map(a => [d.getElementById(a.hash.slice(1)), a]).filter(([sec]) => sec);\n  const spy = () => {\n    if (!pairs.length) return;\n    let hit = null;\n    for (const p of pairs) if (p[0].getBoundingClientRect().top <= innerHeight * 0.4) hit = p;\n    if (innerHeight + scrollY >= root.scrollHeight - 2) hit = pairs[pairs.length - 1];\n    pairs.forEach(([, a]) => {\n      const on = hit && a === hit[1];\n      a.classList.toggle(\'is-current\', on);\n      if (on) a.setAttribute(\'aria-current\', \'location\'); else a.removeAttribute(\'aria-current\');\n    });\n  };\n  addEventListener(\'scroll\', spy, { passive: true }); spy();\n  // Selected work carousel: arrows, a position counter, and buttons that disable at either end\n  const rail = d.querySelector(\'.rail\'), ctl = d.querySelector(\'.rail-controls\');\n  if (rail && ctl) {\n    const cards = [...rail.children], prev = ctl.querySelector(\'.prev\'), next = ctl.querySelector(\'.next\'), count = ctl.querySelector(\'.rail-count\');\n    const step = () => cards[1] ? cards[1].offsetLeft - cards[0].offsetLeft : rail.clientWidth;\n    const update = () => {\n      const scrollable = rail.scrollWidth > rail.clientWidth + 4;\n      ctl.hidden = !scrollable;\n      if (!scrollable) return;\n      const first = Math.round(rail.scrollLeft / step());\n      const shown = Math.max(1, Math.round(rail.clientWidth / step()));\n      count.textContent = `${first + 1}\\u2013${Math.min(cards.length, first + shown)} of ${cards.length}`;\n      prev.disabled = rail.scrollLeft <= 2;\n      next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2;\n    };\n    prev.addEventListener(\'click\', () => rail.scrollBy({ left: -step(), behavior: \'smooth\' }));\n    next.addEventListener(\'click\', () => rail.scrollBy({ left: step(), behavior: \'smooth\' }));\n    rail.addEventListener(\'scroll\', () => requestAnimationFrame(update), { passive: true });\n    addEventListener(\'resize\', update); update();\n    rail.addEventListener(\'keydown\', e => {\n      if (e.target !== rail) return;\n      if (e.key === \'ArrowRight\') { e.preventDefault(); next.click(); }\n      if (e.key === \'ArrowLeft\') { e.preventDefault(); prev.click(); }\n    });\n  }\n  // Light and dark themes: follow the system unless the visitor has chosen\n  const mq = matchMedia(\'(prefers-color-scheme: dark)\');\n  const now = () => root.dataset.theme || (mq.matches ? \'dark\' : \'light\');\n  const toggle = d.querySelector(\'.theme-toggle\');\n  const sync = () => {\n    root.dataset.themeNow = now();\n    if (toggle) toggle.setAttribute(\'aria-label\', now() === \'dark\' ? \'Switch to light theme\' : \'Switch to dark theme\');\n  };\n  if (toggle) {\n    toggle.hidden = false;\n    toggle.addEventListener(\'click\', () => {\n      root.dataset.theme = now() === \'dark\' ? \'light\' : \'dark\';\n      try { localStorage.setItem(\'theme\', root.dataset.theme); } catch (e) {}\n      sync();\n    });\n  }\n  if (mq.addEventListener) mq.addEventListener(\'change\', sync);\n  sync();\n  // Copy email addresses\n  const live = d.getElementById(\'live\');\n  if (navigator.clipboard) d.querySelectorAll(\'.copy\').forEach(b => {\n    b.hidden = false;\n    b.addEventListener(\'click\', async () => {\n      try {\n        await navigator.clipboard.writeText(b.dataset.copy);\n        b.textContent = \'Copied\'; if (live) live.textContent = \'Email address copied\';\n        setTimeout(() => { b.textContent = \'Copy\'; }, 1800);\n      } catch (e) {}\n    });\n  });\n})();\n'
 
 def build_og_image():
     """1200x630 link-preview card: name, degree line, descriptor and photo."""
@@ -517,28 +561,37 @@ def page_home():
              + (f'<div class="exploring"><p class="kicker">{smart(C.INTERESTS_LABEL)}</p><div>{listing(C.INTERESTS, "About: interests")}</div></div>' if C.INTERESTS is not None else '')
              + (f'<div class="exploring"><p class="kicker">{smart(C.EXPLORING_LABEL)}</p><div>{listing(C.EXPLORING, "About: now")}</div></div>' if C.EXPLORING is not None else '')
              + '</div></div></section>')
-    # work
+    # work: compact cards in a carousel; every card has the same media strip
     cards = ''
     for i, w in enumerate(C.WORK):
         where = f'Work card {i + 1} ({w["unit_code"]}): blurb'
         tags = ''.join(f'<li>{smart(t)}</li>' for t in w.get('tags', []))
         href = card_href(w)
         title_html = f'<a class="card-link" href="{href}">{smart(w["title"])}</a>' if href else smart(w["title"])
-        text = (f'<div>{unit_line(w)}<h3><span class="type">{smart(w["type"])}</span>{title_html}</h3>'
-                f'{prose(w["topic"], where.replace("blurb", "topic line"), "topic")}<ul class="tags" aria-label="Topics">{tags}</ul>{prose(w["blurb"], where)}{read_and_pdf(w)}{link_buttons(w)}</div>')
-        if w.get('slides'):
-            figs = ''.join(f'<figure>{img(s, a, [700, 1400], "(max-width:900px) 92vw, 640px" if j == 0 else "(max-width:900px) 45vw, 320px")}</figure>'
-                           for j, (s, a) in enumerate(w['slides']))
-            cards += f'<article class="card wide"><div class="slides">{figs}</div>{text}</article>'
+        if w.get('read'):   # essays: a ruled "page" carrying the essay's own opening line
+            first = next(t for k, t in essay_blocks(w) if k == 'p')
+            opening = ' '.join(re.sub(r'<[^>]+>', '', first).split()[:40])
+            media = f'<div class="page-preview"><p>{opening}</p></div>'
+        elif w.get('thumb'):
+            media = img(w["thumb"][0], w["thumb"][1], [480, 960], "(max-width:700px) 92vw, 400px")
         else:
-            pic = img(w["thumb"][0], w["thumb"][1], [480, 960], "(max-width:700px) 92vw, 400px") if w.get('thumb') else ''
-            if pic and href:   # duplicate of the title link, so hidden from keyboard and screen readers
-                pic = f'<a href="{href}" tabindex="-1" aria-hidden="true">{pic}</a>'
-            thumb = (f'<figure class="thumb{" fit" if w.get("thumb_fit") == "contain" else ""}">{pic}</figure>' if pic else '')
-            cards += f'<article class="card">{thumb}{text}</article>'
+            media = ''
+        if media and href:   # duplicate of the title link, so hidden from keyboard and screen readers
+            media = f'<a href="{href}" tabindex="-1" aria-hidden="true">{media}</a>'
+        media = f'<div class="media{" fit" if w.get("thumb_fit") == "contain" else ""}">{media}</div>' if media else ''
+        summary = (f'<details class="more"><summary>Summary</summary>{prose(w["blurb"], where)}</details>'
+                   if w.get('blurb') is not None else '')
+        cards += (f'<article class="card" aria-roledescription="slide" aria-label="{i + 1} of {len(C.WORK)}">{media}<div class="card-body">'
+                  f'{unit_line(w)}<h3><span class="type">{smart(w["type"])}</span>{title_html}</h3>'
+                  f'{prose(w["topic"], where.replace("blurb", "topic line"), "topic")}<ul class="tags" aria-label="Topics">{tags}</ul>'
+                  f'{summary}<div class="card-actions">{read_and_pdf(w)}{link_buttons(w)}</div></div></article>')
+    controls = (f'<div class="rail-controls" hidden>'
+                f'<button class="rail-btn prev" type="button" aria-label="Previous pieces of work"><span aria-hidden="true">&larr;</span></button>'
+                f'<span class="rail-count" aria-live="polite">1&ndash;3 of {len(C.WORK)}</span>'
+                f'<button class="rail-btn next" type="button" aria-label="Next pieces of work"><span aria-hidden="true">&rarr;</span></button></div>')
     work = (f'<section class="sec" id="work" aria-labelledby="work-h"><div class="wrap">'
-            f'<div class="work-head"><p class="kicker"><span class="num">02</span>Essays, presentations and campaigns</p><h2 id="work-h">{smart(C.WORK_HEAD)}</h2></div>'
-            f'<div class="cards">{cards}</div></div></section>')
+            f'<div class="work-head"><div><p class="kicker"><span class="num">02</span>Essays, presentations and campaigns</p><h2 id="work-h">{smart(C.WORK_HEAD)}</h2></div>{controls}</div>'
+            f'<div class="rail" role="region" aria-roledescription="carousel" aria-label="Selected work" tabindex="0">{cards}</div></div></section>')
     # skills
     if C.SKILLS_LIST is None: skl = ''
     elif isinstance(C.SKILLS_LIST, RyanWrites): skl = f'<p class="kicker">{smart(C.SKILLS_LIST_LABEL)}</p>' + ph(C.SKILLS_LIST, 'Skills: list')
@@ -556,7 +609,7 @@ def page_home():
     def xp_rows(items, label):
         return ''.join(f'<li><div class="dates">{inline(e["dates"], f"{label} {i + 1}: dates")}</div>'
                        f'<div><h3>{inline(e["role"], f"{label} {i + 1}: role")}</h3><p class="org">{smart(e["org"])}</p></div>'
-                       f'<div class="text">{prose(e["text"], f"{label} {i + 1}: description")}</div></li>'
+                       + (f'<div class="text"><details class="more"><summary>Details</summary>{prose(e["text"], f"{label} {i + 1}: description")}</details></div></li>' if e.get("text") else '<div class="text"></div></li>')
                        for i, e in enumerate(items))
     rows = xp_rows([e for e in C.EXPERIENCE if not e.get('earlier')], 'Experience')
     earlier = [e for e in C.EXPERIENCE if e.get('earlier')]
@@ -616,8 +669,11 @@ def page_featured():
 
 ESSAY_CHECKS = []   # (page, differences) from essays.verify, reported by the build
 
+_ESSAY_CACHE = {}
+
 def essay_blocks(w):
     r = w['read']
+    if r['page'] in _ESSAY_CACHE: return _ESSAY_CACHE[r['page']]
     src = os.path.join(ESSAYS, r['src'])
     blocks = essays.from_docx(src) if src.endswith('.docx') else essays.from_pdf(src)
     for old, new in r.get('fixes', []):
@@ -626,6 +682,7 @@ def essay_blocks(w):
         k, t = blocks[hits[0]]; blocks[hits[0]] = (k, t.replace(old, new))
     pdf = os.path.join(ESSAYS, w['pdf'][0])
     ESSAY_CHECKS.append((r['page'], essays.verify(blocks, pdf, w['title'])))
+    _ESSAY_CACHE[r['page']] = blocks
     return blocks
 
 def essay_nav(w):
