@@ -201,9 +201,9 @@ SKILL_GROUPS = [
     },
 ]
 REFLECTION_HEAD = "Reflection: the Not Our Game campaign"
-SKILLS_AUDIT = Draft("""Not Our Game was the first social campaign I have planned from inception to delivery, and its messaging strategy was the aspect from which I learnt most. The most striking available figure was the 40.7% rise in domestic assaults on Origin nights, yet the research advised against leading with it. Publicising the prevalence of a harmful behaviour can normalise it, and a campaign that treats every fan as part of the problem risks alienating the audience it most needs to reach. The fan-facing material therefore begins from a view most men already hold, that disrespect is unacceptable, and suggests practical ways to act on it.
+SKILLS_AUDIT = Draft("""Planning Not Our Game taught me how a social campaign is built, from defining a problem and its audiences to framing a specific request. I learnt most from the messaging strategy, which I wrote. The most striking available figure was the 40.7% rise in domestic assaults on Origin nights, yet the research advised against leading with it: publicising the prevalence of a harmful behaviour can normalise it, and treating every fan as part of the problem would alienate the audience the campaign most needed. The fan-facing material therefore begins from a view most men already hold, that disrespect is unacceptable, and suggests practical ways to act on it.
 
-The experience has made me more attentive to how framing shapes the reception of an argument, independently of its accuracy. Working within a group also required me to coordinate my sections with others' work and deadlines. In future research and writing, I intend to test my assumptions about framing against the available evidence.""")
+The experience has made me more attentive to how framing shapes the reception of an argument, independently of its accuracy. Writing my sections of a group report was also a change from the individual work that makes up most of my degree. In future research and writing, I intend to test my assumptions about framing against the available evidence.""")
 SKILLS_LIST_LABEL = "Skills"
 SKILLS_LIST = None   # replaced by the tags on each skill area (13 Nov)
 
