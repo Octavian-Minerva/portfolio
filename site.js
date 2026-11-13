@@ -8,6 +8,18 @@
     if (bar) bar.style.setProperty('--p', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0);
   };
   addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll); onScroll();
+  // On small screens, tuck the header away while scrolling down and bring it back on the way up
+  let lastY = scrollY;
+  const small = matchMedia('(max-width: 900px)');
+  addEventListener('scroll', () => {
+    const y = scrollY;
+    if (head && small.matches) {
+      if (y > lastY + 6 && y > 140 && !head.contains(d.activeElement)) head.classList.add('head-hidden');
+      else if (y < lastY - 6 || y <= 140) head.classList.remove('head-hidden');
+    } else if (head) head.classList.remove('head-hidden');
+    lastY = y;
+  }, { passive: true });
+  if (head) head.addEventListener('focusin', () => head.classList.remove('head-hidden'));
   // Highlight the section currently in view: the last section whose top has passed 40% of the screen
   const pairs = [...d.querySelectorAll('.nav a[href*="#"]')]
     .map(a => [d.getElementById(a.hash.slice(1)), a]).filter(([sec]) => sec);
