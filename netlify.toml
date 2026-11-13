@@ -1,0 +1,4 @@
+# Netlify: publish the built site folder as-is (no build step; site/ is generated locally by site-src/build_site.py)
+[build]
+  publish = "site"
+  command = ""
