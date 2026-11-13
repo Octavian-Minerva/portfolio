@@ -67,8 +67,9 @@ def pdf_button(w):
         n = re.search(r'Pages:\s+(\d+)', out); pages = f', {n.group(1)} pages' if n else ''
     except FileNotFoundError: pass
     label = w.get('pdf_label', 'Download PDF' if w.get('read') else 'Read the full essay')
+    note = pages.lstrip(', ') if 'PDF' in label else f'PDF{pages}'   # avoid "Download PDF (PDF, 5 pages)"
     return (f'<p class="actions"><a class="btn" href="files/{pub}">{smart(label)} '
-            f'<span class="btn-note">(PDF{pages})</span></a></p>')
+            f'<span class="btn-note">({note})</span></a></p>')
 
 def card_href(w):
     """Where the card's title and picture lead: the reading page, else the first internal link, else the PDF."""
@@ -600,7 +601,7 @@ def page_featured():
     def sec(h, inner, sid):
         return f'<section class="prose-sec" aria-labelledby="{sid}"><h2 id="{sid}">{smart(h)}</h2><div class="measure">{inner}</div></section>'
     body = (f'<main id="main"><div class="wrap"><section class="page-hero" aria-labelledby="title">'
-            f'<p class="crumb"><a href="index.html#work"><span aria-hidden="true">&larr;</span> {smart(C.NAME)}</a></p>'
+            f'<p class="crumb"><a href="index.html#work"><span aria-hidden="true">&larr;</span> Selected work</a></p>'
             f'<p class="kicker">{smart(F["kicker"])}</p><h1 id="title">{smart(F["title"])}</h1>'
             f'<div class="feature-body"><div>{prose(P["overview"], "Project page: overview", "lede")}'
             f'<div class="actions"><a class="btn solid" href="{F["live_url"]}">{smart(F["live_label"])} <span class="arr" aria-hidden="true">&#8599;</span></a></div></div>'

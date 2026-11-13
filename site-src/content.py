@@ -66,13 +66,13 @@ EXPLORING = Draft(["Halfway through a Bachelor of Arts (Politics, Power and Tech
 
 # ---------------------------------------------------------------- 3. featured project (also feeds the detail page)
 FEATURED = {
-    "kicker": "Featured project",
+    "kicker": "Group campaign strategy",
     "title": "Not Our Game",
     "unit_code": "ART20003",
     "unit_name": "Skills and Strategies for Social Change",
     "year": "2026",
     "type": "Group campaign strategy",
-    "role": "The campaign website, and the artefacts and messaging sections of the report",
+    "role": "The campaign website, and the messaging and artefact sections of the report",
     "live_url": "https://not-our-game.netlify.app",
     "live_label": "Visit the live campaign site",
     "detail_label": "Read about the project",
