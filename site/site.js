@@ -35,30 +35,53 @@
     });
   };
   addEventListener('scroll', spy, { passive: true }); spy();
-  // Selected work carousel: arrows, a position counter, and buttons that disable at either end
-  const rail = d.querySelector('.rail'), ctl = d.querySelector('.rail-controls');
-  if (rail && ctl) {
-    const cards = [...rail.children], prev = ctl.querySelector('.prev'), next = ctl.querySelector('.next'), count = ctl.querySelector('.rail-count');
-    const step = () => cards[1] ? cards[1].offsetLeft - cards[0].offsetLeft : rail.clientWidth;
-    const update = () => {
-      const scrollable = rail.scrollWidth > rail.clientWidth + 4;
-      ctl.hidden = !scrollable;
-      if (!scrollable) return;
-      const first = Math.round(rail.scrollLeft / step());
-      const shown = Math.max(1, Math.round(rail.clientWidth / step()));
-      count.textContent = `${first + 1}\u2013${Math.min(cards.length, first + shown)} of ${cards.length}`;
-      prev.disabled = rail.scrollLeft <= 2;
-      next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2;
+  // Selected work: on wide screens, a centred carousel with the active card in focus
+  const rail = d.querySelector('.rail');
+  if (rail) {
+    const cards = [...rail.children];
+    const prev = d.querySelector('.rail-btn.prev'), next = d.querySelector('.rail-btn.next'), count = d.querySelector('.rail-count');
+    const wide = matchMedia('(min-width: 701px)');
+    let active = 0;
+    const centreOf = el => el.offsetLeft + el.offsetWidth / 2;
+    const goTo = (i, smooth = true) => {
+      i = Math.max(0, Math.min(cards.length - 1, i));
+      rail.scrollTo({ left: centreOf(cards[i]) - rail.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' });
     };
-    prev.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
-    next.addEventListener('click', () => rail.scrollBy({ left: step(), behavior: 'smooth' }));
+    const update = () => {
+      if (!rail.classList.contains('cover')) return;
+      const mid = rail.scrollLeft + rail.clientWidth / 2;
+      let best = 0, dist = Infinity;
+      cards.forEach((c, i) => { const dd = Math.abs(centreOf(c) - mid); if (dd < dist) { dist = dd; best = i; } });
+      active = best;
+      cards.forEach((c, i) => c.classList.toggle('is-active', i === active));
+      count.textContent = `${active + 1} of ${cards.length}`;
+      prev.disabled = active === 0;
+      next.disabled = active === cards.length - 1;
+    };
+    const mode = () => {
+      const on = wide.matches;
+      rail.classList.toggle('cover', on);
+      [prev, next, count].forEach(el => { if (el) el.hidden = !on; });
+      if (!on) cards.forEach(c => c.classList.remove('is-active'));
+      else { goTo(active, false); update(); }
+    };
+    prev.addEventListener('click', () => goTo(active - 1));
+    next.addEventListener('click', () => goTo(active + 1));
+    // a faded card comes to the centre when clicked (links inside it still work once it is active)
+    cards.forEach((c, i) => c.addEventListener('click', e => {
+      if (rail.classList.contains('cover') && i !== active) { e.preventDefault(); goTo(i); }
+    }));
+    // keyboard focus moving into a faded card brings it to the centre
+    cards.forEach((c, i) => c.addEventListener('focusin', () => { if (rail.classList.contains('cover') && i !== active) goTo(i); }));
     rail.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
-    addEventListener('resize', update); update();
     rail.addEventListener('keydown', e => {
       if (e.target !== rail) return;
-      if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(active + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(active - 1); }
     });
+    if (wide.addEventListener) wide.addEventListener('change', mode);
+    addEventListener('resize', () => { if (rail.classList.contains('cover')) goTo(active, false); });
+    mode();
   }
   // Light and dark themes: follow the system unless the visitor has chosen
   const mq = matchMedia('(prefers-color-scheme: dark)');
