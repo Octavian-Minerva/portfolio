@@ -115,17 +115,6 @@ SOCIAL_TILES_TODO = None  # dropped 12 Nov: the campaign tiles were groupmates' 
 WORK_HEAD = "Selected work"
 WORK = [
     {
-        "title": "Technological Progress and Power",
-        "read": {"src": "phi10009.pdf", "page": "essay-technological-progress-and-power.html"},   # reading page built from the submitted file; checked word for word against the PDF
-        "pdf": ("phi10009.pdf", "ryan-ogrady-technological-progress-and-power.pdf"),
-        "thumb": ("essay-phi10009-p1.png", "First page of the essay, headed Technological Progress and Power."),
-        "type": "Major essay",
-        "unit_code": "PHI10009", "unit_name": "Introduction to Power in the Digital Age", "year": "2026",
-        "topic": ("Does technological progress distribute power or concentrate it?"),
-        "tags": ["Power", "Automation", "Platform monopolies"],
-        "blurb": ("Whether progress distributes or concentrates power depends less on the technology than on the social and institutional frameworks into which it emerges. Drawing on Lukes and Clegg, I trace how platform monopolies and a research agenda tilted towards labour-replacing automation concentrate power, and how policy intervention could distribute its gains more widely."),
-    },
-    {
         "title": "Not Our Game",
         "thumb": ("campaign-home-desktop.png", "Home page of the Not Our Game campaign website, headed 'Love the game. Respect everyone.' over an AI-generated image of four fans watching a game at home."),
         "type": "Group campaign strategy",
@@ -167,6 +156,17 @@ WORK = [
         "topic": ("What happens to a migrant gateway suburb when urban renewal and gentrification arrive?"),
         "tags": ["Migration", "Housing", "Urban renewal", "Melbourne"],
         "blurb": ("Footscray has served as a gateway suburb for successive waves of migrants, but government-led renewal and rents rising faster than in the outer west are eroding that role; the Ethiopian and Somali communities now live mostly in Wyndham, Brimbank and Hume. I recommend affordable housing beyond key workers, secure leases for migrant traders and settlement services where new arrivals now live."),
+    },
+    {
+        "title": "Technological Progress and Power",
+        "read": {"src": "phi10009.pdf", "page": "essay-technological-progress-and-power.html"},   # reading page built from the submitted file; checked word for word against the PDF
+        "pdf": ("phi10009.pdf", "ryan-ogrady-technological-progress-and-power.pdf"),
+        "thumb": ("essay-phi10009-p1.png", "First page of the essay, headed Technological Progress and Power."),
+        "type": "Major essay",
+        "unit_code": "PHI10009", "unit_name": "Introduction to Power in the Digital Age", "year": "2026",
+        "topic": ("Does technological progress distribute power or concentrate it?"),
+        "tags": ["Power", "Automation", "Platform monopolies"],
+        "blurb": ("New technology can distribute power by widening access to knowledge, as the printing press did, but it has more often concentrated it. Platform monopolies create dependency, and the largest firms steer research towards labour-replacing automation. Drawing on Lukes and Clegg, I trace this to institutions rather than technology itself, and point to anti-trust law and Estonia's digital reforms as remedies."),
     },
     {
         "title": "Three vantage points of the Cold War: Hobsbawm, Gaddis, and Jervis",

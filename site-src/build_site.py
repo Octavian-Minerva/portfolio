@@ -416,7 +416,7 @@ html[data-theme-now=dark] .card .thumb,html[data-theme-now=dark] .frame{border-c
 .card-q{margin:0 0 16px}
 .card-body .topic{font-size:16.5px;margin:0}
 .card-summary{margin:0 0 18px}
-.card-summary p{font-size:15.5px;line-height:1.6;margin:0 0 .7em;text-align:left!important;hyphens:manual}
+.card-summary p{font-size:15.5px;line-height:1.6;margin:0 0 .7em}
 .card-summary p:last-child{margin-bottom:0}
 .card-body .tags{margin:0 0 20px;align-content:start}
 .card-actions .actions{margin:0}
