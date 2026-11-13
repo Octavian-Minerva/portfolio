@@ -49,17 +49,17 @@ NAV = [("About", "about"), ("Work", "work"), ("Skills", "skills"), ("Experience"
 
 # ---------------------------------------------------------------- 1. hero
 HERO_KICKER = "Bachelor of Arts, Politics, Power and Technology, Swinburne University of Technology"
-DESCRIPTOR = Draft("Politics student with interests in inequality, the organisation of work and the social consequences of automation.")
+DESCRIPTOR = Draft("Politics student interested in power, the organisation of work and the social consequences of automation.")
 # Photo: put the file in site-src/img-src/ and set PHOTO = ("your-photo.jpg", "Alt text describing the photo").
 # Portrait, 4:5, at least 900 px wide. Until then a neutral monogram shows inside a placeholder box.
 PHOTO = ("ryan-portrait.jpg", "Ryan sitting on a rocky summit above a layer of cloud, smiling.")   # cropped from Ryan's photo; location metadata stripped
 
 # ---------------------------------------------------------------- 2. about
 ABOUT_HEAD = "About"
-PURPOSE = Draft("I want to pursue research on how wealth, work and technology shape access to opportunity, with the aim of weakening the link between family background and life outcomes. Research appeals to me because it rewards sustained attention to difficult problems.")
+PURPOSE = Draft("I want to pursue research on how power is held and reproduced over time, particularly through the organisation of work, and on how increasing automation may redistribute it. Research appeals to me because it rewards sustained attention to difficult problems.")
 ABOUT_BIO = Draft("Since I was eighteen I have worked in street fundraising, hospitality, COVID-19 pathology collection (including hotel quarantine) and, for nearly four years, customer service and administration at a self-storage business. Each of these workplaces organised labour differently, and observing them first-hand has shaped my interest in how work is structured and whom it serves. Extended budget travel, including through India, has informed my understanding of inequality in a similar way. I returned to study in 2025 through a university pathway diploma.")
 INTERESTS_LABEL = "Questions I'm interested in"
-INTERESTS = Draft(["How can access to opportunity be decoupled from family background?", "Why does rising inequality so often produce division among those affected, rather than pressure on those accumulating wealth and influence?", "How will the wider adoption of AI reshape the labour market, and how will its gains be distributed?"])
+INTERESTS = Draft(["Who holds power, how is it maintained across historical periods, and why do those without it so often consent to arrangements that work against them?", "What happens to the distribution of power when work no longer requires most people?", "Why do people with shared material interests divide along lines such as race or income, while the concentration of wealth at the top goes largely unchallenged?"])
 EXPLORING_LABEL = "Now, November 2026"
 EXPLORING = Draft(["Halfway through a Bachelor of Arts in Politics, Power and Technology", "Beginning work adapting an AI agent platform to client businesses", "Reading on scientific management and the organisation of work"])
 
