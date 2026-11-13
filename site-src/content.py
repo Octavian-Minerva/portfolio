@@ -57,7 +57,7 @@ PHOTO = ("ryan-portrait.jpg", "Ryan sitting on a rocky summit above a layer of c
 # ---------------------------------------------------------------- 2. about
 ABOUT_HEAD = "About"
 PURPOSE = Draft("I want to research how wealth, work and technology shape who gets ahead, so that access to opportunity is not decided by the family you are born into. I am drawn to research because I like hard problems, and I would rather be challenged than stuck in routine.")
-ABOUT_BIO = Draft("Since I was eighteen I have worked a string of jobs that taught me more about how work is organised than I expected: a month of street fundraising, two years at a burger chain, swabbing people at COVID testing sites and in hotel quarantine, and nearly four years behind the counter at a self-storage business. Travelling on a budget, including on the cheapest trains in India, did the same for how I see inequality. I came back to study through a diploma in 2025, and those experiences shape most of what I write about.")
+ABOUT_BIO = Draft("Since I was eighteen I have worked a string of jobs that taught me more about how work is organised than I expected: a month of street fundraising, three years at a burger chain, swabbing people at COVID testing sites and in hotel quarantine, and nearly four years behind the counter at a self-storage business. Travelling on a budget, including on the cheapest trains in India, did the same for how I see inequality. I came back to study through a diploma in 2025, and those experiences shape most of what I write about.")
 INTERESTS_LABEL = "Questions I'm interested in"
 INTERESTS = Draft(["How do we stop access to opportunity being decided by the family you are born into?", "Why does rising inequality so often set people against each other, rather than against those accumulating wealth and influence?", "What will the wider rollout of AI do to the labour market, and who will gain from it?"])
 EXPLORING_LABEL = "Now, November 2026"
@@ -204,7 +204,7 @@ EXPERIENCE = [
     {
         "role": "Team member",
         "org": "Restaurant chain, Melbourne CBD",
-        "dates": "2018 to 2020",
+        "dates": "2018 to 2021",
         "text": None,
     },
     {
