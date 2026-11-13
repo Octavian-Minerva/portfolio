@@ -65,7 +65,8 @@ def pdf_button(w):
         out = subprocess.run(['pdfinfo', os.path.join(ESSAYS, src)], capture_output=True, text=True).stdout
         n = re.search(r'Pages:\s+(\d+)', out); pages = f', {n.group(1)} pages' if n else ''
     except FileNotFoundError: pass
-    return (f'<p class="actions"><a class="btn" href="files/{pub}">Read the full essay '
+    label = w.get('pdf_label', 'Read the full essay')
+    return (f'<p class="actions"><a class="btn" href="files/{pub}">{smart(label)} '
             f'<span class="btn-note">(PDF{pages})</span></a></p>')
 
 def link_buttons(w):

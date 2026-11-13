@@ -57,11 +57,11 @@ PHOTO = ("ryan-portrait.jpg", "Ryan sitting on a rocky summit above a layer of c
 # ---------------------------------------------------------------- 2. about
 ABOUT_HEAD = "About"
 PURPOSE = Draft("I am most interested in studying how power is held and reproduced over time, particularly through the organisation of work, and how increasing automation may redistribute it. I am drawn to difficult problems that reward sustained attention, and I would rather be challenged than settle into routine.")
-ABOUT_BIO = Draft("Since I was eighteen I have worked in street fundraising, hospitality, COVID-19 pathology collection (including hotel quarantine) and, for nearly four years, customer service and administration at a self-storage business. Each of these workplaces organised labour differently, and observing them first-hand has shaped my interest in how work is structured and whom it serves. Extended budget travel, including through India, has informed my understanding of inequality in a similar way. I returned to study in 2025 through a university pathway diploma.")
+ABOUT_BIO = Draft("Since I was eighteen I have worked in street fundraising, hospitality, COVID-19 pathology collection (including hotel quarantine) and, for nearly four years, customer service and administration at a self-storage business. Each of these workplaces organised labour differently, and observing them first-hand has shaped my interest in how work is structured and whom it serves. Time spent travelling, often well away from the usual tourist routes, has shaped my thinking in a similar way, particularly about how differently inequality is lived from place to place. I returned to study in 2025 through a university pathway diploma.")
 INTERESTS_LABEL = "Questions I'm interested in"
 INTERESTS = Draft(["Who holds power, how is it maintained over time, and why do those without it so often accept arrangements that work against them?", "How would power be distributed in a society whose economy no longer needs most people's labour?", "Why do people with shared material interests come to see themselves as opponents, divided by race or income, while the wealthiest go largely unchallenged?"])
 EXPLORING_LABEL = "Now, November 2026"
-EXPLORING = Draft(["Halfway through a Bachelor of Arts (Politics, Power and Technology)", "Beginning work adapting an AI agent platform to client businesses", "Reading on scientific management and the organisation of work"])
+EXPLORING = Draft(["Halfway through a Bachelor of Arts (Politics, Power and Technology)", "Beginning work adapting an AI agent platform to client businesses", "Developing an interest in scientific management and its parallels in automation"])
 
 # ---------------------------------------------------------------- 3. featured project (also feeds the detail page)
 FEATURED = {
@@ -112,6 +112,16 @@ SOCIAL_TILES_TODO = None  # dropped 12 Nov: the campaign tiles were groupmates' 
 WORK_HEAD = "Selected work"
 WORK = [
     {
+        "title": "Technological Progress and Power",
+        "pdf": ("phi10009.pdf", "ryan-ogrady-technological-progress-and-power.pdf"),
+        "thumb": ("essay-phi10009-p1.png", "First page of the essay, headed Technological Progress and Power."),
+        "type": "Major essay",
+        "unit_code": "PHI10009", "unit_name": "Introduction to Power in the Digital Age", "year": "2026",
+        "topic": Draft("Does technological progress distribute power or concentrate it?"),
+        "tags": ["Power", "Automation", "Platform monopolies"],
+        "blurb": Draft("I argue that the outcome depends less on the technology than on the social and institutional frameworks into which it emerges. Drawing on Lukes and Clegg, I trace how platform monopolies and a research agenda tilted towards labour-replacing automation concentrate power, and how policy intervention could distribute its gains more widely."),
+    },
+    {
         "title": "Deterring Arrival: Asylum Policy in Australia and the United States",
         "pdf": ("soc20013.pdf", "ryan-ogrady-deterring-arrival-asylum-policy.pdf"),
         "thumb": ("essay-soc20013-p1.png", "First page of the essay, headed Deterring Arrival: Asylum Policy in Australia and the United States."),
@@ -132,14 +142,15 @@ WORK = [
         "blurb": Draft("I argue that news is only partly a public good, and that quarantining it from the market would not secure its independence. Cases from the Chicago press in 1918 to Poland's public broadcaster in 2021 suggest that removing the market leaves control with the state. News should instead be insulated from both, through regulatory protection and secure funding."),
     },
     {
-        "title": "Footscray: Migrant Settlement and Urban Renewal",
+        "title": "Migrant Settlement and Gentrification in Footscray",
+        "pdf": ("soc20013-presentation.pdf", "ryan-ogrady-footscray-presentation-slides.pdf"), "pdf_label": "View the slides",
         "thumb_fit": "contain",   # 16:9 slide: show it whole rather than cropping the title
-        "thumb": ("footscray-slide-01.png", "Title slide, 'Footscray: Migrant Settlement and Urban Renewal', over a photo of apartment towers beside the river at Footscray."),
+        "thumb": ("footscray-final-p1.png", "Title slide, 'Migrant Settlement and Gentrification in Footscray', over a photo of apartment towers beside the river at Footscray."),
         "type": "Tutorial presentation",
         "unit_code": "SOC20013", "unit_name": "Race, Ethnicity and Migration", "year": "2026",
-        "topic": Draft("What happens to a gateway suburb for migrants when urban renewal and rising rents arrive?"),
+        "topic": Draft("What happens to a migrant gateway suburb when urban renewal and gentrification arrive?"),
         "tags": ["Migration", "Housing", "Urban renewal", "Melbourne"],
-        "blurb": Draft("Footscray has served as a gateway suburb for successive waves of migrants, but state-led urban renewal and rising rents are eroding that role and displacing it westward to Brimbank and Wyndham. I recommend extending public housing beyond provision for essential workers, and offering long-term leases to the African traders being priced out of their shopfronts."),
+        "blurb": Draft("Footscray has served as a gateway suburb for successive waves of migrants, but government-led renewal and rents rising faster than in the outer west are eroding that role; the Ethiopian and Somali communities now live mostly in Wyndham, Brimbank and Hume. I recommend affordable housing beyond key workers, secure leases for migrant traders and settlement services where new arrivals now live."),
     },
     {
         "title": "Three vantage points of the Cold War: Hobsbawm, Gaddis, and Jervis",
