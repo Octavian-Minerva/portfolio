@@ -49,19 +49,19 @@ NAV = [("About", "about"), ("Work", "work"), ("Skills", "skills"), ("Experience"
 
 # ---------------------------------------------------------------- 1. hero
 HERO_KICKER = "Bachelor of Arts, Politics, Power and Technology, Swinburne University of Technology"
-DESCRIPTOR = Draft("Politics student interested in inequality, work, and what automation does to both.")
+DESCRIPTOR = Draft("Politics student with interests in inequality, the organisation of work and the social consequences of automation.")
 # Photo: put the file in site-src/img-src/ and set PHOTO = ("your-photo.jpg", "Alt text describing the photo").
 # Portrait, 4:5, at least 900 px wide. Until then a neutral monogram shows inside a placeholder box.
 PHOTO = ("ryan-portrait.jpg", "Ryan sitting on a rocky summit above a layer of cloud, smiling.")   # cropped from Ryan's photo; location metadata stripped
 
 # ---------------------------------------------------------------- 2. about
 ABOUT_HEAD = "About"
-PURPOSE = Draft("I want to research how wealth, work and technology shape who gets ahead, so that access to opportunity is not decided by the family you are born into. I am drawn to research because I like hard problems, and I would rather be challenged than stuck in routine.")
-ABOUT_BIO = Draft("Since I was eighteen I have worked a string of jobs that taught me more about how work is organised than I expected: a month of street fundraising, three years at a burger chain, swabbing people at COVID testing sites and in hotel quarantine, and nearly four years behind the counter at a self-storage business. Travelling on a budget, including on the cheapest trains in India, did the same for how I see inequality. I came back to study through a diploma in 2025, and those experiences shape most of what I write about.")
+PURPOSE = Draft("I want to pursue research on how wealth, work and technology shape access to opportunity, with the aim of weakening the link between family background and life outcomes. Research appeals to me because it rewards sustained attention to difficult problems.")
+ABOUT_BIO = Draft("Since I was eighteen I have worked in street fundraising, hospitality, COVID-19 pathology collection (including hotel quarantine) and, for nearly four years, customer service and administration at a self-storage business. Each of these workplaces organised labour differently, and observing them first-hand has shaped my interest in how work is structured and whom it serves. Extended budget travel, including through India, has informed my understanding of inequality in a similar way. I returned to study in 2025 through a university pathway diploma.")
 INTERESTS_LABEL = "Questions I'm interested in"
-INTERESTS = Draft(["How do we stop access to opportunity being decided by the family you are born into?", "Why does rising inequality so often set people against each other, rather than against those accumulating wealth and influence?", "What will the wider rollout of AI do to the labour market, and who will gain from it?"])
+INTERESTS = Draft(["How can access to opportunity be decoupled from family background?", "Why does rising inequality so often produce division among those affected, rather than pressure on those accumulating wealth and influence?", "How will the wider adoption of AI reshape the labour market, and how will its gains be distributed?"])
 EXPLORING_LABEL = "Now, November 2026"
-EXPLORING = Draft(["Halfway through my BA, majoring in Politics, Power and Technology", "Moving into infrastructure work on an AI agent platform", "Reading into scientific management and how work is organised"])
+EXPLORING = Draft(["Halfway through a Bachelor of Arts in Politics, Power and Technology", "Beginning infrastructure work on an AI agent platform", "Reading on scientific management and the organisation of work"])
 
 # ---------------------------------------------------------------- 3. featured project (also feeds the detail page)
 FEATURED = {
@@ -75,7 +75,7 @@ FEATURED = {
     "live_url": "https://not-our-game.netlify.app",
     "live_label": "Visit the live campaign site",
     "detail_label": "Read about the project",
-    "blurb": Draft("Not Our Game is a campaign strategy to prevent domestic and family violence on State of Origin nights, when recorded domestic assaults in New South Wales rise by 40.7%. It asks the NRL and its broadcasters to carry prevention messaging and support-service information during the 2027 Origin broadcasts. I produced the campaign website and wrote the report's messaging and artefact sections."),
+    "blurb": Draft("Not Our Game is a campaign strategy addressing domestic and family violence associated with State of Origin, during which recorded domestic assaults in New South Wales rise by 40.7%. The campaign asks the NRL and its broadcasters to include prevention messaging and support-service information in the 2027 Origin broadcasts. I developed the campaign website and wrote the report's messaging and artefact sections."),
     # Screenshots of the campaign site (sources in site-src/img-src/). First two show on the home page.
     "shots": [
         ("campaign-home-desktop.png", "desktop", "Home page, desktop",
@@ -92,11 +92,11 @@ FEATURED = {
 # Detail page (not-our-game.html). Section headings are labels; the prose is yours.
 FEATURED_PAGE = {
     "overview_head": "Overview",
-    "overview": Draft("Not Our Game was a group project for ART20003 Skills and Strategies for Social Change. The campaign targets the State of Origin series, when recorded domestic assaults in New South Wales rise by 40.7%. Rather than treating every fan as part of the problem, it speaks to three audiences: the NRL and its broadcasters, who can make the change; fans, particularly men watching in groups; and people experiencing violence, along with those supporting them and men worried about their own behaviour. Its request is simple: prevention messaging and support-service information during the 2027 Origin broadcasts. My part was the campaign website and the report's messaging and artefact sections."),
+    "overview": Draft("Not Our Game was a group project for ART20003 Skills and Strategies for Social Change. It responds to evidence that recorded domestic assaults in New South Wales rise by 40.7% on State of Origin nights. Rather than positioning fans as the problem, the campaign addresses three audiences: the NRL and its broadcasters, who are able to make the change; fans, particularly men watching in groups; and people experiencing violence, together with those supporting them and men concerned about their own behaviour. Its central request is that prevention messaging and support-service information be included in the 2027 Origin broadcasts. My contribution was the campaign website and the report's messaging and artefact sections."),
     "website_head": "The website",
-    "website": Draft("The website is the campaign's hub; every social post links back to it, as does the QR code shown with support information during broadcasts. Its pages follow the three audiences. A quick-exit button and support numbers sit on every page, including on mobile, because research on domestic violence websites recommends a clearly labelled exit that stays visible."),
+    "website": Draft("The website functions as the campaign's hub. Each social media post links to it, as does the QR code displayed with support information during broadcasts, and its pages are organised around the three audiences. A quick-exit button and support numbers appear on every page, including on mobile, following research on domestic violence websites that recommends a clearly labelled exit that remains visible."),
     "messaging_head": "The messaging section",
-    "messaging": Draft("The central message, \"Love the Game, Respect Everyone\", keeps the sport and the violence separate, so supporters can reject violence without being cast as critics of the game. Fan-facing material does not lead with assault statistics, because publicising how common a harmful behaviour is can reinforce it. Instead, it offers low-key ways to look out for mates, such as checking in the next day."),
+    "messaging": Draft("The central message, \"Love the Game, Respect Everyone\", separates the sport from the violence, allowing supporters to reject violence without being cast as critics of the game. Fan-facing material avoids leading with assault statistics, since publicising the prevalence of a harmful behaviour can reinforce it. It instead suggests low-key forms of bystander action, such as checking in with a friend the following day."),
     "tiles_head": "Social posts",
 }
 # Social tiles you made: (file in site-src/img-src/, alt text, caption). Leave empty to show a placeholder.
@@ -119,7 +119,7 @@ WORK = [
         "unit_code": "SOC20013", "unit_name": "Race, Ethnicity and Migration", "year": "2026",
         "topic": Draft("How do Australia and the United States keep asylum seekers from reaching the territory where they could claim protection?"),
         "tags": ["Asylum policy", "Migration", "Comparative policy"],
-        "blurb": Draft("I argue that both countries have built similar architectures of deterrence on the back of comparable moral panics. Geography explains most differences in form, offshore detention against land buffers. The sharper contrast is durability: Australia's bipartisan consensus against US policy that swings between administrations and the courts."),
+        "blurb": Draft("I argue that both countries have constructed similar architectures of deterrence in response to comparable moral panics. Differences in form, offshore detention in Australia and land buffers in the United States, are largely attributable to geography. The more significant contrast is durability: Australia's bipartisan consensus differs from US policy, which shifts between administrations and is contested in the courts."),
     },
     {
         "title": "Insulating News from the Market and the State",
@@ -129,7 +129,7 @@ WORK = [
         "unit_code": "HIS10006", "unit_name": "Propaganda: A History of Media and Politics", "year": "2026",
         "topic": Draft("Should news and information, as public goods, be quarantined from the commercial market, and would that make them independent?"),
         "tags": ["Media policy", "Public goods", "Public broadcasting"],
-        "blurb": Draft("I argue that news is only partly a public good, and that quarantine would not make it independent; from the Chicago press in 1918 to Poland in 2021, removing the market simply leaves control with the state. News should instead be insulated from both, through regulatory protection and secure funding."),
+        "blurb": Draft("I argue that news is only partly a public good, and that quarantining it from the market would not secure its independence. Cases from the Chicago press in 1918 to Poland's public broadcaster in 2021 suggest that removing the market leaves control with the state. News should instead be insulated from both, through regulatory protection and secure funding."),
     },
     {
         "title": "Footscray: Migrant Settlement and Urban Renewal",
@@ -139,7 +139,7 @@ WORK = [
         "unit_code": "SOC20013", "unit_name": "Race, Ethnicity and Migration", "year": "2026",
         "topic": Draft("What happens to a gateway suburb for migrants when urban renewal and rising rents arrive?"),
         "tags": ["Migration", "Housing", "Urban renewal", "Melbourne"],
-        "blurb": Draft("Footscray has welcomed successive waves of migrants, but state-led renewal and rising rents are pricing out that role, and the gateway is moving west to Brimbank and Wyndham. I recommend public housing that goes beyond essential workers, and long-term leases for the African traders being priced out of their shopfronts."),
+        "blurb": Draft("Footscray has served as a gateway suburb for successive waves of migrants, but state-led urban renewal and rising rents are eroding that role and displacing it westward to Brimbank and Wyndham. I recommend extending public housing beyond provision for essential workers, and offering long-term leases to the African traders being priced out of their shopfronts."),
     },
     {
         "title": "Three vantage points of the Cold War: Hobsbawm, Gaddis, and Jervis",
@@ -147,16 +147,16 @@ WORK = [
         "thumb": ("essay-his10003-p1.png", "First page of the essay, headed Three vantage points of the Cold War: Hobsbawm, Gaddis, and Jervis."),
         "type": "Term essay",
         "unit_code": "HIS10003", "unit_name": "Global History", "year": "2026",
-        "topic": Draft("Why do three serious accounts of the Cold War, written before, just after and a decade after the Soviet collapse, disagree?"),
+        "topic": Draft("Why do three major accounts of the Cold War, written before, shortly after and a decade after the Soviet collapse, reach different conclusions?"),
         "tags": ["Cold War", "International relations", "Historiography"],
-        "blurb": Draft("I compare Hobsbawm, Gaddis and Jervis and argue that when each wrote, what they could know and the frameworks they used shaped their accounts. They agree on what was observable, split on what drove the rivalry, and converge, by different routes, on the Soviet role in ending it."),
+        "blurb": Draft("Comparing Hobsbawm, Gaddis and Jervis, I argue that the period in which each wrote, the information available to them and their theoretical frameworks shaped their accounts. They largely agree on the observable features of the conflict, diverge on what drove the superpower rivalry, and converge, by different routes, on the Soviet role in ending it."),
     },
     {
         "title": "Not Our Game",
         "thumb": ("campaign-home-desktop.png", "Home page of the Not Our Game campaign website, headed 'Love the game. Respect everyone.' over an AI-generated image of four fans watching a game at home."),
         "type": "Group campaign strategy",
         "unit_code": "ART20003", "unit_name": "Skills and Strategies for Social Change", "year": "2026",
-        "topic": Draft("How can State of Origin broadcasts help prevent domestic and family violence without treating fans as the problem?"),
+        "topic": Draft("How might State of Origin broadcasts be used to prevent domestic and family violence without positioning fans as the problem?"),
         "tags": ["Social campaign", "Domestic and family violence", "Messaging"],
         "blurb": FEATURED["blurb"],   # the same Draft as the project page summary
         "links": [("Read about the project", "not-our-game.html", False), ("Visit the live campaign site", "https://not-our-game.netlify.app", True)],
@@ -170,24 +170,24 @@ SKILLS_KICKER = "What I can do, and where I learnt it"
 SKILL_GROUPS = [
     {
         "title": "Research and argument",
-        "text": Draft("Most of my writing compares: three historians on the Cold War, two countries' asylum systems, competing claims about who should fund the news. The biggest change this year came from one piece of tutor feedback, to use sources as evidence, theory or context rather than as authority for a point I had already made. My essays got tighter once the evidence started doing the arguing."),
+        "text": Draft("Much of my academic writing is comparative, whether across historians' accounts of the Cold War, national approaches to asylum, or competing positions on how news should be funded. The most significant development in my writing this year followed tutor feedback to use sources as evidence, theory or context rather than as authority for claims already made. Integrating sources in this way has made my arguments more rigorous and more clearly structured."),
         "tags": Draft(["Comparative analysis", "Historiography", "Policy analysis", "Academic writing"]),
     },
     {
         "title": "Building systems with AI",
-        "text": Draft("I have no formal coding background. What I do have is a habit of breaking a problem into parts and checking each one, which turns out to be most of what directing AI well requires. Since June I have built features for an AI agent platform, including an automated review loop and a single screen for watching every agent at once; before that came Arx, a planner I built for my own study."),
+        "text": Draft("Although I have no formal training in programming, I approach software design as a problem of decomposition: dividing a task into components, specifying each precisely and verifying the result. Since June 2026 I have applied this approach as a contract developer on an AI agent platform, building an automated review loop and an interface for monitoring agent activity. My earlier personal project, Arx, was a study planner built on the same principles."),
         "tags": Draft(["Systems thinking", "AI-assisted development", "Process design"]),
     },
     {
         "title": "Working with people",
-        "text": Draft("Nearly four years at a self-storage business means sales by phone, email and in person, chasing overdue accounts and sorting out whatever goes wrong on site, including covering the assistant manager's shifts while that role was vacant. Earlier jobs added the rest: a month of street fundraising taught me to talk to anyone, and COVID collection in hotel quarantine taught me to work to strict protocol."),
+        "text": Draft("Nearly four years in customer service and administration at a self-storage business has involved sales across phone, email and in-person channels, managing overdue accounts and resolving problems on site, as well as covering the assistant manager's shifts while that position was vacant. Earlier roles in street fundraising and COVID-19 pathology collection developed my confidence in communicating with the public and my ability to work within strict clinical protocols."),
         "tags": Draft(["Customer service", "Difficult conversations", "Working to protocol", "Public speaking"]),
     },
 ]
 REFLECTION_HEAD = "Reflection: the Not Our Game campaign"
-SKILLS_AUDIT = Draft("""Not Our Game was my first time planning a social campaign from start to finish, and the part I took most from was the messaging. The obvious move was to open with the statistic that recorded domestic assaults in New South Wales rise by 40.7% on State of Origin nights. The research pointed the other way: publicising how common a harmful behaviour is can make it seem normal, and a campaign that treats every fan as part of the problem loses the audience it most needs. So the fan-facing material leads with something most men already believe, that they are not okay with disrespect, and gives them small ways to act on it.
+SKILLS_AUDIT = Draft("""Not Our Game was the first social campaign I have planned from inception to delivery, and its messaging strategy was the aspect from which I learnt most. The most striking available figure was the 40.7% rise in recorded domestic assaults in New South Wales on State of Origin nights, yet the research advised against leading with it. Publicising the prevalence of a harmful behaviour can normalise it, and a campaign that treats every fan as part of the problem risks alienating the audience it most needs to reach. The fan-facing material therefore begins from a view most men already hold, that disrespect is unacceptable, and suggests practical ways to act on it.
 
-That decision changed how I think about argument more generally. Being right is not enough if the framing pushes your audience away. Working in a group also meant planning around other people's sections and deadlines, which I will need more of as my work moves towards research. Going forward, I want to keep testing my instincts about framing against the evidence before I commit to them.""")
+The experience has made me more attentive to how framing shapes the reception of an argument, independently of its accuracy. Working within a group also required me to coordinate my sections with others' work and deadlines. In future research and writing, I intend to test my assumptions about framing against the available evidence.""")
 SKILLS_LIST_LABEL = "Skills"
 SKILLS_LIST = None   # replaced by the tags on each skill area (13 Nov)
 
@@ -198,19 +198,19 @@ EXPERIENCE = [
         "role": Draft("AI systems developer"),
         "org": "AI agent platform, contract",
         "dates": "June 2026 to present",
-        "text": Draft("I build features for an AI agent platform, including a review loop in which one agent checks another's code changes until they pass, and a single screen for watching every agent at once. Next: infrastructure that fits the platform to each client's business."),
+        "text": Draft("I have built an automated code review loop, in which one agent reviews another's changes until they meet the required standard, and an interface for monitoring agent activity across a workspace. I am now moving into infrastructure work, adapting the platform to the operational needs of individual client businesses."),
     },
     {
         "role": "Arx, personal project",
         "org": "Self-built study and work planner",
         "dates": "2026",
-        "text": Draft("A planner I built for myself that synced uni deadlines from Canvas and scheduled work backwards from them; it is where my development work started."),
+        "text": Draft("A self-built study planner that synchronised university deadlines from Canvas and scheduled work backwards from each due date; the project that led to my development work."),
     },
     {
         "role": "Customer service and administration",
         "org": "Self-storage business, casual",
         "dates": "December 2022 to present",
-        "text": Draft("Sales by phone, email and in person, chasing overdue accounts and sorting out issues on site. I also covered the assistant manager's shifts while the role was vacant."),
+        "text": Draft("Sales across phone, email and in-person channels, management of overdue accounts and resolution of on-site issues, including covering the assistant manager's shifts while the position was vacant."),
     },
     {
         "role": "COVID-19 pathology collection",
