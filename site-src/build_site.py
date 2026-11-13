@@ -225,7 +225,7 @@ html{scroll-padding-top:96px}
 .sec-label h2{font-size:clamp(28px,3vw,36px)}
 .lede{font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);line-height:1.32;letter-spacing:-.005em;max-width:34ch}
 .measure{max-width:64ch}
-.exploring{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:6px 24px;align-items:baseline}
+.exploring{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);display:grid;grid-template-columns:15rem minmax(0,1fr);gap:6px 24px;align-items:baseline}
 .exploring .kicker{margin:0}
 .exploring+.exploring{margin-top:18px}
 .points{margin:0;padding-left:1.1em}.points li{margin:0 0 6px}
@@ -303,7 +303,7 @@ html{scroll-padding-top:96px}
 
 /* skills */
 .skills{background:var(--tint);border-top:0}
-.skills h2{font-size:clamp(44px,6.5vw,84px);letter-spacing:-.03em;margin-bottom:clamp(28px,4vw,48px)}
+.skills h2{margin-bottom:clamp(28px,4vw,48px)}
 .skills-body{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:clamp(28px,5vw,72px);align-items:start;
  border-top:1px solid var(--accent);padding-top:clamp(24px,3vw,36px)}
 .skills .audit{font-size:20px;line-height:1.65;max-width:62ch}
@@ -311,6 +311,12 @@ html{scroll-padding-top:96px}
 .skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(28px,4vw,48px);margin-bottom:clamp(48px,6vw,80px)}
 .skill-group{border-top:1px solid var(--ink);padding-top:18px}
 .skill-group h3{font-size:clamp(23px,2vw,27px);margin:0 0 12px}
+.skill-text p:last-child{margin-bottom:0}
+.skill-group .tags{margin:20px 0 0;align-content:start}
+@media (min-width:701px){
+ .skill-groups{grid-auto-rows:auto}
+ .skill-group{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0}
+}
 .skill-group p{font-size:17px;line-height:1.6}
 .reflect-h{font-size:clamp(26px,2.6vw,34px);margin:0 0 18px}
 .skills .audit p:first-child{font-family:var(--serif);font-size:clamp(23px,2.3vw,28px);line-height:1.4}
@@ -326,10 +332,11 @@ html{scroll-padding-top:96px}
 .xp h3{font-size:24px;margin:0 0 4px}
 .xp .org{margin:0;color:var(--muted)}
 .xp .text p:last-child{margin:0}
-.xp-sub{font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:48px 0 0;font-family:var(--sans);font-weight:600}
+.xp-sub{font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:48px 0 12px;font-family:var(--sans);font-weight:600}
 
 /* contact */
 .contact .big{font-family:var(--serif);font-size:clamp(28px,4vw,48px);letter-spacing:-.02em;line-height:1.2;word-break:break-word}
+.contact .lede+.emails{margin-top:20px}
 .contact .email-row{margin:0 0 18px;display:flex;flex-direction:column;gap:2px}
 .contact .email-row .big{font-size:clamp(22px,3vw,36px)}
 .email-label{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
@@ -397,19 +404,23 @@ html[data-theme-now=dark] .card .thumb,html[data-theme-now=dark] .frame{border-c
 .page-preview p{margin:0;font-family:var(--serif);font-size:15.5px;line-height:26px;color:var(--topic);text-align:left!important;hyphens:manual}
 .page-preview::after{content:"";position:absolute;inset:auto 0 0 0;height:70%;background:linear-gradient(transparent,var(--tint))}
 .card-body{display:flex;flex-direction:column;flex:1;padding:18px 20px 20px}
-.card-body .unit{margin-bottom:10px}
+.card-body .unit{margin:0 0 12px}
 .card-body h3{font-size:clamp(21px,1.7vw,24px);margin:0 0 10px}
-.card-body .topic{font-size:16.5px;margin:0 0 12px}
-.card-body .tags{margin:0 0 12px}
+.card-q{margin:0 0 16px}
+.card-body .topic{font-size:16.5px;margin:0}
+.card-summary{margin:0 0 18px}
+.card-summary p{font-size:15.5px;line-height:1.6;margin:0 0 .7em;text-align:left!important;hyphens:manual}
+.card-summary p:last-child{margin-bottom:0}
+.card-body .tags{margin:0 0 20px;align-content:start}
+.card-actions .actions{margin:0}
 [hidden]{display:none!important}
-.card-foot{margin-top:auto}
 /* the title link stretches over the whole card; buttons and the Summary toggle sit above it */
 .rail>.card{position:relative}
 .rail>.card .card-link::after{content:"";position:absolute;inset:0;z-index:1}
-.card-foot .more,.card-foot .actions{position:relative;z-index:2}
+.card-actions .actions{position:relative;z-index:2}
 .rail>.card:hover .card-link{background-size:100% 1px}
 .rail>.card:hover .media img{transform:scale(1.03)}
-.card-actions .actions{margin:14px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.card-actions .actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
 .card-actions .btn{padding:10px 16px;font-size:15px}
 .card-actions .btn:first-child{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .card-actions .btn:first-child:hover{background:var(--accent-ink);border-color:var(--accent-ink);color:var(--on-accent)}
@@ -429,7 +440,7 @@ html[data-theme-now=dark] .card .thumb,html[data-theme-now=dark] .frame{border-c
 .rail-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:3;background:var(--bg);box-shadow:0 6px 18px -8px rgba(0,0,0,.35)}
 .rail-btn.prev{left:-6px}.rail-btn.next{right:-6px}
 /* centred mode (set by the script on wide screens): one card in focus, neighbours faded */
-.rail.cover{grid-auto-columns:min(460px,38vw);padding-inline:calc(50% - min(460px,38vw) / 2);scroll-padding-inline:0;gap:28px}
+.rail.cover{grid-auto-columns:min(460px,64vw);padding-inline:calc(50% - min(460px,64vw) / 2);scroll-padding-inline:0;gap:28px}
 .rail.cover>.card{scroll-snap-align:center;transition:opacity .35s ease,transform .35s ease,box-shadow .35s ease;opacity:.42;transform:scale(.93)}
 .rail.cover>.card.is-active{opacity:1;transform:none;box-shadow:0 18px 40px -24px rgba(0,0,0,.45)}
 .rail.cover{padding-block:8px 40px}.rail.cover~.rail-count,.rail-wrap~.rail-count{margin-top:0}
@@ -437,8 +448,15 @@ html[data-theme-now=dark] .card .thumb,html[data-theme-now=dark] .frame{border-c
 .rail.cover::-webkit-scrollbar{display:none}.rail.cover{scrollbar-width:none}
 @media (prefers-reduced-motion:reduce){.rail.cover>.card{transition:none}}
 .xp .more summary{font-size:13px}
+/* wide screens: every card shares the rail's seven row tracks (subgrid), so rows line up across cards */
+@media (min-width:701px){
+ .rail{grid-template-rows:repeat(7,auto)}
+ .rail,.rail.cover{row-gap:0}
+ .rail>.card{display:grid;grid-row:span 7;grid-template-rows:subgrid;row-gap:0}
+ .rail>.card>.card-body{display:grid;grid-row:span 6;grid-template-rows:subgrid;row-gap:0}
+ .rail>.card>.card-body>*{min-width:0}
+}
 @media (max-width:1100px){.rail{grid-auto-columns:calc((100% - clamp(20px,2.4vw,32px)) / 2)}}
-@media (max-width:1100px){.rail.cover{grid-auto-columns:min(460px,56vw);padding-inline:calc(50% - min(460px,56vw) / 2)}}
 @media (max-width:700px){
  .rail{grid-auto-flow:row;grid-auto-columns:auto;overflow:visible;scroll-snap-type:none;padding:0;margin:0}
  .rail-btn,.rail-count{display:none!important}
@@ -595,14 +613,13 @@ def page_home():
             media = img(w["thumb"][0], w["thumb"][1], [480, 960], "(max-width:700px) 92vw, 400px")
         else:
             media = ''
-        media = f'<div class="media{" fit" if w.get("thumb_fit") == "contain" else ""}">{media}</div>' if media else ''
-        summary = (f'<details class="more"><summary>Summary</summary>{prose(w["blurb"], where)}</details>'
-                   if w.get('blurb') is not None else '')
+        media = f'<div class="media{" fit" if w.get("thumb_fit") == "contain" else ""}">{media}</div>'
+        summary = f'<div class="card-summary">{prose(w.get("blurb"), where)}</div>'
         cards += (f'<article class="card" aria-roledescription="slide" aria-label="{i + 1} of {len(C.WORK)}">{media}<div class="card-body">'
                   f'{unit_line(w)}<h3><span class="type">{smart(w["type"])}</span>{title_html}</h3>'
-                  f'{prose(w["topic"], where.replace("blurb", "topic line"), "topic")}'
-                  f'<div class="card-foot"><ul class="tags" aria-label="Topics">{tags}</ul>'
-                  f'{summary}<div class="card-actions">{read_and_pdf(w)}{link_buttons(w)}</div></div></div></article>')
+                  f'<div class="card-q">{prose(w["topic"], where.replace("blurb", "topic line"), "topic")}</div>'
+                  f'{summary}<ul class="tags" aria-label="Topics">{tags}</ul>'
+                  f'<div class="card-actions">{read_and_pdf(w)}{link_buttons(w)}</div></div></article>')
     prev_btn = '<button class="rail-btn prev" type="button" aria-label="Previous piece of work" hidden><span aria-hidden="true">&larr;</span></button>'
     next_btn = '<button class="rail-btn next" type="button" aria-label="Next piece of work" hidden><span aria-hidden="true">&rarr;</span></button>'
     count = f'<p class="rail-count" aria-live="polite" hidden>1 of {len(C.WORK)}</p>'
@@ -616,7 +633,7 @@ def page_home():
     else: skl = f'<p class="kicker">{smart(C.SKILLS_LIST_LABEL)}</p><ul class="skill-list">' + ''.join(f'<li>{smart(s)}</li>' for s in C.SKILLS_LIST) + '</ul>'
     def skill_group(g):
         tags = ''.join(f'<li>{smart(t)}</li>' for t in g.get('tags') or [])
-        return (f'<article class="skill-group"><h3>{smart(g["title"])}</h3>{prose(g["text"], "Skills: " + g["title"])}'
+        return (f'<article class="skill-group"><h3>{smart(g["title"])}</h3><div class="skill-text">{prose(g["text"], "Skills: " + g["title"])}</div>'
                 + (f'<ul class="tags" aria-label="Skills">{tags}</ul>' if tags else '') + '</article>')
     groups = ''.join(skill_group(g) for g in getattr(C, 'SKILL_GROUPS', []))
     skills = (f'<section class="sec skills" id="skills" aria-labelledby="skills-h"><div class="wrap">'
@@ -648,7 +665,7 @@ def page_home():
                         for label, addr in C.EMAIL) + '<span class="sr-only" aria-live="polite" id="live"></span>'
     contact = (f'<section class="sec contact" id="contact" aria-labelledby="contact-h"><div class="wrap sec-grid">'
                f'<div class="sec-label"><p class="kicker"><span class="num">05</span>Correspondence</p><h2 id="contact-h">{smart(C.CONTACT_HEAD)}</h2></div>'
-               f'<div>{prose(C.CONTACT_LINE, "Contact: invitation line", "lede")}<div style="margin-top:20px">{email}</div></div></div></section>')
+               f'<div>{prose(C.CONTACT_LINE, "Contact: invitation line", "lede")}<div class="emails">{email}</div></div></div></section>')
     body = f'<main id="main">{hero}{about}{work}{skills}{xp}{contact}</main>'
     return head(C.PAGE_TITLE, C.META_DESCRIPTION) + header() + body + footer()
 

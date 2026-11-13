@@ -83,18 +83,21 @@ with sync_playwright() as pw:
     for _ in range(2): pg.click('.rail-btn.next'); pg.wait_for_timeout(800)
     check(pg.text_content('.rail-count') == '6 of 6' and pg.is_disabled('.rail-btn.next'), 'next is disabled at the last piece')
     pg.locator('#work').screenshot(path=os.path.join(SHOTS, 'interaction-carousel-end.png'))
-    pg.locator('.rail > .card.is-active .more summary').click(); pg.wait_for_timeout(150)
-    check(pg.evaluate("document.querySelector('.rail > .card.is-active .more').open"), 'summary toggle opens on the active card')
+    shown = pg.evaluate("[...document.querySelectorAll('.rail > .card .card-summary')].filter(e => e.offsetHeight > 40 && !e.closest('details')).length")
+    check(shown == 6, f'every card shows its summary in full, with no toggle ({shown} of 6)')
     deco = pg.evaluate("getComputedStyle(document.querySelector('.page-preview p')).textDecorationLine")
     check(deco == 'none', f'page preview text is not underlined ({deco})')
-    # Footer rows line up: Summary toggles and first buttons sit at the same height on every card
-    pg.locator('.rail > .card.is-active .more summary').click(); pg.wait_for_timeout(150)   # close it again
-    check(pg.url.endswith('/index.html'), 'the Summary toggle does not follow the card link')
-    for sel, what in (('.more summary', 'Summary toggles'), ('.card-actions .btn', 'bottom buttons'), ('.tags', 'tag rows (bottom edge)')):
-        edge = 'bottom' if 'tags' in sel else 'top'
-        # faded cards are scaled, so compare against the card's own bottom instead of the page
-        rel = pg.evaluate(f"[...document.querySelectorAll('.rail > .card')].map(c => {{ const r = c.getBoundingClientRect(); return Math.round((r.bottom - c.querySelector('{sel}').getBoundingClientRect().{edge}) / (r.height / c.offsetHeight)) }})")
-        check(max(rel) - min(rel) <= 2, f'{what} line up across cards (distance from card foot: {rel})')
+    # Every row starts at the same line on every card, whatever the length of the text above it
+    for width in (820, 1160, 1440):
+        pg.set_viewport_size({'width': width, 'height': 900}); pg.wait_for_timeout(500)
+        for sel, what in (('.unit', 'unit lines'), ('h3', 'titles'), ('.card-q', 'questions'), ('.card-summary', 'summaries'),
+                          ('.tags', 'tag rows'), ('.card-actions .btn', 'buttons')):
+            # faded cards are scaled, so measure from each card's own top and undo the scale
+            rel = pg.evaluate(f"[...document.querySelectorAll('.rail > .card')].map(c => {{ const r = c.getBoundingClientRect(); return Math.round((c.querySelector('{sel}').getBoundingClientRect().top - r.top) / (r.height / c.offsetHeight)) }})")
+            check(max(rel) - min(rel) <= 1, f'{width}px: {what} start at the same height on every card ({rel})')
+        hs = pg.evaluate("[...document.querySelectorAll('.rail > .card')].map(c => c.offsetHeight)")
+        check(len(set(hs)) == 1, f'{width}px: all cards are the same height ({hs[0]}px)')
+    pg.set_viewport_size({'width': 1440, 'height': 900}); pg.wait_for_timeout(500)
     # The whole card is the link: clicking the preview strip of the active card opens the piece
     bx = pg.locator('.rail > .card.is-active .media').bounding_box()
     pg.mouse.click(bx['x'] + bx['width'] / 2, bx['y'] + bx['height'] / 2); pg.wait_for_load_state('load'); pg.wait_for_timeout(300)
