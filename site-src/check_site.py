@@ -126,8 +126,9 @@ EXE = glob.glob('/opt/pw-browsers/chromium_headless_shell-*/*/chrome-headless-sh
 shots = []
 with sync_playwright() as pw:
     b = pw.chromium.launch(executable_path=EXE)
-    for mode, vp, scale in (('desktop', {'width': 1440, 'height': 900}, 1), ('phone', {'width': 390, 'height': 844}, 2)):
-        ctx = b.new_context(viewport=vp, device_scale_factor=scale, is_mobile=(mode == 'phone'), has_touch=(mode == 'phone'))
+    for mode, vp, scale in (('desktop', {'width': 1440, 'height': 900}, 1), ('phone', {'width': 390, 'height': 844}, 2), ('dark', {'width': 1440, 'height': 900}, 1)):
+        ctx = b.new_context(viewport=vp, device_scale_factor=scale, is_mobile=(mode == 'phone'), has_touch=(mode == 'phone'),
+                            color_scheme='dark' if mode == 'dark' else 'light')
         ext = []
         ctx.route('**/*', lambda r, ext=ext: serve(r, ext))
         for name in PAGES:

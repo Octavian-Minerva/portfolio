@@ -56,7 +56,7 @@ PHOTO = ("ryan-portrait.jpg", "Ryan sitting on a rocky summit above a layer of c
 
 # ---------------------------------------------------------------- 2. about
 ABOUT_HEAD = "About"
-PURPOSE = Draft("My studies centre on how power is held and reproduced over time, particularly through the organisation of work, and on how increasing automation may redistribute it. I am most engaged by difficult problems that reward sustained attention, and I would rather be challenged than settle into routine.")
+PURPOSE = Draft("I am most interested in studying how power is held and reproduced over time, particularly through the organisation of work, and how increasing automation may redistribute it. I am drawn to difficult problems that reward sustained attention, and I would rather be challenged than settle into routine.")
 ABOUT_BIO = Draft("Since I was eighteen I have worked in street fundraising, hospitality, COVID-19 pathology collection (including hotel quarantine) and, for nearly four years, customer service and administration at a self-storage business. Each of these workplaces organised labour differently, and observing them first-hand has shaped my interest in how work is structured and whom it serves. Extended budget travel, including through India, has informed my understanding of inequality in a similar way. I returned to study in 2025 through a university pathway diploma.")
 INTERESTS_LABEL = "Questions I'm interested in"
 INTERESTS = Draft(["Who holds power, how is it maintained over time, and why do those without it so often accept arrangements that work against them?", "How would power be distributed in a society whose economy no longer needs most people's labour?", "Why do people with shared material interests come to see themselves as opponents, divided by race or income, while the wealthiest go largely unchallenged?"])
@@ -255,6 +255,7 @@ EMAIL = [("Personal", "ryan.ogrady77@gmail.com"), ("University", "103024469@stud
 
 # ---------------------------------------------------------------- 8. footer
 AI_NOTE = None   # dropped 12 Nov: Ryan will put an AI statement in the Canvas submission instead
+COLOPHON = Draft("This site is a static build generated from a small Python script, with no frameworks, trackers or third-party requests. It follows your system's light or dark setting, can be printed as a plain document, and has been checked for keyboard access and WCAG AA colour contrast.")
 CREDITS = [
     "Set in Newsreader and Source Sans 3, both under the SIL Open Font License (fonts/OFL-*.txt).",
     'Footscray title slide photo: "Saltwater River Crossing Site and Footscray Wharves Precinct" by Sgroey, CC BY-SA 4.0, via Wikimedia Commons.',
