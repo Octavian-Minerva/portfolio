@@ -565,7 +565,7 @@ def page_home():
     edu = (f'<h3 class="xp-sub">{smart(C.EDUCATION_HEAD)}</h3><ul class="xp">{xp_rows(C.EDUCATION, "Education")}</ul>'
            if getattr(C, 'EDUCATION', None) else '')
     xp = (f'<section class="sec" id="experience" aria-labelledby="xp-h"><div class="wrap sec-grid">'
-          f'<div class="sec-label"><p class="kicker"><span class="num">04</span>Work, clubs and study</p><h2 id="xp-h">{smart(C.EXPERIENCE_HEAD)}</h2></div>'
+          f'<div class="sec-label"><p class="kicker"><span class="num">04</span>Employment, involvement and education</p><h2 id="xp-h">{smart(C.EXPERIENCE_HEAD)}</h2></div>'
           f'<div><ul class="xp">{rows}</ul>{edu}</div></div></section>')
     # contact
     if isinstance(C.EMAIL, RyanWrites): email = ph(C.EMAIL, 'Contact: email')
@@ -576,7 +576,7 @@ def page_home():
                         f'<button class="copy" type="button" data-copy="{html.escape(addr)}" aria-label="Copy {html.escape(label.lower())} email address" hidden>Copy</button></span></p>'
                         for label, addr in C.EMAIL) + '<span class="sr-only" aria-live="polite" id="live"></span>'
     contact = (f'<section class="sec contact" id="contact" aria-labelledby="contact-h"><div class="wrap sec-grid">'
-               f'<div class="sec-label"><p class="kicker"><span class="num">05</span>Get in touch</p><h2 id="contact-h">{smart(C.CONTACT_HEAD)}</h2></div>'
+               f'<div class="sec-label"><p class="kicker"><span class="num">05</span>Correspondence</p><h2 id="contact-h">{smart(C.CONTACT_HEAD)}</h2></div>'
                f'<div>{prose(C.CONTACT_LINE, "Contact: invitation line", "lede")}<div style="margin-top:20px">{email}</div></div></div></section>')
     body = f'<main id="main">{hero}{about}{work}{skills}{xp}{contact}</main>'
     return head(C.PAGE_TITLE, C.META_DESCRIPTION) + header() + body + footer()

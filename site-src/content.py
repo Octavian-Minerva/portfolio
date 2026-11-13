@@ -14,8 +14,9 @@
 
 
 # DRAFTS (13 Nov 2026): Ryan asked the assistant to draft all copy for a feedback preview.
+# 14 Nov 2026: Ryan reviewed and accepted all drafts; the Draft(...) markers were removed.
 # Every assistant-drafted item is wrapped in Draft(...). It renders normally, but the build counts drafts
-# and "--release" refuses to build while any remain. To accept or replace one, swap Draft("...") for
+# and "--release" refuses to build while any remain. To accept or replace one, swap ("...") for
 # your own "..." (keep or rewrite the words). The tracker is ../DRAFT-TRACKER.md.
 
 DRAFTS = []
@@ -50,19 +51,19 @@ NAV = [("About", "about"), ("Work", "work"), ("Skills", "skills"), ("Experience"
 
 # ---------------------------------------------------------------- 1. hero
 HERO_KICKER = "Bachelor of Arts (Politics, Power and Technology) · Swinburne"
-DESCRIPTOR = Draft("Politics student interested in power, the organisation of work and the social consequences of automation.")
+DESCRIPTOR = ("Politics student interested in power, the organisation of work and the social consequences of automation.")
 # Photo: put the file in site-src/img-src/ and set PHOTO = ("your-photo.jpg", "Alt text describing the photo").
 # Portrait, 4:5, at least 900 px wide. Until then a neutral monogram shows inside a placeholder box.
 PHOTO = ("ryan-portrait.jpg", "Ryan sitting on a rocky summit above a layer of cloud, smiling.")   # cropped from Ryan's photo; location metadata stripped
 
 # ---------------------------------------------------------------- 2. about
 ABOUT_HEAD = "About"
-PURPOSE = Draft("I am most interested in studying how power is held and reproduced over time, particularly through the organisation of work, and how increasing automation may redistribute it. Difficult problems that reward sustained attention suit me best, and I would rather be challenged than settle into routine.")
-ABOUT_BIO = Draft("Since I was eighteen I have worked in street fundraising, hospitality, COVID-19 pathology collection (including hotel quarantine) and, for nearly four years, customer service and administration at a self-storage business. Each of these workplaces organised labour differently, and observing them first-hand has shaped my interest in how work is structured and whom it serves. Time spent travelling, often well away from the usual tourist routes, has shaped my thinking in a similar way, particularly about how differently inequality is lived from place to place. I returned to study in 2025 through a university pathway diploma.")
-INTERESTS_LABEL = "Questions I'm interested in"
-INTERESTS = Draft(["Who holds power, how is it maintained over time, and why do those without it so often accept arrangements that work against them?", "How would power be distributed in a society whose economy no longer needs most people's labour?", "Why do people with shared material interests come to see themselves as opponents, divided by race or income, while the wealthiest go largely unchallenged?"])
-EXPLORING_LABEL = "Now, November 2026"
-EXPLORING = Draft(["Halfway through a Bachelor of Arts (Politics, Power and Technology)", "Beginning work adapting an AI agent platform to client businesses", "Developing an interest in scientific management and its parallels in automation"])
+PURPOSE = ("I am most interested in studying how power is held and reproduced over time, particularly through the organisation of work, and how increasing automation may redistribute it. I am particularly drawn to problems that require sustained analysis.")
+ABOUT_BIO = ("Since I was eighteen I have worked in street fundraising, hospitality, COVID-19 pathology collection (including hotel quarantine) and, for nearly four years, customer service and administration at a self-storage business. Each of these workplaces organised labour differently, and observing them first-hand has shaped my interest in how work is structured and whom it serves. Travel has also shaped my thinking, particularly about how differently inequality is experienced from place to place. I returned to study in 2025 through a university pathway diploma.")
+INTERESTS_LABEL = "Areas of interest"
+INTERESTS = (["Who holds power, how is it maintained over time, and why do those without it so often accept arrangements that work against them?", "How would power be distributed in a society whose economy no longer needs most people's labour?", "Why do people with shared material interests come to see themselves as opponents, divided by race or income, while the wealthiest go largely unchallenged?"])
+EXPLORING_LABEL = "At present (November 2026)"
+EXPLORING = (["Halfway through a Bachelor of Arts (Politics, Power and Technology)", "Beginning work adapting an AI agent platform to client businesses", "Developing an interest in scientific management and its parallels in automation"])
 
 # ---------------------------------------------------------------- 3. featured project (also feeds the detail page)
 FEATURED = {
@@ -76,7 +77,7 @@ FEATURED = {
     "live_url": "https://not-our-game.netlify.app",
     "live_label": "Visit the live campaign site",
     "detail_label": "Read about the project",
-    "blurb": Draft("Not Our Game is a campaign strategy addressing domestic and family violence associated with State of Origin, during which recorded domestic assaults in New South Wales rise by 40.7%. The campaign asks the NRL and its broadcasters to include prevention messaging and support-service information in the 2027 Origin broadcasts. I developed the campaign website and wrote the report's messaging and artefact sections."),
+    "blurb": ("Not Our Game is a campaign strategy addressing domestic and family violence associated with State of Origin, during which recorded domestic assaults in New South Wales rise by 40.7%. The campaign asks the NRL and its broadcasters to include prevention messaging and support-service information in the 2027 Origin broadcasts. I developed the campaign website and wrote the report's messaging and artefact sections."),
     # Screenshots of the campaign site (sources in site-src/img-src/). First two show on the home page.
     "shots": [
         ("campaign-home-desktop.png", "desktop", "Home page, desktop",
@@ -93,11 +94,11 @@ FEATURED = {
 # Detail page (not-our-game.html). Section headings are labels; the prose is yours.
 FEATURED_PAGE = {
     "overview_head": "Overview",
-    "overview": Draft("Not Our Game was a group project for ART20003 Skills and Strategies for Social Change. It responds to evidence that recorded domestic assaults in New South Wales rise by 40.7% on State of Origin nights. Rather than positioning fans as the problem, the campaign addresses three audiences: the NRL and its broadcasters, who are able to make the change; fans, particularly men watching in groups; and people experiencing violence, together with those supporting them and men concerned about their own behaviour. Its central request is that prevention messaging and support-service information be included in the 2027 Origin broadcasts. My contribution was the campaign website and the report's messaging and artefact sections."),
+    "overview": ("Not Our Game was a group project for ART20003 Skills and Strategies for Social Change. It responds to evidence that recorded domestic assaults in New South Wales rise by 40.7% on State of Origin nights. Rather than positioning fans as the problem, the campaign addresses three audiences: the NRL and its broadcasters, who are able to make the change; fans, particularly men watching in groups; and people experiencing violence, together with those supporting them and men concerned about their own behaviour. Its central request is that prevention messaging and support-service information be included in the 2027 Origin broadcasts. My contribution was the campaign website and the report's messaging and artefact sections."),
     "website_head": "The website",
-    "website": Draft("The website functions as the campaign's hub. Each social media post links to it, as does the QR code displayed with support information during broadcasts, and its pages are organised around the three audiences. A quick-exit button and support numbers appear on every page, including on mobile, following research on domestic violence websites that recommends a clearly labelled exit that remains visible."),
+    "website": ("The website functions as the campaign's hub. Each social media post links to it, as does the QR code displayed with support information during broadcasts, and its pages are organised around the three audiences. A quick-exit button and support numbers appear on every page, including on mobile, following research on domestic violence websites that recommends a clearly labelled exit that remains visible."),
     "messaging_head": "The messaging section",
-    "messaging": Draft("The central message, \"Love the Game, Respect Everyone\", separates the sport from the violence, allowing supporters to reject violence without being cast as critics of the game. Fan-facing material avoids leading with assault statistics, since publicising the prevalence of a harmful behaviour can reinforce it. It instead suggests low-key forms of bystander action, such as checking in with a friend the following day."),
+    "messaging": ("The central message, \"Love the Game, Respect Everyone\", separates the sport from the violence, allowing supporters to reject violence without being cast as critics of the game. Fan-facing material avoids leading with assault statistics, since publicising the prevalence of a harmful behaviour can reinforce it. It instead suggests low-key forms of bystander action, such as checking in with a friend the following day."),
     "tiles_head": "Social posts",
 }
 # Social tiles you made: (file in site-src/img-src/, alt text, caption). Leave empty to show a placeholder.
@@ -120,9 +121,9 @@ WORK = [
         "thumb": ("essay-phi10009-p1.png", "First page of the essay, headed Technological Progress and Power."),
         "type": "Major essay",
         "unit_code": "PHI10009", "unit_name": "Introduction to Power in the Digital Age", "year": "2026",
-        "topic": Draft("Does technological progress distribute power or concentrate it?"),
+        "topic": ("Does technological progress distribute power or concentrate it?"),
         "tags": ["Power", "Automation", "Platform monopolies"],
-        "blurb": Draft("Whether progress distributes or concentrates power depends less on the technology than on the social and institutional frameworks into which it emerges. Drawing on Lukes and Clegg, I trace how platform monopolies and a research agenda tilted towards labour-replacing automation concentrate power, and how policy intervention could distribute its gains more widely."),
+        "blurb": ("Whether progress distributes or concentrates power depends less on the technology than on the social and institutional frameworks into which it emerges. Drawing on Lukes and Clegg, I trace how platform monopolies and a research agenda tilted towards labour-replacing automation concentrate power, and how policy intervention could distribute its gains more widely."),
     },
     {
         "title": "Deterring Arrival: Asylum Policy in Australia and the United States",
@@ -131,9 +132,9 @@ WORK = [
         "thumb": ("essay-soc20013-p1.png", "First page of the essay, headed Deterring Arrival: Asylum Policy in Australia and the United States."),
         "type": "Major essay",
         "unit_code": "SOC20013", "unit_name": "Race, Ethnicity and Migration", "year": "2026",
-        "topic": Draft("How do Australia and the United States keep asylum seekers from reaching the territory where they could claim protection?"),
+        "topic": ("How do Australia and the United States keep asylum seekers from reaching the territory where they could claim protection?"),
         "tags": ["Asylum policy", "Migration", "Comparative policy"],
-        "blurb": Draft("Both countries have constructed similar architectures of deterrence in response to comparable moral panics. Geography explains most differences in form, offshore detention in Australia and land buffers in the United States. The more significant contrast is durability: Australia's bipartisan consensus differs from US policy, which shifts between administrations and is contested in the courts."),
+        "blurb": ("Both countries have constructed similar architectures of deterrence in response to comparable moral panics. Geography explains most differences in form, offshore detention in Australia and land buffers in the United States. The more significant contrast lies in durability, with Australia's bipartisan consensus differing from US policy, which shifts between administrations and is contested in the courts."),
     },
     {
         "title": "Insulating News from the Market and the State",
@@ -142,9 +143,9 @@ WORK = [
         "thumb": ("essay-his10006-p1.png", "First page of the essay, headed Insulating News from the Market and the State."),
         "type": "Major essay",
         "unit_code": "HIS10006", "unit_name": "Propaganda: A History of Media and Politics", "year": "2026",
-        "topic": Draft("Should news and information, as public goods, be quarantined from the commercial market, and would that make them independent?"),
+        "topic": ("Should news and information, as public goods, be quarantined from the commercial market, and would that make them independent?"),
         "tags": ["Media policy", "Public goods", "Public broadcasting"],
-        "blurb": Draft("I argue that news is only partly a public good, and that quarantining it from the market would not secure its independence. Cases from the Chicago press in 1918 to Poland's public broadcaster in 2021 suggest that removing the market leaves control with the state. News should instead be insulated from both, through regulatory protection and secure funding."),
+        "blurb": ("I argue that news is only partly a public good, and that quarantining it from the market would not secure its independence. Cases from the Chicago press in 1918 to Poland's public broadcaster in 2021 suggest that removing the market leaves control with the state. News should instead be insulated from both, through regulatory protection and secure funding."),
     },
     {
         "title": "Migrant Settlement and Gentrification in Footscray",
@@ -153,9 +154,9 @@ WORK = [
         "thumb": ("footscray-final-p1.png", "Title slide, 'Migrant Settlement and Gentrification in Footscray', over a photo of apartment towers beside the river at Footscray."),
         "type": "Tutorial presentation",
         "unit_code": "SOC20013", "unit_name": "Race, Ethnicity and Migration", "year": "2026",
-        "topic": Draft("What happens to a migrant gateway suburb when urban renewal and gentrification arrive?"),
+        "topic": ("What happens to a migrant gateway suburb when urban renewal and gentrification arrive?"),
         "tags": ["Migration", "Housing", "Urban renewal", "Melbourne"],
-        "blurb": Draft("Footscray has served as a gateway suburb for successive waves of migrants, but government-led renewal and rents rising faster than in the outer west are eroding that role; the Ethiopian and Somali communities now live mostly in Wyndham, Brimbank and Hume. I recommend affordable housing beyond key workers, secure leases for migrant traders and settlement services where new arrivals now live."),
+        "blurb": ("Footscray has served as a gateway suburb for successive waves of migrants, but government-led renewal and rents rising faster than in the outer west are eroding that role; the Ethiopian and Somali communities now live mostly in Wyndham, Brimbank and Hume. I recommend affordable housing beyond key workers, secure leases for migrant traders and settlement services where new arrivals now live."),
     },
     {
         "title": "Three vantage points of the Cold War: Hobsbawm, Gaddis, and Jervis",
@@ -164,16 +165,16 @@ WORK = [
         "thumb": ("essay-his10003-p1.png", "First page of the essay, headed Three vantage points of the Cold War: Hobsbawm, Gaddis, and Jervis."),
         "type": "Term essay",
         "unit_code": "HIS10003", "unit_name": "Global History", "year": "2026",
-        "topic": Draft("Why do three major accounts of the Cold War, written before, shortly after and a decade after the Soviet collapse, reach different conclusions?"),
+        "topic": ("Why do three major accounts of the Cold War, written before, shortly after and a decade after the Soviet collapse, reach different conclusions?"),
         "tags": ["Cold War", "International relations", "Historiography"],
-        "blurb": Draft("The period in which Hobsbawm, Gaddis and Jervis each wrote, the information available to them and their theoretical frameworks all shaped their accounts. They largely agree on the observable features of the conflict, diverge on what drove the superpower rivalry, and converge, by different routes, on the Soviet role in ending it."),
+        "blurb": ("The period in which Hobsbawm, Gaddis and Jervis each wrote, the information available to them and their theoretical frameworks all shaped their accounts. They largely agree on the observable features of the conflict, diverge on what drove the superpower rivalry, and converge, by different routes, on the Soviet role in ending it."),
     },
     {
         "title": "Not Our Game",
         "thumb": ("campaign-home-desktop.png", "Home page of the Not Our Game campaign website, headed 'Love the game. Respect everyone.' over an AI-generated image of four fans watching a game at home."),
         "type": "Group campaign strategy",
         "unit_code": "ART20003", "unit_name": "Skills and Strategies for Social Change", "year": "2026",
-        "topic": Draft("How might State of Origin broadcasts be used to prevent domestic and family violence without positioning fans as the problem?"),
+        "topic": ("How might State of Origin broadcasts be used to prevent domestic and family violence without positioning fans as the problem?"),
         "tags": ["Social campaign", "Domestic and family violence", "Messaging"],
         "blurb": FEATURED["blurb"],   # the same Draft as the project page summary
         "links": [("Read about the project", "not-our-game.html", False), ("Visit the live campaign site", "https://not-our-game.netlify.app", True)],
@@ -187,22 +188,22 @@ SKILLS_KICKER = "Skills developed in ART20003 and beyond"
 SKILL_GROUPS = [
     {
         "title": "Research and argument",
-        "text": Draft("Much of my academic writing is comparative, whether across historians' accounts of the Cold War, national approaches to asylum, or competing positions on how news should be funded. The most significant development in my writing this year followed tutor feedback to use sources as evidence, theory or context rather than as authority for claims already made. Integrating sources in this way has made my arguments more rigorous and more clearly structured."),
-        "tags": Draft(["Comparative analysis", "Historiography", "Policy analysis", "Academic writing"]),
+        "text": ("Much of my academic writing is comparative, whether across historians' accounts of the Cold War, national approaches to asylum, or competing positions on how news should be funded. The most significant development in my writing this year followed tutor feedback to use sources as evidence, theory or context rather than as authority for claims already made. Integrating sources in this way has strengthened the structure of my arguments."),
+        "tags": (["Comparative analysis", "Historiography", "Policy analysis", "Academic writing"]),
     },
     {
         "title": "Building systems with AI",
-        "text": Draft("Although I have no formal training in programming, I have found that most of the work of directing AI lies in specification. A task must be divided into components, each with an explicit definition of completion expressed as conditions that can be verified as true or false, and the system is then refined, detail by detail, until those conditions hold. Since June 2026 I have applied this approach as a contract developer on an AI agent platform, where I have also learnt that a tool's design largely determines whether people use more than its most basic functions."),
-        "tags": Draft(["Specification and acceptance criteria", "Systems design", "Interface design", "Iterative testing"]),
+        "text": ("Although I have no formal training in programming, I have found that most of the work of directing AI lies in specification. A task must be divided into components, each with an explicit definition of completion expressed as conditions that can be verified as true or false, and the system is then refined until those conditions hold. Since June 2026 I have applied this approach as a contract developer on an AI agent platform, where I have also learnt that a tool's design largely determines whether people use more than its most basic functions."),
+        "tags": (["Specification and acceptance criteria", "Systems design", "Interface design", "Iterative testing"]),
     },
     {
         "title": "Working with people",
-        "text": Draft("Nearly four years in customer service and administration at a self-storage business has involved sales across phone, email and in-person channels, managing overdue accounts and resolving problems on site, as well as covering the assistant manager's shifts while that position was vacant. Earlier roles in street fundraising and COVID-19 pathology collection developed my confidence in communicating with the public and my ability to work within strict clinical protocols."),
-        "tags": Draft(["Customer service", "Difficult conversations", "Working to protocol", "Public speaking"]),
+        "text": ("Nearly four years in customer service and administration at a self-storage business has involved sales across phone, email and in-person channels, managing overdue accounts and resolving problems on site, as well as covering the assistant manager's shifts while that position was vacant. Earlier roles in street fundraising and COVID-19 pathology collection developed my confidence in communicating with the public and my ability to work within strict clinical protocols."),
+        "tags": (["Customer service", "Account management", "Working to protocol", "Public speaking"]),
     },
 ]
 REFLECTION_HEAD = "Reflection: the Not Our Game campaign"
-SKILLS_AUDIT = Draft("""In developing the Not Our Game campaign strategy, I learnt most from its messaging. The most striking available figure was the 40.7% rise in domestic assaults on Origin nights, yet the research advised against leading with it. Publicising the prevalence of a harmful behaviour can normalise it, and a campaign that treats every fan as part of the problem risks alienating the audience it most needs to reach. The fan-facing material therefore begins from a view most men already hold, that disrespect is unacceptable, and suggests practical ways to act on it.
+SKILLS_AUDIT = ("""In developing the Not Our Game campaign strategy, I learnt most from its messaging. The most striking available figure was the 40.7% rise in domestic assaults on Origin nights, yet the research advised against leading with it. Publicising the prevalence of a harmful behaviour can normalise it, and a campaign that treats every fan as part of the problem risks alienating the audience it most needs to reach. The fan-facing material therefore begins from a view most men already hold, that disrespect is unacceptable, and suggests practical ways to act on it.
 
 The experience has made me more attentive to how framing shapes the reception of an argument, independently of its accuracy. As the strategy was developed in a group, my sections also needed to align with the work of other members. In future research and writing, I intend to test my assumptions about framing against the available evidence.""")
 SKILLS_LIST_LABEL = "Skills"
@@ -213,22 +214,22 @@ EXPERIENCE_HEAD = "Experience and involvement"
 EARLIER_HEAD = "Earlier work"
 EXPERIENCE = [
     {
-        "role": Draft("AI systems developer"),
+        "role": ("AI systems developer"),
         "org": "AI agent platform, contract",
         "dates": "June 2026 to present",
-        "text": Draft("Work so far includes an independent review agent that checks proposed code changes against the existing codebase, suggests fixes and re-reviews them until they pass; a 'factory floor' view that shows the status of every agent at a glance, with an assistant agent that summarises activity on request; and an orchestration mode that divides a plan into tickets for separate agents and assembles their output. Each feature was tested in a separate development deployment. I am now beginning work adapting the platform to the needs of client businesses."),
+        "text": ("Contributions include an independent review agent that checks proposed code changes against the existing codebase, suggests fixes and re-reviews them until they pass; a 'factory floor' view that shows the status of every agent at a glance, with an assistant agent that summarises activity on request; and an orchestration mode that divides a plan into tickets for separate agents and assembles their output. Each feature was tested in a separate development deployment. I am now beginning work adapting the platform to the needs of client businesses."),
     },
     {
         "role": "Arx, personal project",
         "org": "Self-built study and work planner",
         "dates": "2026",
-        "text": Draft("A self-built study planner that synchronised university deadlines from Canvas and scheduled work backwards from each due date; the project that led to my development work."),
+        "text": ("A self-built study planner that synchronised university deadlines from Canvas and scheduled work backwards from each due date; the project that led to my development work."),
     },
     {
         "role": "Customer service and administration",
         "org": "Self-storage business, casual",
         "dates": "December 2022 to present",
-        "text": Draft("Sales across phone, email and in-person channels, management of overdue accounts and resolution of on-site issues, including covering the assistant manager's shifts while the position was vacant."),
+        "text": ("Sales across phone, email and in-person channels, management of overdue accounts and resolution of on-site issues, including covering the assistant manager's shifts while the position was vacant."),
     },
     {
         "role": "COVID-19 pathology collection",
@@ -275,7 +276,7 @@ EMAIL = [("Personal", "ryan.ogrady77@gmail.com"), ("University", "103024469@stud
 
 # ---------------------------------------------------------------- 8. footer
 AI_NOTE = None   # dropped 12 Nov: Ryan will put an AI statement in the Canvas submission instead
-COLOPHON = Draft("This site is a static build generated from a small Python script, with no frameworks, trackers or third-party requests. It follows your system's light or dark setting, can be printed as a plain document, and has been checked for keyboard access and WCAG AA colour contrast.")
+COLOPHON = ("This site is a static build generated from a small Python script, with no frameworks, trackers or third-party requests. It follows your system's light or dark setting, can be printed as a plain document, and has been checked for keyboard access and WCAG AA colour contrast.")
 CREDITS = [
     "Set in Newsreader and Source Sans 3, both under the SIL Open Font License (fonts/OFL-*.txt).",
     'Footscray title slide photo: "Saltwater River Crossing Site and Footscray Wharves Precinct" by Sgroey, CC BY-SA 4.0, via Wikimedia Commons.',
