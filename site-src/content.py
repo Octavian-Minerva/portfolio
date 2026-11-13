@@ -164,15 +164,32 @@ WORK = [
 ]
 
 # ---------------------------------------------------------------- 5. skills audit and reflection (marked requirement)
-SKILLS_HEAD = "Skills audit and reflection"
-SKILLS_KICKER = "ART20003 and beyond"
-SKILLS_AUDIT = Draft("""In ART20003 I learnt how to plan and deliver a social campaign, working with a group to take Not Our Game from a problem to a strategy with a clear request. My part was the messaging, and it showed me how much evidence should drive a strategy. Research on social norms suggests that publicising how common a harmful behaviour is can reinforce it, so our fan material does not lead with assault statistics, however striking they are.
+SKILLS_HEAD = "Skills and reflection"
+SKILLS_KICKER = "What I can do, and where I learnt it"
+# Skill areas: each card has a heading, a short paragraph of evidence and a few labels.
+SKILL_GROUPS = [
+    {
+        "title": "Research and argument",
+        "text": Draft("Most of my writing compares: three historians on the Cold War, two countries' asylum systems, competing claims about who should fund the news. The biggest change this year came from one piece of tutor feedback, to use sources as evidence, theory or context rather than as authority for a point I had already made. My essays got tighter once the evidence started doing the arguing."),
+        "tags": Draft(["Comparative analysis", "Historiography", "Policy analysis", "Academic writing"]),
+    },
+    {
+        "title": "Building systems with AI",
+        "text": Draft("I have no formal coding background. What I do have is a habit of breaking a problem into parts and checking each one, which turns out to be most of what directing AI well requires. Since June I have built features for an AI agent platform, including an automated review loop and a single screen for watching every agent at once; before that came Arx, a planner I built for my own study."),
+        "tags": Draft(["Systems thinking", "AI-assisted development", "Process design"]),
+    },
+    {
+        "title": "Working with people",
+        "text": Draft("Nearly four years at a self-storage business means sales by phone, email and in person, chasing overdue accounts and sorting out whatever goes wrong on site, including covering the assistant manager's shifts while that role was vacant. Earlier jobs added the rest: a month of street fundraising taught me to talk to anyone, and COVID collection in hotel quarantine taught me to work to strict protocol."),
+        "tags": Draft(["Customer service", "Difficult conversations", "Working to protocol", "Public speaking"]),
+    },
+]
+REFLECTION_HEAD = "Reflection: the Not Our Game campaign"
+SKILLS_AUDIT = Draft("""Not Our Game was my first time planning a social campaign from start to finish, and the part I took most from was the messaging. The obvious move was to open with the statistic that recorded domestic assaults in New South Wales rise by 40.7% on State of Origin nights. The research pointed the other way: publicising how common a harmful behaviour is can make it seem normal, and a campaign that treats every fan as part of the problem loses the audience it most needs. So the fan-facing material leads with something most men already believe, that they are not okay with disrespect, and gives them small ways to act on it.
 
-That is the same skill my essays this year have pushed hardest: structuring an argument so the evidence does the work. Outside uni, building systems with AI has sharpened how I break a problem into parts and check the result, and pushing these tools since the first ChatGPT release has kept me learning.
-
-As I finish my degree and keep working, I want to bring that habit of letting evidence lead into research on inequality and work.""")
+That decision changed how I think about argument more generally. Being right is not enough if the framing pushes your audience away. Working in a group also meant planning around other people's sections and deadlines, which I will need more of as my work moves towards research. Going forward, I want to keep testing my instincts about framing against the evidence before I commit to them.""")
 SKILLS_LIST_LABEL = "Skills"
-SKILLS_LIST = Draft(["Campaign strategy", "Writing for different audiences", "Argument and essay structure", "Evidence analysis", "Comparative research", "Systems thinking", "Building with AI", "Teamwork"])
+SKILLS_LIST = None   # replaced by the tags on each skill area (13 Nov)
 
 # ---------------------------------------------------------------- 6. experience and involvement
 EXPERIENCE_HEAD = "Experience and involvement"

@@ -246,6 +246,11 @@ main p.lede,main p.kicker,main p.unit,main p.org,main p.actions,main p.crumb,mai
  border-top:1px solid var(--accent);padding-top:clamp(24px,3vw,36px)}
 .skills .audit{font-size:20px;line-height:1.65;max-width:62ch}
 .skills .audit .ph{font-size:17px;padding:20px 22px;max-width:none}
+.skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(28px,4vw,48px);margin-bottom:clamp(48px,6vw,80px)}
+.skill-group{border-top:1px solid var(--ink);padding-top:18px}
+.skill-group h3{font-size:clamp(23px,2vw,27px);margin:0 0 12px}
+.skill-group p{font-size:17px;line-height:1.6}
+.reflect-h{font-size:clamp(26px,2.6vw,34px);margin:0 0 18px}
 .skills .audit p:first-child{font-family:var(--serif);font-size:clamp(23px,2.3vw,28px);line-height:1.4}
 .skill-list{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
 .skill-list li{background:var(--paper);border:1px solid #cbd6e4;border-radius:999px;padding:8px 14px;font-size:15px}
@@ -416,9 +421,15 @@ def page_home():
     if C.SKILLS_LIST is None: skl = ''
     elif isinstance(C.SKILLS_LIST, RyanWrites): skl = f'<p class="kicker">{smart(C.SKILLS_LIST_LABEL)}</p>' + ph(C.SKILLS_LIST, 'Skills: list')
     else: skl = f'<p class="kicker">{smart(C.SKILLS_LIST_LABEL)}</p><ul class="skill-list">' + ''.join(f'<li>{smart(s)}</li>' for s in C.SKILLS_LIST) + '</ul>'
+    def skill_group(g):
+        tags = ''.join(f'<li>{smart(t)}</li>' for t in g.get('tags') or [])
+        return (f'<article class="skill-group"><h3>{smart(g["title"])}</h3>{prose(g["text"], "Skills: " + g["title"])}'
+                + (f'<ul class="tags" aria-label="Skills">{tags}</ul>' if tags else '') + '</article>')
+    groups = ''.join(skill_group(g) for g in getattr(C, 'SKILL_GROUPS', []))
     skills = (f'<section class="sec skills" id="skills" aria-labelledby="skills-h"><div class="wrap">'
               f'<p class="kicker"><span class="num">03</span>{smart(C.SKILLS_KICKER)}</p><h2 id="skills-h">{smart(C.SKILLS_HEAD)}</h2>'
-              f'<div class="skills-body"><div class="audit">{prose(C.SKILLS_AUDIT, "Skills: audit and reflection")}</div><div>{skl}</div></div></div></section>')
+              + (f'<div class="skill-groups">{groups}</div>' if groups else '')
+              + f'<div class="skills-body"><div class="audit"><h3 class="reflect-h">{smart(C.REFLECTION_HEAD)}</h3>{prose(C.SKILLS_AUDIT, "Skills: audit and reflection")}</div><div>{skl}</div></div></div></section>')
     # experience
     def xp_rows(items, label):
         return ''.join(f'<li><div class="dates">{inline(e["dates"], f"{label} {i + 1}: dates")}</div>'
