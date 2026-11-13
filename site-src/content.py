@@ -198,7 +198,7 @@ EXPERIENCE = [
     {
         "role": "COVID-19 pathology collection",
         "org": "Pathology provider: testing sites, then hotel quarantine",
-        "dates": RyanWrites("Years", "e.g. 2020 to 2022", who='Ryan confirms'),
+        "dates": "2021 to 2022",
         "text": None,
     },
     {
