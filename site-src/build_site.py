@@ -153,7 +153,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0;lette
 p{margin:0 0 1em}
 /* Ryan's preference: justified body text, with hyphenation (lang="en-AU") to keep word gaps even in narrow columns */
 main p{text-align:justify;-webkit-hyphens:auto;hyphens:auto;hyphenate-limit-chars:8 4 3}
-main p.lede,main p.kicker,main p.unit,main p.org,main p.actions,main p.crumb,main p.big,main p.name{text-align:left;-webkit-hyphens:manual;hyphens:manual}
+main p.lede,main p.kicker,main p.unit,main p.org,main p.actions,main p.crumb,main p.big,main p.name,main p.email-row{text-align:left;-webkit-hyphens:manual;hyphens:manual}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad)}
 .skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:#fff;padding:10px 16px;border-radius:4px;z-index:10;text-decoration:none}
 .skip:focus{top:12px;color:#fff}
@@ -267,6 +267,9 @@ main p.lede,main p.kicker,main p.unit,main p.org,main p.actions,main p.crumb,mai
 
 /* contact */
 .contact .big{font-family:var(--serif);font-size:clamp(28px,4vw,48px);letter-spacing:-.02em;line-height:1.2;word-break:break-word}
+.contact .email-row{margin:0 0 18px;display:flex;flex-direction:column;gap:2px}
+.contact .email-row .big{font-size:clamp(22px,3vw,36px)}
+.email-label{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
 /* footer */
 .site-foot{border-top:1px solid var(--line);padding:40px 0 56px;font-size:15px;color:var(--muted)}
@@ -444,7 +447,10 @@ def page_home():
           f'<div><ul class="xp">{rows}</ul>{edu}</div></div></section>')
     # contact
     if isinstance(C.EMAIL, RyanWrites): email = ph(C.EMAIL, 'Contact: email')
-    else: email = f'<p class="big"><a href="mailto:{html.escape(C.EMAIL)}">{html.escape(C.EMAIL)}</a></p>'
+    elif isinstance(C.EMAIL, str): email = f'<p class="big"><a href="mailto:{html.escape(C.EMAIL)}">{html.escape(C.EMAIL)}</a></p>'
+    else:  # list of (label, address)
+        email = ''.join(f'<p class="email-row"><span class="email-label">{smart(label)}</span>'
+                        f'<a class="big" href="mailto:{html.escape(addr)}">{html.escape(addr)}</a></p>' for label, addr in C.EMAIL)
     contact = (f'<section class="sec contact" id="contact" aria-labelledby="contact-h"><div class="wrap sec-grid">'
                f'<div class="sec-label"><p class="kicker"><span class="num">05</span>Get in touch</p><h2 id="contact-h">{smart(C.CONTACT_HEAD)}</h2></div>'
                f'<div>{prose(C.CONTACT_LINE, "Contact: invitation line", "lede")}<div style="margin-top:20px">{email}</div></div></div></section>')
