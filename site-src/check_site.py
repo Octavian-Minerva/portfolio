@@ -53,7 +53,7 @@ for name, p in parsed.items():
     for tag, url in p.links:
         if url.startswith(('http://', 'https://')): external.add(url); continue
         if url.startswith(('mailto:', 'tel:')): continue
-        path, _, frag = url.partition('#')
+        path, _, frag = url.partition('#'); path = path.split('?')[0]
         if path.startswith('/'): target = os.path.join(SITE, path.lstrip('/') or 'index.html')
         else: target = os.path.join(SITE, path) if path else os.path.join(SITE, name)
         if os.path.isdir(target): target = os.path.join(target, 'index.html')

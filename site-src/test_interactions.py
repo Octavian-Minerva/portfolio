@@ -87,6 +87,19 @@ with sync_playwright() as pw:
     check(pg.evaluate("document.querySelector('.rail > .card.is-active .more').open"), 'summary toggle opens on the active card')
     deco = pg.evaluate("getComputedStyle(document.querySelector('.page-preview p')).textDecorationLine")
     check(deco == 'none', f'page preview text is not underlined ({deco})')
+    # Footer rows line up: Summary toggles and first buttons sit at the same height on every card
+    pg.locator('.rail > .card.is-active .more summary').click(); pg.wait_for_timeout(150)   # close it again
+    check(pg.url.endswith('/index.html'), 'the Summary toggle does not follow the card link')
+    for sel, what in (('.more summary', 'Summary toggles'), ('.card-actions .btn', 'bottom buttons'), ('.tags', 'tag rows (bottom edge)')):
+        edge = 'bottom' if 'tags' in sel else 'top'
+        # faded cards are scaled, so compare against the card's own bottom instead of the page
+        rel = pg.evaluate(f"[...document.querySelectorAll('.rail > .card')].map(c => {{ const r = c.getBoundingClientRect(); return Math.round((r.bottom - c.querySelector('{sel}').getBoundingClientRect().{edge}) / (r.height / c.offsetHeight)) }})")
+        check(max(rel) - min(rel) <= 2, f'{what} line up across cards (distance from card foot: {rel})')
+    # The whole card is the link: clicking the preview strip of the active card opens the piece
+    bx = pg.locator('.rail > .card.is-active .media').bounding_box()
+    pg.mouse.click(bx['x'] + bx['width'] / 2, bx['y'] + bx['height'] / 2); pg.wait_for_load_state('load'); pg.wait_for_timeout(300)
+    check(pg.url.endswith('not-our-game.html'), f'clicking the card image opens the piece ({pg.url})')
+    pg.go_back(); pg.wait_for_load_state('load')
     # Phone: header tucks away when scrolling down and returns when scrolling up
     ph = b.new_context(viewport={'width': 390, 'height': 844}, is_mobile=True, has_touch=True)
     ph.route('**/*', answer)

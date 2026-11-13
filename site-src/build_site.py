@@ -3,7 +3,7 @@
 #                      .venv/bin/python build_site.py --release  refuse to build while any placeholder remains
 # Output is plain static HTML/CSS with no JavaScript and no external requests: fonts are self-hosted.
 # Deploy (later, not yet): upload the whole ../site/ folder to Netlify (publish directory = site root, no build command).
-import html, os, re, shutil, subprocess, sys
+import hashlib, html, os, re, shutil, subprocess, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import content as C
@@ -390,10 +390,8 @@ html[data-theme-now=dark] .card .thumb,html[data-theme-now=dark] .frame{border-c
 .rail:focus-visible{outline:3px solid var(--accent);outline-offset:6px}
 .rail>.card{scroll-snap-align:start;border:1px solid var(--line);border-radius:8px;background:var(--paper);overflow:hidden;display:flex;flex-direction:column;padding:0}
 .card .media{height:168px;border-bottom:1px solid var(--line);overflow:hidden;background:var(--tint)}
-.card .media a{display:block;height:100%;text-decoration:none;color:inherit}
 .card .media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .35s ease}
 .card .media.fit img{object-fit:cover}
-.card .media a:hover img{transform:scale(1.03)}
 .page-preview{height:100%;padding:20px 20px 0;position:relative;
  background:var(--tint)}
 .page-preview p{margin:0;font-family:var(--serif);font-size:15.5px;line-height:26px;color:var(--topic);text-align:left!important;hyphens:manual}
@@ -403,7 +401,14 @@ html[data-theme-now=dark] .card .thumb,html[data-theme-now=dark] .frame{border-c
 .card-body h3{font-size:clamp(21px,1.7vw,24px);margin:0 0 10px}
 .card-body .topic{font-size:16.5px;margin:0 0 12px}
 .card-body .tags{margin:0 0 12px}
-.card-actions{margin-top:auto}
+[hidden]{display:none!important}
+.card-foot{margin-top:auto}
+/* the title link stretches over the whole card; buttons and the Summary toggle sit above it */
+.rail>.card{position:relative}
+.rail>.card .card-link::after{content:"";position:absolute;inset:0;z-index:1}
+.card-foot .more,.card-foot .actions{position:relative;z-index:2}
+.rail>.card:hover .card-link{background-size:100% 1px}
+.rail>.card:hover .media img{transform:scale(1.03)}
 .card-actions .actions{margin:14px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
 .card-actions .btn{padding:10px 16px;font-size:15px}
 .card-actions .btn:first-child{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
@@ -427,6 +432,7 @@ html[data-theme-now=dark] .card .thumb,html[data-theme-now=dark] .frame{border-c
 .rail.cover{grid-auto-columns:min(460px,38vw);padding-inline:calc(50% - min(460px,38vw) / 2);scroll-padding-inline:0;gap:28px}
 .rail.cover>.card{scroll-snap-align:center;transition:opacity .35s ease,transform .35s ease,box-shadow .35s ease;opacity:.42;transform:scale(.93)}
 .rail.cover>.card.is-active{opacity:1;transform:none;box-shadow:0 18px 40px -24px rgba(0,0,0,.45)}
+.rail.cover{padding-block:8px 40px}.rail.cover~.rail-count,.rail-wrap~.rail-count{margin-top:0}
 .rail.cover>.card:not(.is-active){cursor:pointer}
 .rail.cover::-webkit-scrollbar{display:none}.rail.cover{scrollbar-width:none}
 @media (prefers-reduced-motion:reduce){.rail.cover>.card{transition:none}}
@@ -507,10 +513,13 @@ def head(title, desc, prefix=''):
             f'<link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml">'
             f'<link rel="preload" href="{prefix}fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>'
             f'<link rel="preload" href="{prefix}fonts/source-sans-3.woff2" as="font" type="font/woff2" crossorigin>'
-            f'<link rel="stylesheet" href="{prefix}style.css">'
+            f'<link rel="stylesheet" href="{prefix}style.css?v={asset_version()}">'
             '<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>'
-            f'<script src="{prefix}site.js" defer></script></head><body>'
+            f'<script src="{prefix}site.js?v={asset_version()}" defer></script></head><body>'
             '<a class="skip" href="#main">Skip to content</a>')
+
+def asset_version():
+    return hashlib.sha1((CSS + SITE_JS).encode()).hexdigest()[:10]
 
 def header(home=True):
     base = '' if home else 'index.html'
@@ -586,15 +595,14 @@ def page_home():
             media = img(w["thumb"][0], w["thumb"][1], [480, 960], "(max-width:700px) 92vw, 400px")
         else:
             media = ''
-        if media and href:   # duplicate of the title link, so hidden from keyboard and screen readers
-            media = f'<a href="{href}" tabindex="-1" aria-hidden="true">{media}</a>'
         media = f'<div class="media{" fit" if w.get("thumb_fit") == "contain" else ""}">{media}</div>' if media else ''
         summary = (f'<details class="more"><summary>Summary</summary>{prose(w["blurb"], where)}</details>'
                    if w.get('blurb') is not None else '')
         cards += (f'<article class="card" aria-roledescription="slide" aria-label="{i + 1} of {len(C.WORK)}">{media}<div class="card-body">'
                   f'{unit_line(w)}<h3><span class="type">{smart(w["type"])}</span>{title_html}</h3>'
-                  f'{prose(w["topic"], where.replace("blurb", "topic line"), "topic")}<ul class="tags" aria-label="Topics">{tags}</ul>'
-                  f'{summary}<div class="card-actions">{read_and_pdf(w)}{link_buttons(w)}</div></div></article>')
+                  f'{prose(w["topic"], where.replace("blurb", "topic line"), "topic")}'
+                  f'<div class="card-foot"><ul class="tags" aria-label="Topics">{tags}</ul>'
+                  f'{summary}<div class="card-actions">{read_and_pdf(w)}{link_buttons(w)}</div></div></div></article>')
     prev_btn = '<button class="rail-btn prev" type="button" aria-label="Previous piece of work" hidden><span aria-hidden="true">&larr;</span></button>'
     next_btn = '<button class="rail-btn next" type="button" aria-label="Next piece of work" hidden><span aria-hidden="true">&rarr;</span></button>'
     count = f'<p class="rail-count" aria-live="polite" hidden>1 of {len(C.WORK)}</p>'
