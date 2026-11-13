@@ -106,21 +106,15 @@ SOCIAL_TILES_TODO = None  # dropped 12 Nov: the campaign tiles were groupmates' 
 # ---------------------------------------------------------------- 4. selected work
 # One dict per card. Reorder, delete or add cards freely. Titles are exact titles from the submitted files.
 # "pdf": optional (source file in ../essays-src/, public file name); adds a "Read the full essay (PDF)" button.
+# "thumb": (file in site-src/img-src/, alt text) shown at the top of the card, cropped to 4:3.
+# "links": optional [(label, href, external)] buttons.
 # "slides": optional images (file in site-src/img-src/, alt text); a card with slides spans the full width.
 WORK_HEAD = "Selected work"
 WORK = [
     {
-        "title": "Three vantage points of the Cold War: Hobsbawm, Gaddis, and Jervis",
-        "pdf": ("his10003.pdf", "ryan-ogrady-cold-war-three-vantage-points.pdf"),
-        "type": "Term essay",
-        "unit_code": "HIS10003", "unit_name": "Global History", "year": "2026",
-        "topic": Draft("Why do three serious accounts of the Cold War, written before, just after and a decade after the Soviet collapse, disagree?"),
-        "tags": ["Cold War", "International relations", "Historiography"],
-        "blurb": Draft("I compare Hobsbawm, Gaddis and Jervis and argue that when each wrote, what they could know and the frameworks they used shaped their accounts. They agree on what was observable, split on what drove the rivalry, and converge, by different routes, on the Soviet role in ending it."),
-    },
-    {
         "title": "Deterring Arrival: Asylum Policy in Australia and the United States",
         "pdf": ("soc20013.pdf", "ryan-ogrady-deterring-arrival-asylum-policy.pdf"),
+        "thumb": ("essay-soc20013-p1.png", "First page of the essay, headed Deterring Arrival: Asylum Policy in Australia and the United States."),
         "type": "Major essay",
         "unit_code": "SOC20013", "unit_name": "Race, Ethnicity and Migration", "year": "2026",
         "topic": Draft("How do Australia and the United States keep asylum seekers from reaching the territory where they could claim protection?"),
@@ -130,6 +124,7 @@ WORK = [
     {
         "title": "Insulating News from the Market and the State",
         "pdf": ("his10006.pdf", "ryan-ogrady-insulating-news.pdf"),
+        "thumb": ("essay-his10006-p1.png", "First page of the essay, headed Insulating News from the Market and the State."),
         "type": "Major essay",
         "unit_code": "HIS10006", "unit_name": "Propaganda: A History of Media and Politics", "year": "2026",
         "topic": Draft("Should news and information, as public goods, be quarantined from the commercial market, and would that make them independent?"),
@@ -138,16 +133,33 @@ WORK = [
     },
     {
         "title": "Footscray: Migrant Settlement and Urban Renewal",
+        "thumb_fit": "contain",   # 16:9 slide: show it whole rather than cropping the title
+        "thumb": ("footscray-slide-01.png", "Title slide, 'Footscray: Migrant Settlement and Urban Renewal', over a photo of apartment towers beside the river at Footscray."),
         "type": "Tutorial presentation",
         "unit_code": "SOC20013", "unit_name": "Race, Ethnicity and Migration", "year": "2026",
         "topic": Draft("What happens to a gateway suburb for migrants when urban renewal and rising rents arrive?"),
         "tags": ["Migration", "Housing", "Urban renewal", "Melbourne"],
         "blurb": Draft("Footscray has welcomed successive waves of migrants, but state-led renewal and rising rents are pricing out that role, and the gateway is moving west to Brimbank and Wyndham. I recommend public housing that goes beyond essential workers, and long-term leases for the African traders being priced out of their shopfronts."),
-        "slides": [
-            ("footscray-slide-01.png", "Title slide, 'Footscray: Migrant Settlement and Urban Renewal', over a photo of apartment towers beside the river at Footscray."),
-            ("footscray-slide-04.png", "Slide headed 'Who Lives in Footscray Now?', with a bar chart of the share of residents born in Australia, born overseas and born in Vietnam at each Census from 2006 to 2021."),
-            ("footscray-slide-09.png", "Slide headed 'Class, Not Only Ethnicity', with a table setting four concepts from the readings against what is happening in Footscray."),
-        ],
+    },
+    {
+        "title": "Three vantage points of the Cold War: Hobsbawm, Gaddis, and Jervis",
+        "pdf": ("his10003.pdf", "ryan-ogrady-cold-war-three-vantage-points.pdf"),
+        "thumb": ("essay-his10003-p1.png", "First page of the essay, headed Three vantage points of the Cold War: Hobsbawm, Gaddis, and Jervis."),
+        "type": "Term essay",
+        "unit_code": "HIS10003", "unit_name": "Global History", "year": "2026",
+        "topic": Draft("Why do three serious accounts of the Cold War, written before, just after and a decade after the Soviet collapse, disagree?"),
+        "tags": ["Cold War", "International relations", "Historiography"],
+        "blurb": Draft("I compare Hobsbawm, Gaddis and Jervis and argue that when each wrote, what they could know and the frameworks they used shaped their accounts. They agree on what was observable, split on what drove the rivalry, and converge, by different routes, on the Soviet role in ending it."),
+    },
+    {
+        "title": "Not Our Game",
+        "thumb": ("campaign-home-desktop.png", "Home page of the Not Our Game campaign website, headed 'Love the game. Respect everyone.' over an AI-generated image of four fans watching a game at home."),
+        "type": "Group campaign strategy",
+        "unit_code": "ART20003", "unit_name": "Skills and Strategies for Social Change", "year": "2026",
+        "topic": Draft("How can State of Origin broadcasts help prevent domestic and family violence without treating fans as the problem?"),
+        "tags": ["Social campaign", "Domestic and family violence", "Messaging"],
+        "blurb": FEATURED["blurb"],   # the same Draft as the project page summary
+        "links": [("Read about the project", "not-our-game.html", False), ("Visit the live campaign site", "https://not-our-game.netlify.app", True)],
     },
 ]
 

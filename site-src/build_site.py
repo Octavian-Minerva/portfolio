@@ -68,6 +68,13 @@ def pdf_button(w):
     return (f'<p class="actions"><a class="btn" href="files/{pub}">Read the full essay '
             f'<span class="btn-note">(PDF{pages})</span></a></p>')
 
+def link_buttons(w):
+    out = ''
+    for label, href, external in w.get('links', []):
+        arrow = '&#8599;' if external else '&rarr;'
+        out += f'<a class="btn" href="{href}">{smart(label)} <span class="arr" aria-hidden="true">{arrow}</span></a>'
+    return f'<p class="actions">{out}</p>' if out else ''
+
 def inline(x, where):
     if x is None: return ''
     if isinstance(x, RyanWrites): return ph(x, where, inline=True)
@@ -183,7 +190,10 @@ p{margin:0 0 1em}
 .exploring .kicker{margin:0}
 .exploring+.exploring{margin-top:18px}
 .points{margin:0;padding-left:1.1em}.points li{margin:0 0 6px}
-.card .actions{margin-top:18px}
+.card .actions{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+.card .thumb{margin:0 0 22px;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--line);background:#fff}
+.card .thumb img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+.card .thumb.fit img{object-fit:contain;object-position:center}
 .btn-note{font-weight:400;opacity:.8}
 
 /* featured */
@@ -381,39 +391,30 @@ def page_home():
              + (f'<div class="exploring"><p class="kicker">{smart(C.INTERESTS_LABEL)}</p><div>{listing(C.INTERESTS, "About: interests")}</div></div>' if C.INTERESTS is not None else '')
              + (f'<div class="exploring"><p class="kicker">{smart(C.EXPLORING_LABEL)}</p><div>{listing(C.EXPLORING, "About: now")}</div></div>' if C.EXPLORING is not None else '')
              + '</div></div></section>')
-    # featured
-    shots = F['shots']
-    stage = (f'<div class="stage">{frame(shots[0][0], shots[0][3], "(max-width:1200px) 85vw, 1000px")}'
-             f'<div class="phone">{img(shots[1][0], shots[1][3], PHONE_W, "(max-width:600px) 34vw, 240px")}</div></div>')
-    featured = (f'<section class="sec" id="featured" aria-labelledby="featured-h"><div class="wrap">'
-                f'<div class="feature-head"><div><p class="kicker"><span class="num">02</span>{smart(F["kicker"])}</p>'
-                f'<h2 id="featured-h">{smart(F["title"])}</h2></div></div>{stage}'
-                f'<div class="feature-body"><div>{prose(F["blurb"], "Featured: blurb", "lede")}'
-                f'<div class="actions"><a class="btn solid" href="not-our-game.html">{smart(F["detail_label"])} <span class="arr" aria-hidden="true">&rarr;</span></a>'
-                f'<a class="btn" href="{F["live_url"]}">{smart(F["live_label"])} <span class="arr" aria-hidden="true">&#8599;</span></a></div></div>'
-                f'{meta_list(F)}</div></div></section>')
     # work
     cards = ''
     for i, w in enumerate(C.WORK):
         where = f'Work card {i + 1} ({w["unit_code"]}): blurb'
         tags = ''.join(f'<li>{smart(t)}</li>' for t in w.get('tags', []))
         text = (f'<div>{unit_line(w)}<h3><span class="type">{smart(w["type"])}</span>{smart(w["title"])}</h3>'
-                f'{prose(w["topic"], where.replace("blurb", "topic line"), "topic")}<ul class="tags" aria-label="Topics">{tags}</ul>{prose(w["blurb"], where)}{pdf_button(w)}</div>')
+                f'{prose(w["topic"], where.replace("blurb", "topic line"), "topic")}<ul class="tags" aria-label="Topics">{tags}</ul>{prose(w["blurb"], where)}{pdf_button(w)}{link_buttons(w)}</div>')
         if w.get('slides'):
             figs = ''.join(f'<figure>{img(s, a, [700, 1400], "(max-width:900px) 92vw, 640px" if j == 0 else "(max-width:900px) 45vw, 320px")}</figure>'
                            for j, (s, a) in enumerate(w['slides']))
             cards += f'<article class="card wide"><div class="slides">{figs}</div>{text}</article>'
         else:
-            cards += f'<article class="card">{text}</article>'
+            thumb = (f'<figure class="thumb{" fit" if w.get("thumb_fit") == "contain" else ""}">{img(w["thumb"][0], w["thumb"][1], [480, 960], "(max-width:700px) 92vw, 400px")}</figure>'
+                     if w.get('thumb') else '')
+            cards += f'<article class="card">{thumb}{text}</article>'
     work = (f'<section class="sec" id="work" aria-labelledby="work-h"><div class="wrap">'
-            f'<div class="work-head"><p class="kicker"><span class="num">03</span>Essays and presentations</p><h2 id="work-h">{smart(C.WORK_HEAD)}</h2></div>'
+            f'<div class="work-head"><p class="kicker"><span class="num">02</span>Essays, presentations and campaigns</p><h2 id="work-h">{smart(C.WORK_HEAD)}</h2></div>'
             f'<div class="cards">{cards}</div></div></section>')
     # skills
     if C.SKILLS_LIST is None: skl = ''
     elif isinstance(C.SKILLS_LIST, RyanWrites): skl = f'<p class="kicker">{smart(C.SKILLS_LIST_LABEL)}</p>' + ph(C.SKILLS_LIST, 'Skills: list')
     else: skl = f'<p class="kicker">{smart(C.SKILLS_LIST_LABEL)}</p><ul class="skill-list">' + ''.join(f'<li>{smart(s)}</li>' for s in C.SKILLS_LIST) + '</ul>'
     skills = (f'<section class="sec skills" id="skills" aria-labelledby="skills-h"><div class="wrap">'
-              f'<p class="kicker"><span class="num">04</span>{smart(C.SKILLS_KICKER)}</p><h2 id="skills-h">{smart(C.SKILLS_HEAD)}</h2>'
+              f'<p class="kicker"><span class="num">03</span>{smart(C.SKILLS_KICKER)}</p><h2 id="skills-h">{smart(C.SKILLS_HEAD)}</h2>'
               f'<div class="skills-body"><div class="audit">{prose(C.SKILLS_AUDIT, "Skills: audit and reflection")}</div><div>{skl}</div></div></div></section>')
     # experience
     def xp_rows(items, label):
@@ -425,15 +426,15 @@ def page_home():
     edu = (f'<h3 class="xp-sub">{smart(C.EDUCATION_HEAD)}</h3><ul class="xp">{xp_rows(C.EDUCATION, "Education")}</ul>'
            if getattr(C, 'EDUCATION', None) else '')
     xp = (f'<section class="sec" id="experience" aria-labelledby="xp-h"><div class="wrap sec-grid">'
-          f'<div class="sec-label"><p class="kicker"><span class="num">05</span>Work and clubs</p><h2 id="xp-h">{smart(C.EXPERIENCE_HEAD)}</h2></div>'
+          f'<div class="sec-label"><p class="kicker"><span class="num">04</span>Work, clubs and study</p><h2 id="xp-h">{smart(C.EXPERIENCE_HEAD)}</h2></div>'
           f'<div><ul class="xp">{rows}</ul>{edu}</div></div></section>')
     # contact
     if isinstance(C.EMAIL, RyanWrites): email = ph(C.EMAIL, 'Contact: email')
     else: email = f'<p class="big"><a href="mailto:{html.escape(C.EMAIL)}">{html.escape(C.EMAIL)}</a></p>'
     contact = (f'<section class="sec contact" id="contact" aria-labelledby="contact-h"><div class="wrap sec-grid">'
-               f'<div class="sec-label"><p class="kicker"><span class="num">06</span>Get in touch</p><h2 id="contact-h">{smart(C.CONTACT_HEAD)}</h2></div>'
+               f'<div class="sec-label"><p class="kicker"><span class="num">05</span>Get in touch</p><h2 id="contact-h">{smart(C.CONTACT_HEAD)}</h2></div>'
                f'<div>{prose(C.CONTACT_LINE, "Contact: invitation line", "lede")}<div style="margin-top:20px">{email}</div></div></div></section>')
-    body = f'<main id="main">{hero}{about}{featured}{work}{skills}{xp}{contact}</main>'
+    body = f'<main id="main">{hero}{about}{work}{skills}{xp}{contact}</main>'
     return head(C.PAGE_TITLE, C.META_DESCRIPTION) + header() + body + footer()
 
 def page_featured():
@@ -456,7 +457,7 @@ def page_featured():
     def sec(h, inner, sid):
         return f'<section class="prose-sec" aria-labelledby="{sid}"><h2 id="{sid}">{smart(h)}</h2><div class="measure">{inner}</div></section>'
     body = (f'<main id="main"><div class="wrap"><section class="page-hero" aria-labelledby="title">'
-            f'<p class="crumb"><a href="index.html#featured"><span aria-hidden="true">&larr;</span> {smart(C.NAME)}</a></p>'
+            f'<p class="crumb"><a href="index.html#work"><span aria-hidden="true">&larr;</span> {smart(C.NAME)}</a></p>'
             f'<p class="kicker">{smart(F["kicker"])}</p><h1 id="title">{smart(F["title"])}</h1>'
             f'<div class="feature-body"><div>{prose(P["overview"], "Project page: overview", "lede")}'
             f'<div class="actions"><a class="btn solid" href="{F["live_url"]}">{smart(F["live_label"])} <span class="arr" aria-hidden="true">&#8599;</span></a></div></div>'
