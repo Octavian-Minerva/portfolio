@@ -113,9 +113,13 @@ with sync_playwright() as pw:
     pp.evaluate("window.scrollTo({top: 1100, behavior: 'instant'})"); pp.wait_for_timeout(450)
     check(not pp.evaluate("document.querySelector('.site-head').classList.contains('head-hidden')"), 'phone header returns when scrolling up')
     # Essay pages: standfirst and previous/next links
-    pp.goto(ORIGIN + '/essay-deterring-arrival.html'); pp.wait_for_load_state('load')
+    pp.goto(ORIGIN + '/essay-insulating-news.html'); pp.wait_for_load_state('load')
     check(pp.is_visible('.standfirst'), 'essay page shows its standfirst')
     check(pp.locator('.essay-nav a').count() == 2, 'middle essay links to previous and next')
+    pp.goto(ORIGIN + '/essay-deterring-arrival.html'); pp.wait_for_load_state('load')
+    check(pp.locator('.essay-nav a.next').count() == 1 and pp.locator('.essay-nav a.prev').count() == 0, 'first essay links forward only')
+    pp.goto(ORIGIN + '/essay-cold-war.html'); pp.wait_for_load_state('load')
+    check(pp.locator('.essay-nav a.prev').count() == 1 and pp.locator('.essay-nav a.next').count() == 0, 'last essay links back only')
     # Cards: title links to the reading page
     pp.goto(ORIGIN + '/index.html'); pp.wait_for_load_state('load')
     hrefs = pp.evaluate("[...document.querySelectorAll('.card-link')].map(a => a.getAttribute('href'))")
