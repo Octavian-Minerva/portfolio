@@ -105,6 +105,7 @@ SOCIAL_TILES_TODO = None  # dropped 12 Nov: the campaign tiles were groupmates' 
 
 # ---------------------------------------------------------------- 4. selected work
 # One dict per card. Reorder, delete or add cards freely. Titles are exact titles from the submitted files.
+# "read": optional {"src": file in ../essays-src/ (.docx preferred, else .pdf), "page": output file, "fixes": [(old, new)] to match the submitted PDF}.
 # "pdf": optional (source file in ../essays-src/, public file name); adds a "Read the full essay (PDF)" button.
 # "thumb": (file in site-src/img-src/, alt text) shown at the top of the card, cropped to 4:3.
 # "links": optional [(label, href, external)] buttons.
@@ -113,6 +114,7 @@ WORK_HEAD = "Selected work"
 WORK = [
     {
         "title": "Technological Progress and Power",
+        "read": {"src": "phi10009.pdf", "page": "essay-technological-progress-and-power.html"},   # reading page built from the submitted file; checked word for word against the PDF
         "pdf": ("phi10009.pdf", "ryan-ogrady-technological-progress-and-power.pdf"),
         "thumb": ("essay-phi10009-p1.png", "First page of the essay, headed Technological Progress and Power."),
         "type": "Major essay",
@@ -123,6 +125,7 @@ WORK = [
     },
     {
         "title": "Deterring Arrival: Asylum Policy in Australia and the United States",
+        "read": {"src": "soc20013.docx", "page": "essay-deterring-arrival.html"},   # reading page built from the submitted file; checked word for word against the PDF
         "pdf": ("soc20013.pdf", "ryan-ogrady-deterring-arrival-asylum-policy.pdf"),
         "thumb": ("essay-soc20013-p1.png", "First page of the essay, headed Deterring Arrival: Asylum Policy in Australia and the United States."),
         "type": "Major essay",
@@ -133,6 +136,7 @@ WORK = [
     },
     {
         "title": "Insulating News from the Market and the State",
+        "read": {"src": "his10006-final.docx", "page": "essay-insulating-news.html", "fixes": [("Funding has been a second lever; Dodd (2020)", "Funding has been a second lever whereby the government has applied pressure. Dodd (2020)")]},   # reading page built from the submitted file; checked word for word against the PDF
         "pdf": ("his10006.pdf", "ryan-ogrady-insulating-news.pdf"),
         "thumb": ("essay-his10006-p1.png", "First page of the essay, headed Insulating News from the Market and the State."),
         "type": "Major essay",
@@ -154,6 +158,7 @@ WORK = [
     },
     {
         "title": "Three vantage points of the Cold War: Hobsbawm, Gaddis, and Jervis",
+        "read": {"src": "his10003.docx", "page": "essay-cold-war.html"},   # reading page built from the submitted file; checked word for word against the PDF
         "pdf": ("his10003.pdf", "ryan-ogrady-cold-war-three-vantage-points.pdf"),
         "thumb": ("essay-his10003-p1.png", "First page of the essay, headed Three vantage points of the Cold War: Hobsbawm, Gaddis, and Jervis."),
         "type": "Term essay",

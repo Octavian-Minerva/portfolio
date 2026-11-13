@@ -7,6 +7,7 @@ import html, os, re, shutil, subprocess, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import content as C
+import essays
 from content import RyanWrites
 
 OUT = os.path.abspath(os.path.join(HERE, '..', 'site'))
@@ -65,9 +66,18 @@ def pdf_button(w):
         out = subprocess.run(['pdfinfo', os.path.join(ESSAYS, src)], capture_output=True, text=True).stdout
         n = re.search(r'Pages:\s+(\d+)', out); pages = f', {n.group(1)} pages' if n else ''
     except FileNotFoundError: pass
-    label = w.get('pdf_label', 'Read the full essay')
+    label = w.get('pdf_label', 'Download PDF' if w.get('read') else 'Read the full essay')
     return (f'<p class="actions"><a class="btn" href="files/{pub}">{smart(label)} '
             f'<span class="btn-note">(PDF{pages})</span></a></p>')
+
+def read_and_pdf(w):
+    """Card buttons: a reading page (if any) as the main action, the PDF beside it."""
+    if not w.get('read'):
+        return pdf_button(w)
+    pdf = pdf_button(w)
+    pdf_link = re.search(r'<a class="btn".*?</a>', pdf, flags=re.S).group(0) if pdf else ''
+    return (f'<p class="actions"><a class="btn solid" href="{w["read"]["page"]}">Read the essay '
+            f'<span class="arr" aria-hidden="true">&rarr;</span></a>{pdf_link}</p>')
 
 def link_buttons(w):
     out = ''
@@ -211,6 +221,17 @@ html{scroll-padding-top:96px}
 .exploring+.exploring{margin-top:18px}
 .points{margin:0;padding-left:1.1em}.points li{margin:0 0 6px}
 .card .actions{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+.essay-head{max-width:46rem}
+.essay-head .unit{margin-bottom:10px}
+.page-hero.essay-head h1{font-size:clamp(36px,5vw,60px);line-height:1.08;letter-spacing:-.02em;margin:0 0 18px}
+.essay-meta{font-size:15px;color:var(--muted);margin:0 0 18px;text-align:left!important}
+.essay-body{max-width:44rem;font-family:var(--serif);font-size:20px;line-height:1.7;padding:clamp(8px,2vw,24px) 0 0;border-top:1px solid var(--line)}
+.essay-body p{margin:0 0 1.05em}
+.essay-body h2{font-size:clamp(24px,2.4vw,30px);line-height:1.25;margin:1.6em 0 .6em}
+.essay-body .refs-h{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:2.6em}
+.refs{list-style:none;margin:0;padding:0;font-family:var(--sans);font-size:15px;line-height:1.55}
+.refs li{padding-left:2em;text-indent:-2em;margin:0 0 .75em;overflow-wrap:anywhere}
+@media (max-width:600px){.essay-body{font-size:18px}}
 .card .thumb{margin:0 0 22px;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--line);background:#fff}
 .card .thumb img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
 .card .thumb.fit img{object-fit:contain;object-position:center}
@@ -441,7 +462,7 @@ def page_home():
         where = f'Work card {i + 1} ({w["unit_code"]}): blurb'
         tags = ''.join(f'<li>{smart(t)}</li>' for t in w.get('tags', []))
         text = (f'<div>{unit_line(w)}<h3><span class="type">{smart(w["type"])}</span>{smart(w["title"])}</h3>'
-                f'{prose(w["topic"], where.replace("blurb", "topic line"), "topic")}<ul class="tags" aria-label="Topics">{tags}</ul>{prose(w["blurb"], where)}{pdf_button(w)}{link_buttons(w)}</div>')
+                f'{prose(w["topic"], where.replace("blurb", "topic line"), "topic")}<ul class="tags" aria-label="Topics">{tags}</ul>{prose(w["blurb"], where)}{read_and_pdf(w)}{link_buttons(w)}</div>')
         if w.get('slides'):
             figs = ''.join(f'<figure>{img(s, a, [700, 1400], "(max-width:900px) 92vw, 640px" if j == 0 else "(max-width:900px) 45vw, 320px")}</figure>'
                            for j, (s, a) in enumerate(w['slides']))
@@ -525,6 +546,47 @@ def page_featured():
             '</div></main>')
     return head(f'{F["title"]} | {C.NAME}', f'{F["title"]}: {F["type"]}, {F["unit_code"]} {F["unit_name"]}, {F["year"]}.') + header(home=False) + body + footer()
 
+ESSAY_CHECKS = []   # (page, differences) from essays.verify, reported by the build
+
+def essay_blocks(w):
+    r = w['read']
+    src = os.path.join(ESSAYS, r['src'])
+    blocks = essays.from_docx(src) if src.endswith('.docx') else essays.from_pdf(src)
+    for old, new in r.get('fixes', []):
+        hits = [i for i, (_, t) in enumerate(blocks) if old in t]
+        if len(hits) != 1: sys.exit(f'BUILD STOPPED: fix not found exactly once in {r["src"]}: {old!r}')
+        k, t = blocks[hits[0]]; blocks[hits[0]] = (k, t.replace(old, new))
+    pdf = os.path.join(ESSAYS, w['pdf'][0])
+    ESSAY_CHECKS.append((r['page'], essays.verify(blocks, pdf, w['title'])))
+    return blocks
+
+def page_essay(w):
+    blocks = essay_blocks(w)
+    body_words = sum(len(re.sub(r'<[^>]+>', ' ', t).split()) for k, t in blocks if k in ('p', 'h'))
+    minutes = max(1, round(body_words / 230))
+    parts, refs = [], []
+    for k, t in blocks:
+        if k == 'h': parts.append(f'<h2>{t}</h2>')
+        elif k == 'p': parts.append(f'<p>{t}</p>')
+        elif k == 'refs': parts.append(f'<h2 class="refs-h">{t}</h2>')
+        elif k == 'ref': refs.append(f'<li>{t}</li>')
+    if refs:
+        i = next(n for n, x in enumerate(parts) if x.startswith('<h2 class="refs-h"'))
+        parts.insert(i + 1, '<ul class="refs">' + ''.join(refs) + '</ul>')
+    pdf = f'files/{w["pdf"][1]}'
+    head_html = (f'<section class="page-hero essay-head" aria-labelledby="title">'
+                 f'<p class="crumb"><a href="index.html#work"><span aria-hidden="true">&larr;</span> Selected work</a></p>'
+                 f'{unit_line(w)}<p class="kicker">{smart(w["type"])}</p><h1 id="title">{smart(w["title"])}</h1>'
+                 f'<p class="essay-meta">About {body_words:,} words &middot; {minutes} minute read &middot; '
+                 f'Submitted for {smart(w["unit_code"])} {smart(w["unit_name"])}, Swinburne University of Technology, {smart(w["year"])}</p>'
+                 f'<p class="actions"><a class="btn" href="{pdf}">Download PDF <span class="arr" aria-hidden="true">&darr;</span></a></p></section>')
+    body = (f'<main id="main"><div class="wrap">{head_html}'
+            f'<article class="essay-body" aria-labelledby="title">{"".join(parts)}</article>'
+            f'<p style="padding:24px 0 72px"><a class="btn" href="index.html#work">See more work <span class="arr" aria-hidden="true">&rarr;</span></a></p>'
+            '</div></main>')
+    desc = f'{w["title"]}: {w["type"].lower()} by {C.NAME} for {w["unit_code"]} {w["unit_name"]}, Swinburne University of Technology, {w["year"]}.'
+    return head(f'{w["title"]} | {C.NAME}', desc) + header(home=False) + body + footer()
+
 def page_404():
     t, s = C.NOT_FOUND
     body = (f'<main id="main"><div class="wrap"><section class="page-hero"><p class="kicker">404</p><h1>{smart(t)}</h1>'
@@ -583,9 +645,12 @@ if __name__ == '__main__':
     os.makedirs(os.path.join(OUT, 'images'), exist_ok=True)
     build_fonts()
     pages = {'index.html': page_home, 'not-our-game.html': page_featured, '404.html': page_404}
+    for w in C.WORK:
+        if w.get('read'): pages[w['read']['page']] = (lambda w=w: page_essay(w))
     for f, fn in pages.items():
         html_out = fn()
-        if '\u2014' in html_out: sys.exit(f'BUILD STOPPED: em dash in built {f}')
+        # essays are Ryan's submitted text, reproduced exactly; the em-dash rule applies to site copy only
+        if '\u2014' in html_out and not f.startswith('essay-'): sys.exit(f'BUILD STOPPED: em dash in built {f}')
         open(os.path.join(OUT, f), 'w', encoding='utf-8').write(html_out)
     os.makedirs(os.path.join(OUT, 'files'), exist_ok=True)
     for f in os.listdir(os.path.join(OUT, 'files')): os.remove(os.path.join(OUT, 'files', f))
@@ -602,6 +667,10 @@ if __name__ == '__main__':
     for f in os.listdir(os.path.join(OUT, 'images')):
         if f not in used: os.remove(os.path.join(OUT, 'images', f))
     print('built', OUT, sorted(os.listdir(OUT)))
+    for page, diffs in ESSAY_CHECKS:
+        print(f'{page}: matches the submitted PDF word for word' if not diffs else f'{page}: {len(diffs)} difference(s) from the PDF')
+        for d in diffs[:20]: print('   ', d)
+    if RELEASE and any(d for _, d in ESSAY_CHECKS): sys.exit('RELEASE BUILD REFUSED: an essay page differs from its PDF')
     if drafts: print(f'{len(drafts)} assistant draft(s) still marked Draft(...): ' + ', '.join(drafts))
     if found: banner(found)
     else: print('No placeholders remain.')
