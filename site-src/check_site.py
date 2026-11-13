@@ -155,7 +155,7 @@ with sync_playwright() as pw:
                 pg.keyboard.press('Tab')
                 first = pg.evaluate("document.activeElement.className + '|' + document.activeElement.textContent")
                 if not first.startswith('skip'): problems.append(f'{name}: first Tab stop is not the skip link ({first})')
-                n = pg.evaluate("document.querySelectorAll('a[href],button,input,select,textarea,[tabindex]').length")
+                n = pg.evaluate("document.querySelectorAll('a[href]:not([tabindex=\\'-1\\']),button:not([hidden]),input,select,textarea,[tabindex]:not([tabindex=\\'-1\\'])').length")
                 for _ in range(n - 1):
                     pg.keyboard.press('Tab')
                     o = pg.evaluate("(() => { const e = document.activeElement; const s = getComputedStyle(e); return [e.tagName, e.textContent.trim().slice(0,30), s.outlineStyle, s.outlineWidth] })()")

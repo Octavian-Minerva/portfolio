@@ -44,11 +44,12 @@ SITE_URL = "https://ryanoogrady.netlify.app"            # e.g. "https://ryan-ogr
 PAGE_TITLE = "Ryan O'Grady | Bachelor of Arts (Politics, Power and Technology), Swinburne"
 META_DESCRIPTION = "Portfolio of Ryan O'Grady, Bachelor of Arts student majoring in Politics, Power and Technology at Swinburne University of Technology."
 YEAR = "2026"
+LAST_UPDATED = "November 2026"   # shown in the footer; change it whenever the site is updated
 
 NAV = [("About", "about"), ("Work", "work"), ("Skills", "skills"), ("Experience", "experience"), ("Contact", "contact")]
 
 # ---------------------------------------------------------------- 1. hero
-HERO_KICKER = "Bachelor of Arts (Politics, Power and Technology), Swinburne University of Technology"
+HERO_KICKER = "Bachelor of Arts (Politics, Power and Technology) · Swinburne"
 DESCRIPTOR = Draft("Politics student interested in power, the organisation of work and the social consequences of automation.")
 # Photo: put the file in site-src/img-src/ and set PHOTO = ("your-photo.jpg", "Alt text describing the photo").
 # Portrait, 4:5, at least 900 px wide. Until then a neutral monogram shows inside a placeholder box.
@@ -180,7 +181,7 @@ WORK = [
 ]
 
 # ---------------------------------------------------------------- 5. skills audit and reflection (marked requirement)
-SKILLS_HEAD = "Skills and reflection"
+SKILLS_HEAD = "Skills audit and reflection"
 SKILLS_KICKER = "What I can do, and where I learnt it"
 # Skill areas: each card has a heading, a short paragraph of evidence and a few labels.
 SKILL_GROUPS = [
@@ -201,14 +202,15 @@ SKILL_GROUPS = [
     },
 ]
 REFLECTION_HEAD = "Reflection: the Not Our Game campaign"
-SKILLS_AUDIT = Draft("""Planning Not Our Game taught me how a social campaign is built, from defining a problem and its audiences to framing a specific request. I learnt most from the messaging strategy, which I wrote. The most striking available figure was the 40.7% rise in domestic assaults on Origin nights, yet the research advised against leading with it: publicising the prevalence of a harmful behaviour can normalise it, and treating every fan as part of the problem would alienate the audience the campaign most needed. The fan-facing material therefore begins from a view most men already hold, that disrespect is unacceptable, and suggests practical ways to act on it.
+SKILLS_AUDIT = Draft("""Not Our Game was the first social campaign I have planned from inception to delivery, and its messaging strategy was the aspect from which I learnt most. The most striking available figure was the 40.7% rise in domestic assaults on Origin nights, yet the research advised against leading with it. Publicising the prevalence of a harmful behaviour can normalise it, and a campaign that treats every fan as part of the problem risks alienating the audience it most needs to reach. The fan-facing material therefore begins from a view most men already hold, that disrespect is unacceptable, and suggests practical ways to act on it.
 
-The experience has made me more attentive to how framing shapes the reception of an argument, independently of its accuracy. Writing my sections of a group report was also a change from the individual work that makes up most of my degree. In future research and writing, I intend to test my assumptions about framing against the available evidence.""")
+The experience has made me more attentive to how framing shapes the reception of an argument, independently of its accuracy. Working within a group also required me to coordinate my sections with others' work and deadlines. In future research and writing, I intend to test my assumptions about framing against the available evidence.""")
 SKILLS_LIST_LABEL = "Skills"
 SKILLS_LIST = None   # replaced by the tags on each skill area (13 Nov)
 
 # ---------------------------------------------------------------- 6. experience and involvement
 EXPERIENCE_HEAD = "Experience and involvement"
+EARLIER_HEAD = "Earlier work"
 EXPERIENCE = [
     {
         "role": Draft("AI systems developer"),
@@ -230,12 +232,14 @@ EXPERIENCE = [
     },
     {
         "role": "COVID-19 pathology collection",
+        "earlier": True,   # listed under "Earlier work"
         "org": "Pathology provider: testing sites, then hotel quarantine",
         "dates": "2021 to 2022",
         "text": None,
     },
     {
         "role": "Team member",
+        "earlier": True,
         "org": "Restaurant chain, Melbourne CBD",
         "dates": "2018 to 2021",
         "text": None,

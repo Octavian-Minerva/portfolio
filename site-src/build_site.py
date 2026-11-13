@@ -70,6 +70,14 @@ def pdf_button(w):
     return (f'<p class="actions"><a class="btn" href="files/{pub}">{smart(label)} '
             f'<span class="btn-note">(PDF{pages})</span></a></p>')
 
+def card_href(w):
+    """Where the card's title and picture lead: the reading page, else the first internal link, else the PDF."""
+    if w.get('read'): return w['read']['page']
+    for _, href, external in w.get('links', []):
+        if not external: return href
+    if w.get('pdf'): return f'files/{w["pdf"][1]}'
+    return None
+
 def read_and_pdf(w):
     """Card buttons: a reading page (if any) as the main action, the PDF beside it."""
     if not w.get('read'):
@@ -221,6 +229,21 @@ html{scroll-padding-top:96px}
 .exploring+.exploring{margin-top:18px}
 .points{margin:0;padding-left:1.1em}.points li{margin:0 0 6px}
 .card .actions{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+.card-link{color:inherit;text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:0 1px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .25s ease}
+.card-link:hover{color:inherit;background-size:100% 1px}
+.card .thumb a{display:block;height:100%}
+.card .thumb img{transition:transform .35s ease}
+.card .thumb a:hover img{transform:scale(1.025)}
+@media (prefers-reduced-motion:reduce){.card-link,.card .thumb img{transition:none}}
+.standfirst{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2vw,24px);line-height:1.45;color:var(--topic);margin:0 0 18px;max-width:40rem;text-align:left!important}
+.essay-nav{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:44rem;margin:56px 0 24px;padding-top:24px;border-top:1px solid var(--line)}
+.essay-nav a{display:block;text-decoration:none;color:var(--ink);padding:14px 16px;border:1px solid var(--line);border-radius:6px}
+.essay-nav a:hover{border-color:var(--ink)}
+.essay-nav .dir{display:block;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.essay-nav .t{font-family:var(--serif);font-size:19px;line-height:1.3}
+.essay-nav .next{text-align:right;grid-column:2}
+@media (max-width:600px){.essay-nav{grid-template-columns:1fr}.essay-nav .next{grid-column:1}}
+.updated{font-size:14px;color:var(--muted)}
 .essay-head{max-width:46rem}
 .essay-head .unit{margin-bottom:10px}
 .page-hero.essay-head h1{font-size:clamp(36px,5vw,60px);line-height:1.08;letter-spacing:-.02em;margin:0 0 18px}
@@ -295,7 +318,8 @@ html{scroll-padding-top:96px}
 
 /* experience */
 .xp{list-style:none;margin:0;padding:0}
-.xp li{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,4fr) minmax(0,5fr);gap:12px 32px;padding:24px 0;border-top:1px solid var(--line)}
+.xp li{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-areas:'dates text' 'role text';align-items:start;gap:6px 40px;padding:24px 0;border-top:1px solid var(--line)}
+.xp li>.dates{grid-area:dates}.xp li>div:nth-child(2){grid-area:role}.xp li>.text{grid-area:text}
 .xp li:last-child{border-bottom:1px solid var(--line)}
 .xp .dates{font-size:15px;color:var(--muted);font-variant-numeric:tabular-nums}
 .xp h3{font-size:24px;margin:0 0 4px}
@@ -350,7 +374,7 @@ html{scroll-padding-top:96px}
  .portrait{max-width:340px}
  .sec-grid,.prose-sec,.feature-body,.card.wide,.skills-body{grid-template-columns:1fr}
  .cards{grid-template-columns:1fr}
- .xp li{grid-template-columns:1fr}
+ .xp li{grid-template-columns:1fr;grid-template-areas:'dates' 'role' 'text'}
  .site-foot .wrap{grid-template-columns:1fr}
  .exploring{grid-template-columns:1fr}
  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -359,6 +383,8 @@ html[data-theme=dark]{--ink:#ebe7e0;--muted:#b4aca0;--bg:#141619;--paper:#1d2024
 @media (prefers-color-scheme:dark){html:not([data-theme=light]){--ink:#ebe7e0;--muted:#b4aca0;--bg:#141619;--paper:#1d2024;--line:#363a41;--soft:#1b1e22;--accent:#8db4e8;--accent-ink:#b8d1f2;--tint:#18202b;--on-accent:#0f141a;--topic:#d8d2c8;--bar:#23272c;--dot:#4a4f57;--head-bg:rgba(20,22,25,.86);color-scheme:dark}}
 html[data-theme-now=dark] .card .thumb,html[data-theme-now=dark] .frame{border-color:#2b2f35}
 @media print{.site-head,.skip,.actions,.copy,.theme-toggle,.progress{display:none!important}html,body{background:#fff!important;color:#000!important}body{font-size:11pt}.sec{padding:14pt 0;border-top:1px solid #ccc}.skills{background:none!important}.hero,.card,.skill-group,.xp li,.exploring{break-inside:avoid}.thumb,.portrait{display:none}main a[href^=http]::after,main a[href$='.pdf']::after{content:' (' attr(href) ')';font-size:9pt;color:#444;word-break:break-all}}
+@media (max-width:900px){.site-head{transition:transform .25s ease,box-shadow .2s ease}.site-head.head-hidden{transform:translateY(-100%)}}
+@media (max-width:900px) and (prefers-reduced-motion:reduce){.site-head{transition:none}}
 @media (max-width:600px){
  body{font-size:17px}
  .site-head .wrap{padding-top:14px;padding-bottom:14px}
@@ -378,14 +404,47 @@ html[data-theme-now=dark] .card .thumb,html[data-theme-now=dark] .frame{border-c
 }
 """.replace('ACCENT', ACCENT)
 
-SITE_JS = '(() => {\n  const d = document, root = d.documentElement;\n  const head = d.querySelector(\'.site-head\'), bar = d.querySelector(\'.progress\');\n  // Header shadow and reading progress\n  const onScroll = () => {\n    const max = root.scrollHeight - innerHeight;\n    if (head) head.classList.toggle(\'scrolled\', scrollY > 4);\n    if (bar) bar.style.setProperty(\'--p\', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0);\n  };\n  addEventListener(\'scroll\', onScroll, { passive: true }); addEventListener(\'resize\', onScroll); onScroll();\n  // Highlight the section currently in view: the last section whose top has passed 40% of the screen\n  const pairs = [...d.querySelectorAll(\'.nav a[href*="#"]\')]\n    .map(a => [d.getElementById(a.hash.slice(1)), a]).filter(([sec]) => sec);\n  const spy = () => {\n    if (!pairs.length) return;\n    let hit = null;\n    for (const p of pairs) if (p[0].getBoundingClientRect().top <= innerHeight * 0.4) hit = p;\n    if (innerHeight + scrollY >= root.scrollHeight - 2) hit = pairs[pairs.length - 1];\n    pairs.forEach(([, a]) => {\n      const on = hit && a === hit[1];\n      a.classList.toggle(\'is-current\', on);\n      if (on) a.setAttribute(\'aria-current\', \'location\'); else a.removeAttribute(\'aria-current\');\n    });\n  };\n  addEventListener(\'scroll\', spy, { passive: true }); spy();\n  // Light and dark themes: follow the system unless the visitor has chosen\n  const mq = matchMedia(\'(prefers-color-scheme: dark)\');\n  const now = () => root.dataset.theme || (mq.matches ? \'dark\' : \'light\');\n  const toggle = d.querySelector(\'.theme-toggle\');\n  const sync = () => {\n    root.dataset.themeNow = now();\n    if (toggle) toggle.setAttribute(\'aria-label\', now() === \'dark\' ? \'Switch to light theme\' : \'Switch to dark theme\');\n  };\n  if (toggle) {\n    toggle.hidden = false;\n    toggle.addEventListener(\'click\', () => {\n      root.dataset.theme = now() === \'dark\' ? \'light\' : \'dark\';\n      try { localStorage.setItem(\'theme\', root.dataset.theme); } catch (e) {}\n      sync();\n    });\n  }\n  if (mq.addEventListener) mq.addEventListener(\'change\', sync);\n  sync();\n  // Copy email addresses\n  const live = d.getElementById(\'live\');\n  if (navigator.clipboard) d.querySelectorAll(\'.copy\').forEach(b => {\n    b.hidden = false;\n    b.addEventListener(\'click\', async () => {\n      try {\n        await navigator.clipboard.writeText(b.dataset.copy);\n        b.textContent = \'Copied\'; if (live) live.textContent = \'Email address copied\';\n        setTimeout(() => { b.textContent = \'Copy\'; }, 1800);\n      } catch (e) {}\n    });\n  });\n})();\n'
+SITE_JS = '(() => {\n  const d = document, root = d.documentElement;\n  const head = d.querySelector(\'.site-head\'), bar = d.querySelector(\'.progress\');\n  // Header shadow and reading progress\n  const onScroll = () => {\n    const max = root.scrollHeight - innerHeight;\n    if (head) head.classList.toggle(\'scrolled\', scrollY > 4);\n    if (bar) bar.style.setProperty(\'--p\', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0);\n  };\n  addEventListener(\'scroll\', onScroll, { passive: true }); addEventListener(\'resize\', onScroll); onScroll();\n  // On small screens, tuck the header away while scrolling down and bring it back on the way up\n  let lastY = scrollY;\n  const small = matchMedia(\'(max-width: 900px)\');\n  addEventListener(\'scroll\', () => {\n    const y = scrollY;\n    if (head && small.matches) {\n      if (y > lastY + 6 && y > 140 && !head.contains(d.activeElement)) head.classList.add(\'head-hidden\');\n      else if (y < lastY - 6 || y <= 140) head.classList.remove(\'head-hidden\');\n    } else if (head) head.classList.remove(\'head-hidden\');\n    lastY = y;\n  }, { passive: true });\n  if (head) head.addEventListener(\'focusin\', () => head.classList.remove(\'head-hidden\'));\n  // Highlight the section currently in view: the last section whose top has passed 40% of the screen\n  const pairs = [...d.querySelectorAll(\'.nav a[href*="#"]\')]\n    .map(a => [d.getElementById(a.hash.slice(1)), a]).filter(([sec]) => sec);\n  const spy = () => {\n    if (!pairs.length) return;\n    let hit = null;\n    for (const p of pairs) if (p[0].getBoundingClientRect().top <= innerHeight * 0.4) hit = p;\n    if (innerHeight + scrollY >= root.scrollHeight - 2) hit = pairs[pairs.length - 1];\n    pairs.forEach(([, a]) => {\n      const on = hit && a === hit[1];\n      a.classList.toggle(\'is-current\', on);\n      if (on) a.setAttribute(\'aria-current\', \'location\'); else a.removeAttribute(\'aria-current\');\n    });\n  };\n  addEventListener(\'scroll\', spy, { passive: true }); spy();\n  // Light and dark themes: follow the system unless the visitor has chosen\n  const mq = matchMedia(\'(prefers-color-scheme: dark)\');\n  const now = () => root.dataset.theme || (mq.matches ? \'dark\' : \'light\');\n  const toggle = d.querySelector(\'.theme-toggle\');\n  const sync = () => {\n    root.dataset.themeNow = now();\n    if (toggle) toggle.setAttribute(\'aria-label\', now() === \'dark\' ? \'Switch to light theme\' : \'Switch to dark theme\');\n  };\n  if (toggle) {\n    toggle.hidden = false;\n    toggle.addEventListener(\'click\', () => {\n      root.dataset.theme = now() === \'dark\' ? \'light\' : \'dark\';\n      try { localStorage.setItem(\'theme\', root.dataset.theme); } catch (e) {}\n      sync();\n    });\n  }\n  if (mq.addEventListener) mq.addEventListener(\'change\', sync);\n  sync();\n  // Copy email addresses\n  const live = d.getElementById(\'live\');\n  if (navigator.clipboard) d.querySelectorAll(\'.copy\').forEach(b => {\n    b.hidden = false;\n    b.addEventListener(\'click\', async () => {\n      try {\n        await navigator.clipboard.writeText(b.dataset.copy);\n        b.textContent = \'Copied\'; if (live) live.textContent = \'Email address copied\';\n        setTimeout(() => { b.textContent = \'Copy\'; }, 1800);\n      } catch (e) {}\n    });\n  });\n})();\n'
+
+def build_og_image():
+    """1200x630 link-preview card: name, degree line, descriptor and photo."""
+    from PIL import Image, ImageDraw, ImageFont, ImageOps
+    W, H, pad = 1200, 630, 72
+    im = Image.new('RGB', (W, H), '#faf8f4'); d = ImageDraw.Draw(im)
+    serif = os.path.join(HERE, 'fonts-src', 'newsreader-Newsreader[opsz,wght].ttf')
+    sans = os.path.join(HERE, 'fonts-src', 'sourcesans3-SourceSans3[wght].ttf')
+    d.rectangle([0, 0, W, 10], fill=ACCENT)
+    kicker = ImageFont.truetype(sans, 22)
+    try: kicker.set_variation_by_axes([600])
+    except Exception: pass
+    k1, k2 = (C.HERO_KICKER.upper().split(' \u00b7 ') + [''])[:2]   # degree on one line, university on the next
+    d.text((pad, 104), k1, font=kicker, fill='#57524a')
+    if k2: d.text((pad, 134), k2, font=kicker, fill='#57524a')
+    name = ImageFont.truetype(serif, 104)
+    d.text((pad, 178), C.NAME.replace("'", '\u2019'), font=name, fill='#1c1b19')
+    desc = ImageFont.truetype(serif, 34)
+    words, lines, cur = str(C.DESCRIPTOR).split(), [], ''
+    for wd in words:
+        t = (cur + ' ' + wd).strip()
+        if d.textlength(t, font=desc) > 640: lines.append(cur); cur = wd
+        else: cur = t
+    lines.append(cur)
+    for i, ln in enumerate(lines): d.text((pad, 330 + i * 46), ln, font=desc, fill='#38342e')
+    if isinstance(C.PHOTO, tuple):
+        ph = Image.open(os.path.join(HERE, 'img-src', C.PHOTO[0])).convert('RGB')
+        ph = ImageOps.fit(ph, (360, 450))
+        im.paste(ph, (W - pad - 360, (H - 450) // 2))
+    im.save(os.path.join(OUT, 'og.jpg'), quality=88)
 
 # ------------------------------------------------------------------ page parts
 def head(title, desc, prefix=''):
     og = ''
     if C.SITE_URL:
         og = (f'<meta property="og:type" content="website"><meta property="og:title" content="{attr(title)}">'
-              f'<meta property="og:description" content="{attr(desc)}"><meta property="og:url" content="{C.SITE_URL}">')
+              f'<meta property="og:description" content="{attr(desc)}"><meta property="og:url" content="{C.SITE_URL}">'
+              f'<meta property="og:image" content="{C.SITE_URL}/og.jpg"><meta property="og:image:width" content="1200">'
+              f'<meta property="og:image:height" content="630"><meta property="og:image:alt" content="{attr(C.NAME)}: {attr(C.HERO_KICKER)}">'
+              f'<meta name="twitter:card" content="summary_large_image">')
     return ('<!doctype html><html lang="en-AU"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width, initial-scale=1">'
             f'<title>{smart(title)}</title><meta name="description" content="{attr(desc)}">{NOINDEX}'
@@ -414,7 +473,8 @@ def footer():
         for k, url in C.CREDIT_LINKS.items():
             t = t.replace(smart(k), f'<a href="{url}">{smart(k)}</a>', 1)
         credits += f'<li>{t}</li>'
-    return (f'<footer class="site-foot"><div class="wrap"><div><p class="name">{smart(C.NAME)}</p><p>&copy; {C.YEAR}</p></div>'
+    return (f'<footer class="site-foot"><div class="wrap"><div><p class="name">{smart(C.NAME)}</p><p>&copy; {C.YEAR}</p>'
+            + (f'<p class="updated">Last updated {smart(C.LAST_UPDATED)}</p>' if getattr(C, 'LAST_UPDATED', None) else '') + '</div>'
             f'<div>{prose(C.AI_NOTE, "Footer: AI note") if C.AI_NOTE else ""}'
             + (f'<p class="colophon">{smart(C.COLOPHON)}</p>' if getattr(C, 'COLOPHON', None) else '')
             + f'<ul class="credits">{credits}</ul></div></div></footer></body></html>')
@@ -461,15 +521,19 @@ def page_home():
     for i, w in enumerate(C.WORK):
         where = f'Work card {i + 1} ({w["unit_code"]}): blurb'
         tags = ''.join(f'<li>{smart(t)}</li>' for t in w.get('tags', []))
-        text = (f'<div>{unit_line(w)}<h3><span class="type">{smart(w["type"])}</span>{smart(w["title"])}</h3>'
+        href = card_href(w)
+        title_html = f'<a class="card-link" href="{href}">{smart(w["title"])}</a>' if href else smart(w["title"])
+        text = (f'<div>{unit_line(w)}<h3><span class="type">{smart(w["type"])}</span>{title_html}</h3>'
                 f'{prose(w["topic"], where.replace("blurb", "topic line"), "topic")}<ul class="tags" aria-label="Topics">{tags}</ul>{prose(w["blurb"], where)}{read_and_pdf(w)}{link_buttons(w)}</div>')
         if w.get('slides'):
             figs = ''.join(f'<figure>{img(s, a, [700, 1400], "(max-width:900px) 92vw, 640px" if j == 0 else "(max-width:900px) 45vw, 320px")}</figure>'
                            for j, (s, a) in enumerate(w['slides']))
             cards += f'<article class="card wide"><div class="slides">{figs}</div>{text}</article>'
         else:
-            thumb = (f'<figure class="thumb{" fit" if w.get("thumb_fit") == "contain" else ""}">{img(w["thumb"][0], w["thumb"][1], [480, 960], "(max-width:700px) 92vw, 400px")}</figure>'
-                     if w.get('thumb') else '')
+            pic = img(w["thumb"][0], w["thumb"][1], [480, 960], "(max-width:700px) 92vw, 400px") if w.get('thumb') else ''
+            if pic and href:   # duplicate of the title link, so hidden from keyboard and screen readers
+                pic = f'<a href="{href}" tabindex="-1" aria-hidden="true">{pic}</a>'
+            thumb = (f'<figure class="thumb{" fit" if w.get("thumb_fit") == "contain" else ""}">{pic}</figure>' if pic else '')
             cards += f'<article class="card">{thumb}{text}</article>'
     work = (f'<section class="sec" id="work" aria-labelledby="work-h"><div class="wrap">'
             f'<div class="work-head"><p class="kicker"><span class="num">02</span>Essays, presentations and campaigns</p><h2 id="work-h">{smart(C.WORK_HEAD)}</h2></div>'
@@ -493,7 +557,10 @@ def page_home():
                        f'<div><h3>{inline(e["role"], f"{label} {i + 1}: role")}</h3><p class="org">{smart(e["org"])}</p></div>'
                        f'<div class="text">{prose(e["text"], f"{label} {i + 1}: description")}</div></li>'
                        for i, e in enumerate(items))
-    rows = xp_rows(C.EXPERIENCE, 'Experience')
+    rows = xp_rows([e for e in C.EXPERIENCE if not e.get('earlier')], 'Experience')
+    earlier = [e for e in C.EXPERIENCE if e.get('earlier')]
+    if earlier:
+        rows += f'</ul><h3 class="xp-sub">{smart(C.EARLIER_HEAD)}</h3><ul class="xp">' + xp_rows(earlier, 'Earlier')
     edu = (f'<h3 class="xp-sub">{smart(C.EDUCATION_HEAD)}</h3><ul class="xp">{xp_rows(C.EDUCATION, "Education")}</ul>'
            if getattr(C, 'EDUCATION', None) else '')
     xp = (f'<section class="sec" id="experience" aria-labelledby="xp-h"><div class="wrap sec-grid">'
@@ -560,6 +627,19 @@ def essay_blocks(w):
     ESSAY_CHECKS.append((r['page'], essays.verify(blocks, pdf, w['title'])))
     return blocks
 
+def essay_nav(w):
+    """Previous and next reading pages, in the order the cards appear."""
+    order = [x for x in C.WORK if x.get('read')]
+    i = order.index(w)
+    out = ''
+    if i > 0:
+        p = order[i - 1]
+        out += f'<a class="prev" href="{p["read"]["page"]}"><span class="dir">&larr; Previous</span><span class="t">{smart(p["title"])}</span></a>'
+    if i < len(order) - 1:
+        n = order[i + 1]
+        out += f'<a class="next" href="{n["read"]["page"]}"><span class="dir">Next &rarr;</span><span class="t">{smart(n["title"])}</span></a>'
+    return f'<nav class="essay-nav" aria-label="More essays">{out}</nav>' if out else ''
+
 def page_essay(w):
     blocks = essay_blocks(w)
     body_words = sum(len(re.sub(r'<[^>]+>', ' ', t).split()) for k, t in blocks if k in ('p', 'h'))
@@ -577,12 +657,13 @@ def page_essay(w):
     head_html = (f'<section class="page-hero essay-head" aria-labelledby="title">'
                  f'<p class="crumb"><a href="index.html#work"><span aria-hidden="true">&larr;</span> Selected work</a></p>'
                  f'{unit_line(w)}<p class="kicker">{smart(w["type"])}</p><h1 id="title">{smart(w["title"])}</h1>'
+                 f'<p class="standfirst">{smart(w["topic"])}</p>'
                  f'<p class="essay-meta">About {body_words:,} words &middot; {minutes} minute read &middot; '
                  f'Submitted for {smart(w["unit_code"])} {smart(w["unit_name"])}, Swinburne University of Technology, {smart(w["year"])}</p>'
                  f'<p class="actions"><a class="btn" href="{pdf}">Download PDF <span class="arr" aria-hidden="true">&darr;</span></a></p></section>')
     body = (f'<main id="main"><div class="wrap">{head_html}'
-            f'<article class="essay-body" aria-labelledby="title">{"".join(parts)}</article>'
-            f'<p style="padding:24px 0 72px"><a class="btn" href="index.html#work">See more work <span class="arr" aria-hidden="true">&rarr;</span></a></p>'
+            f'<article class="essay-body" aria-labelledby="title">{"".join(parts)}</article>{essay_nav(w)}'
+            f'<p style="padding:24px 0 72px"><a class="btn" href="index.html#work">See all work <span class="arr" aria-hidden="true">&rarr;</span></a></p>'
             '</div></main>')
     desc = f'{w["title"]}: {w["type"].lower()} by {C.NAME} for {w["unit_code"]} {w["unit_name"]}, Swinburne University of Technology, {w["year"]}.'
     return head(f'{w["title"]} | {C.NAME}', desc) + header(home=False) + body + footer()
@@ -656,6 +737,7 @@ if __name__ == '__main__':
     for f in os.listdir(os.path.join(OUT, 'files')): os.remove(os.path.join(OUT, 'files', f))
     for src, pub in PDFS: shutil.copyfile(os.path.join(ESSAYS, src), os.path.join(OUT, 'files', pub))
     open(os.path.join(OUT, 'style.css'), 'w').write(CSS)
+    build_og_image()
     open(os.path.join(OUT, 'site.js'), 'w').write(SITE_JS)
     open(os.path.join(OUT, 'favicon.svg'), 'w').write(FAVICON)
     open(os.path.join(OUT, '.nojekyll'), 'w').write('')   # GitHub Pages: publish files untouched, no Jekyll

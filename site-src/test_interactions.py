@@ -66,6 +66,23 @@ with sync_playwright() as pw:
     check(not pg.is_visible('.site-head'), 'header is hidden when printing')
     pg.pdf(path=os.path.join(SHOTS, 'print-preview.pdf'), format='A4')
     check(not errs, f'no console errors {errs}')
+    # Phone: header tucks away when scrolling down and returns when scrolling up
+    ph = b.new_context(viewport={'width': 390, 'height': 844}, is_mobile=True, has_touch=True)
+    ph.route('**/*', answer)
+    pp = ph.new_page(); pp.goto(ORIGIN + '/index.html'); pp.wait_for_load_state('load')
+    pp.evaluate("window.scrollTo({top: 400, behavior: 'instant'})"); pp.wait_for_timeout(150)
+    pp.evaluate("window.scrollTo({top: 1400, behavior: 'instant'})"); pp.wait_for_timeout(450)
+    check(pp.evaluate("document.querySelector('.site-head').classList.contains('head-hidden')"), 'phone header hides while scrolling down')
+    pp.evaluate("window.scrollTo({top: 1100, behavior: 'instant'})"); pp.wait_for_timeout(450)
+    check(not pp.evaluate("document.querySelector('.site-head').classList.contains('head-hidden')"), 'phone header returns when scrolling up')
+    # Essay pages: standfirst and previous/next links
+    pp.goto(ORIGIN + '/essay-deterring-arrival.html'); pp.wait_for_load_state('load')
+    check(pp.is_visible('.standfirst'), 'essay page shows its standfirst')
+    check(pp.locator('.essay-nav a').count() == 2, 'middle essay links to previous and next')
+    # Cards: title links to the reading page
+    pp.goto(ORIGIN + '/index.html'); pp.wait_for_load_state('load')
+    hrefs = pp.evaluate("[...document.querySelectorAll('.card-link')].map(a => a.getAttribute('href'))")
+    check(len(hrefs) == 6 and all(hrefs), f'every card title is a link ({hrefs})')
     b.close()
 print('ALL INTERACTION TESTS PASSED' if not fails else f'{len(fails)} FAILED')
 sys.exit(1 if fails else 0)
