@@ -52,7 +52,7 @@ HERO_KICKER = "Bachelor of Arts, Politics, Power and Technology, Swinburne Unive
 DESCRIPTOR = Draft("Politics student interested in inequality, work, and what automation does to both.")
 # Photo: put the file in site-src/img-src/ and set PHOTO = ("your-photo.jpg", "Alt text describing the photo").
 # Portrait, 4:5, at least 900 px wide. Until then a neutral monogram shows inside a placeholder box.
-PHOTO = None   # no photo yet: the monogram shows on its own. To add one: PHOTO = ("file.jpg", "Alt text")
+PHOTO = ("ryan-portrait.jpg", "Ryan sitting on a rocky summit above a layer of cloud, smiling.")   # cropped from Ryan's photo; location metadata stripped
 
 # ---------------------------------------------------------------- 2. about
 ABOUT_HEAD = "About"
