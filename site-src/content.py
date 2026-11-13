@@ -182,7 +182,7 @@ WORK = [
 
 # ---------------------------------------------------------------- 5. skills audit and reflection (marked requirement)
 SKILLS_HEAD = "Skills audit and reflection"
-SKILLS_KICKER = "What I can do, and where I learnt it"
+SKILLS_KICKER = "Skills developed in ART20003 and beyond"
 # Skill areas: each card has a heading, a short paragraph of evidence and a few labels.
 SKILL_GROUPS = [
     {
@@ -202,9 +202,9 @@ SKILL_GROUPS = [
     },
 ]
 REFLECTION_HEAD = "Reflection: the Not Our Game campaign"
-SKILLS_AUDIT = Draft("""Not Our Game was the first social campaign I have planned from inception to delivery, and its messaging strategy was the aspect from which I learnt most. The most striking available figure was the 40.7% rise in domestic assaults on Origin nights, yet the research advised against leading with it. Publicising the prevalence of a harmful behaviour can normalise it, and a campaign that treats every fan as part of the problem risks alienating the audience it most needs to reach. The fan-facing material therefore begins from a view most men already hold, that disrespect is unacceptable, and suggests practical ways to act on it.
+SKILLS_AUDIT = Draft("""In developing the Not Our Game campaign strategy, I learnt most from its messaging. The most striking available figure was the 40.7% rise in domestic assaults on Origin nights, yet the research advised against leading with it. Publicising the prevalence of a harmful behaviour can normalise it, and a campaign that treats every fan as part of the problem risks alienating the audience it most needs to reach. The fan-facing material therefore begins from a view most men already hold, that disrespect is unacceptable, and suggests practical ways to act on it.
 
-The experience has made me more attentive to how framing shapes the reception of an argument, independently of its accuracy. Working within a group also required me to coordinate my sections with others' work and deadlines. In future research and writing, I intend to test my assumptions about framing against the available evidence.""")
+The experience has made me more attentive to how framing shapes the reception of an argument, independently of its accuracy. As the strategy was developed in a group, my sections also needed to align with the work of other members. In future research and writing, I intend to test my assumptions about framing against the available evidence.""")
 SKILLS_LIST_LABEL = "Skills"
 SKILLS_LIST = None   # replaced by the tags on each skill area (13 Nov)
 
