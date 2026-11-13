@@ -101,7 +101,7 @@ with sync_playwright() as pw:
     # The whole card is the link: clicking the preview strip of the active card opens the piece
     bx = pg.locator('.rail > .card.is-active .media').bounding_box()
     pg.mouse.click(bx['x'] + bx['width'] / 2, bx['y'] + bx['height'] / 2); pg.wait_for_load_state('load'); pg.wait_for_timeout(300)
-    check(pg.url.endswith('not-our-game.html'), f'clicking the card image opens the piece ({pg.url})')
+    check(pg.url.endswith('essay-cold-war.html'), f'clicking the card image opens the piece ({pg.url})')
     pg.go_back(); pg.wait_for_load_state('load')
     # Phone: header tucks away when scrolling down and returns when scrolling up
     ph = b.new_context(viewport={'width': 390, 'height': 844}, is_mobile=True, has_touch=True)

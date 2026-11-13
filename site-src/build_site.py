@@ -48,7 +48,11 @@ def prose(x, where, cls=''):
     if x is None: return ''
     if isinstance(x, RyanWrites): return ph(x, where)
     c = f' class="{cls}"' if cls else ''
-    return ''.join(f'<p{c}>{smart(p.strip())}</p>' for p in re.split(r'\n\s*\n', x.strip()) if p.strip())
+    return ''.join(f'<p{c}>{keep_together(smart(p.strip()))}</p>' for p in re.split(r'\n\s*\n', x.strip()) if p.strip())
+
+def keep_together(t):
+    """Terms that should never break at their hyphen in justified text."""
+    return t.replace('COVID-19', '<span class="nowrap">COVID-19</span>')
 
 def listing(x, where):
     """A list of short items: placeholder, None (omit), a list of strings, or a plain string."""
@@ -325,13 +329,15 @@ html{scroll-padding-top:96px}
 
 /* experience */
 .xp{list-style:none;margin:0;padding:0}
-.xp li{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-areas:'dates text' 'role text';align-items:start;gap:6px 40px;padding:24px 0;border-top:1px solid var(--line)}
+.xp li{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-areas:'dates text' 'role text';grid-template-rows:auto 1fr;align-items:start;gap:6px 40px;padding:24px 0;border-top:1px solid var(--line)}
 .xp li>.dates{grid-area:dates}.xp li>div:nth-child(2){grid-area:role}.xp li>.text{grid-area:text}
 .xp li:last-child{border-bottom:1px solid var(--line)}
 .xp .dates{font-size:15px;color:var(--muted);font-variant-numeric:tabular-nums}
 .xp h3{font-size:24px;margin:0 0 4px}
 .xp .org{margin:0;color:var(--muted)}
 .xp .text p:last-child{margin:0}
+.xp .text p{font-size:17px;line-height:1.6}
+.nowrap{white-space:nowrap}
 .xp-sub{font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:48px 0 12px;font-family:var(--sans);font-weight:600}
 
 /* contact */
@@ -382,7 +388,8 @@ html{scroll-padding-top:96px}
  .portrait{max-width:340px}
  .sec-grid,.prose-sec,.feature-body,.card.wide,.skills-body{grid-template-columns:1fr}
  .cards{grid-template-columns:1fr}
- .xp li{grid-template-columns:1fr;grid-template-areas:'dates' 'role' 'text'}
+ .xp li{grid-template-columns:1fr;grid-template-areas:'dates' 'role' 'text';grid-template-rows:none}
+ .xp li>.text:not(:empty){margin-top:10px}
  .site-foot .wrap{grid-template-columns:1fr}
  .exploring{grid-template-columns:1fr}
  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -516,11 +523,11 @@ def build_og_image():
     im.save(os.path.join(OUT, 'og.jpg'), quality=88)
 
 # ------------------------------------------------------------------ page parts
-def head(title, desc, prefix=''):
+def head(title, desc, prefix='', page=''):
     og = ''
     if C.SITE_URL:
         og = (f'<meta property="og:type" content="website"><meta property="og:title" content="{attr(title)}">'
-              f'<meta property="og:description" content="{attr(desc)}"><meta property="og:url" content="{C.SITE_URL}">'
+              f'<meta property="og:description" content="{attr(desc)}"><meta property="og:url" content="{C.SITE_URL}/{page}">'
               f'<meta property="og:image" content="{C.SITE_URL}/og.jpg"><meta property="og:image:width" content="1200">'
               f'<meta property="og:image:height" content="630"><meta property="og:image:alt" content="{attr(C.NAME)}: {attr(C.HERO_KICKER)}">'
               f'<meta name="twitter:card" content="summary_large_image">')
@@ -644,7 +651,7 @@ def page_home():
     def xp_rows(items, label):
         return ''.join(f'<li><div class="dates">{inline(e["dates"], f"{label} {i + 1}: dates")}</div>'
                        f'<div><h3>{inline(e["role"], f"{label} {i + 1}: role")}</h3><p class="org">{smart(e["org"])}</p></div>'
-                       + (f'<div class="text"><details class="more"><summary>Details</summary>{prose(e["text"], f"{label} {i + 1}: description")}</details></div></li>' if e.get("text") else '<div class="text"></div></li>')
+                       + (f'<div class="text">{prose(e["text"], f"{label} {i + 1}: description")}</div></li>' if e.get("text") else '<div class="text"></div></li>')
                        for i, e in enumerate(items))
     rows = xp_rows([e for e in C.EXPERIENCE if not e.get('earlier')], 'Experience')
     earlier = [e for e in C.EXPERIENCE if e.get('earlier')]
@@ -698,9 +705,9 @@ def page_featured():
             + sec(P['website_head'], prose(P['website'], 'Project page: the website'), 'web-h')
             + sec(P['messaging_head'], prose(P['messaging'], 'Project page: messaging chapter'), 'msg-h')
             + (sec(P['tiles_head'], tiles, 'tiles-h') if tiles else '')
-            + f'<p style="padding:24px 0 72px"><a class="btn" href="index.html#work">See more work <span class="arr" aria-hidden="true">&rarr;</span></a></p>'
+            + f'<p style="padding:24px 0 72px"><a class="btn" href="index.html#work">See all work <span class="arr" aria-hidden="true">&rarr;</span></a></p>'
             '</div></main>')
-    return head(f'{F["title"]} | {C.NAME}', f'{F["title"]}: {F["type"]}, {F["unit_code"]} {F["unit_name"]}, {F["year"]}.') + header(home=False) + body + footer()
+    return head(f'{F["title"]} | {C.NAME}', f'{F["title"]}: {F["type"]}, {F["unit_code"]} {F["unit_name"]}, {F["year"]}.', page='not-our-game.html') + header(home=False) + body + footer()
 
 ESSAY_CHECKS = []   # (page, differences) from essays.verify, reported by the build
 
@@ -751,7 +758,7 @@ def page_essay(w):
                  f'<p class="crumb"><a href="index.html#work"><span aria-hidden="true">&larr;</span> Selected work</a></p>'
                  f'{unit_line(w)}<p class="kicker">{smart(w["type"])}</p><h1 id="title">{smart(w["title"])}</h1>'
                  f'<p class="standfirst">{smart(w["topic"])}</p>'
-                 f'<p class="essay-meta">About {body_words:,} words &middot; {minutes} minute read &middot; '
+                 f'<p class="essay-meta">About {round(body_words, -2):,} words &middot; {minutes}-minute read &middot; '
                  f'Submitted for {smart(w["unit_code"])} {smart(w["unit_name"])}, Swinburne University of Technology, {smart(w["year"])}</p>'
                  f'<p class="actions"><a class="btn" href="{pdf}">Download PDF <span class="arr" aria-hidden="true">&darr;</span></a></p></section>')
     body = (f'<main id="main"><div class="wrap">{head_html}'
@@ -759,7 +766,7 @@ def page_essay(w):
             f'<p style="padding:24px 0 72px"><a class="btn" href="index.html#work">See all work <span class="arr" aria-hidden="true">&rarr;</span></a></p>'
             '</div></main>')
     desc = f'{w["title"]}: {w["type"].lower()} by {C.NAME} for {w["unit_code"]} {w["unit_name"]}, Swinburne University of Technology, {w["year"]}.'
-    return head(f'{w["title"]} | {C.NAME}', desc) + header(home=False) + body + footer()
+    return head(f'{w["title"]} | {C.NAME}', desc, page=w['read']['page']) + header(home=False) + body + footer()
 
 def page_404():
     t, s = C.NOT_FOUND

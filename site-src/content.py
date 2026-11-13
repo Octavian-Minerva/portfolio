@@ -58,8 +58,8 @@ PHOTO = ("ryan-portrait.jpg", "Ryan sitting on a rocky summit above a layer of c
 
 # ---------------------------------------------------------------- 2. about
 ABOUT_HEAD = "About"
-PURPOSE = ("I am most interested in studying how power is held and reproduced over time, particularly through the organisation of work, and how increasing automation may redistribute it. I am particularly drawn to problems that require sustained analysis.")
-ABOUT_BIO = ("Since I was eighteen I have worked in street fundraising, hospitality, COVID-19 pathology collection (including hotel quarantine) and, for nearly four years, customer service and administration at a self-storage business. Each of these workplaces organised labour differently, and observing them first-hand has shaped my interest in how work is structured and whom it serves. Travel has also shaped my thinking, particularly about how differently inequality is experienced from place to place. I returned to study in 2025 through a university pathway diploma.")
+PURPOSE = ("I am most interested in studying how power is held and reproduced over time, particularly through the organisation of work, and how increasing automation may redistribute it. I am drawn to problems that require sustained analysis.")
+ABOUT_BIO = ("Since I was eighteen I have worked in street fundraising, hospitality, COVID-19 pathology collection (including hotel quarantine) and, for nearly four years, customer service and administration at a self-storage business. Each of these workplaces organised labour differently, and observing them first-hand has shaped my interest in how work is structured and whom it serves. Travel has also shaped my thinking about how differently inequality is experienced from place to place. I returned to study in 2025 through a university pathway diploma.")
 INTERESTS_LABEL = "Areas of interest"
 INTERESTS = (["Who holds power, how is it maintained over time, and why do those without it so often accept arrangements that work against them?", "How would power be distributed in a society whose economy no longer needs most people's labour?", "Why do people with shared material interests come to see themselves as opponents, divided by race or income, while the wealthiest go largely unchallenged?"])
 EXPLORING_LABEL = "At present (November 2026)"
@@ -77,7 +77,7 @@ FEATURED = {
     "live_url": "https://not-our-game.netlify.app",
     "live_label": "Visit the live campaign site",
     "detail_label": "Read about the project",
-    "blurb": ("Not Our Game is a campaign strategy addressing domestic and family violence associated with State of Origin, during which recorded domestic assaults in New South Wales rise by 40.7%. The campaign asks the NRL and its broadcasters to include prevention messaging and support-service information in the 2027 Origin broadcasts. I developed the campaign website and wrote the report's messaging and artefact sections."),
+    "blurb": ("Not Our Game is a campaign strategy addressing domestic and family violence associated with State of Origin: recorded domestic assaults in New South Wales rise by 40.7% on Origin nights. The campaign asks the NRL and its broadcasters to include prevention messaging and support-service information in the 2027 Origin broadcasts. I developed the campaign website and wrote the report's messaging and artefact sections."),
     # Screenshots of the campaign site (sources in site-src/img-src/). First two show on the home page.
     "shots": [
         ("campaign-home-desktop.png", "desktop", "Home page, desktop",
@@ -126,6 +126,16 @@ WORK = [
         "blurb": ("Whether progress distributes or concentrates power depends less on the technology than on the social and institutional frameworks into which it emerges. Drawing on Lukes and Clegg, I trace how platform monopolies and a research agenda tilted towards labour-replacing automation concentrate power, and how policy intervention could distribute its gains more widely."),
     },
     {
+        "title": "Not Our Game",
+        "thumb": ("campaign-home-desktop.png", "Home page of the Not Our Game campaign website, headed 'Love the game. Respect everyone.' over an AI-generated image of four fans watching a game at home."),
+        "type": "Group campaign strategy",
+        "unit_code": "ART20003", "unit_name": "Skills and Strategies for Social Change", "year": "2026",
+        "topic": ("How might State of Origin broadcasts be used to prevent domestic and family violence without positioning fans as the problem?"),
+        "tags": ["Social campaign", "Domestic and family violence", "Messaging"],
+        "blurb": FEATURED["blurb"],   # the same Draft as the project page summary
+        "links": [("Read about the project", "not-our-game.html", False), ("Visit the live campaign site", "https://not-our-game.netlify.app", True)],
+    },
+    {
         "title": "Deterring Arrival: Asylum Policy in Australia and the United States",
         "read": {"src": "soc20013.docx", "page": "essay-deterring-arrival.html"},   # reading page built from the submitted file; checked word for word against the PDF
         "pdf": ("soc20013.pdf", "ryan-ogrady-deterring-arrival-asylum-policy.pdf"),
@@ -134,7 +144,7 @@ WORK = [
         "unit_code": "SOC20013", "unit_name": "Race, Ethnicity and Migration", "year": "2026",
         "topic": ("How do Australia and the United States keep asylum seekers from reaching the territory where they could claim protection?"),
         "tags": ["Asylum policy", "Migration", "Comparative policy"],
-        "blurb": ("Both countries have constructed similar architectures of deterrence in response to comparable moral panics. Geography explains most differences in form, offshore detention in Australia and land buffers in the United States. The more significant contrast lies in durability, with Australia's bipartisan consensus differing from US policy, which shifts between administrations and is contested in the courts."),
+        "blurb": ("Both countries have constructed similar architectures of deterrence in response to comparable moral panics. Geography explains most differences in form: offshore detention in Australia and land buffers in the United States. The more significant contrast lies in durability, with Australia's bipartisan consensus differing from US policy, which shifts between administrations and is contested in the courts."),
     },
     {
         "title": "Insulating News from the Market and the State",
@@ -169,16 +179,6 @@ WORK = [
         "tags": ["Cold War", "International relations", "Historiography"],
         "blurb": ("The period in which Hobsbawm, Gaddis and Jervis each wrote, the information available to them and their theoretical frameworks all shaped their accounts. They largely agree on the observable features of the conflict, diverge on what drove the superpower rivalry, and converge, by different routes, on the Soviet role in ending it."),
     },
-    {
-        "title": "Not Our Game",
-        "thumb": ("campaign-home-desktop.png", "Home page of the Not Our Game campaign website, headed 'Love the game. Respect everyone.' over an AI-generated image of four fans watching a game at home."),
-        "type": "Group campaign strategy",
-        "unit_code": "ART20003", "unit_name": "Skills and Strategies for Social Change", "year": "2026",
-        "topic": ("How might State of Origin broadcasts be used to prevent domestic and family violence without positioning fans as the problem?"),
-        "tags": ["Social campaign", "Domestic and family violence", "Messaging"],
-        "blurb": FEATURED["blurb"],   # the same Draft as the project page summary
-        "links": [("Read about the project", "not-our-game.html", False), ("Visit the live campaign site", "https://not-our-game.netlify.app", True)],
-    },
 ]
 
 # ---------------------------------------------------------------- 5. skills audit and reflection (marked requirement)
@@ -203,7 +203,7 @@ SKILL_GROUPS = [
     },
 ]
 REFLECTION_HEAD = "Reflection: the Not Our Game campaign"
-SKILLS_AUDIT = ("""In developing the Not Our Game campaign strategy, I learnt most from its messaging. The most striking available figure was the 40.7% rise in domestic assaults on Origin nights, yet the research advised against leading with it. Publicising the prevalence of a harmful behaviour can normalise it, and a campaign that treats every fan as part of the problem risks alienating the audience it most needs to reach. The fan-facing material therefore begins from a view most men already hold, that disrespect is unacceptable, and suggests practical ways to act on it.
+SKILLS_AUDIT = ("""In developing the Not Our Game campaign strategy, I learnt most from its messaging. The most prominent available figure was the 40.7% rise in domestic assaults on Origin nights, yet the research advised against leading with it. Publicising the prevalence of a harmful behaviour can normalise it, and a campaign that treats every fan as part of the problem risks alienating the audience it most needs to reach. The fan-facing material therefore begins from a view most men already hold, that disrespect is unacceptable, and suggests practical ways to act on it.
 
 The experience has made me more attentive to how framing shapes the reception of an argument, independently of its accuracy. As the strategy was developed in a group, my sections also needed to align with the work of other members. In future research and writing, I intend to test my assumptions about framing against the available evidence.""")
 SKILLS_LIST_LABEL = "Skills"
@@ -223,7 +223,7 @@ EXPERIENCE = [
         "role": "Arx, personal project",
         "org": "Self-built study and work planner",
         "dates": "2026",
-        "text": ("A self-built study planner that synchronised university deadlines from Canvas and scheduled work backwards from each due date; the project that led to my development work."),
+        "text": ("A study planner that synchronised university deadlines from Canvas and scheduled work backwards from each due date; the project that led to my development work."),
     },
     {
         "role": "Customer service and administration",
@@ -262,7 +262,7 @@ EDUCATION = [   # same fields as EXPERIENCE
         "text": None,
     },
     {
-        "role": "Diploma of Arts and Communication (UniLink)",   # Ryan to check the exact name on his transcript
+        "role": "Diploma of Arts and Communication (UniLink)",   # name confirmed on Swinburne's course page, 14 Nov 2026
         "org": "Swinburne University of Technology; credited as the first year of the BA",
         "dates": "October 2025 to June 2026",
         "text": None,
