@@ -61,7 +61,7 @@ ABOUT_BIO = Draft("Since I was eighteen I have worked in street fundraising, hos
 INTERESTS_LABEL = "Questions I'm interested in"
 INTERESTS = Draft(["How can access to opportunity be decoupled from family background?", "Why does rising inequality so often produce division among those affected, rather than pressure on those accumulating wealth and influence?", "How will the wider adoption of AI reshape the labour market, and how will its gains be distributed?"])
 EXPLORING_LABEL = "Now, November 2026"
-EXPLORING = Draft(["Halfway through a Bachelor of Arts in Politics, Power and Technology", "Beginning infrastructure work on an AI agent platform", "Reading on scientific management and the organisation of work"])
+EXPLORING = Draft(["Halfway through a Bachelor of Arts in Politics, Power and Technology", "Beginning work adapting an AI agent platform to client businesses", "Reading on scientific management and the organisation of work"])
 
 # ---------------------------------------------------------------- 3. featured project (also feeds the detail page)
 FEATURED = {
@@ -175,8 +175,8 @@ SKILL_GROUPS = [
     },
     {
         "title": "Building systems with AI",
-        "text": Draft("Although I have no formal training in programming, I approach software design as a problem of decomposition: dividing a task into components, specifying each precisely and verifying the result. Since June 2026 I have applied this approach as a contract developer on an AI agent platform, building an automated review loop and an interface for monitoring agent activity. My earlier personal project, Arx, was a study planner built on the same principles."),
-        "tags": Draft(["Systems thinking", "AI-assisted development", "Process design"]),
+        "text": Draft("Although I have no formal training in programming, I have found that most of the work of directing AI lies in specification. A task must be divided into components, each with an explicit definition of completion expressed as conditions that can be verified as true or false, and the system is then refined, detail by detail, until those conditions hold. Since June 2026 I have applied this approach as a contract developer on an AI agent platform, where I have also learnt that a tool's design largely determines whether people use more than its most basic functions."),
+        "tags": Draft(["Specification and acceptance criteria", "Systems design", "Interface design", "Iterative testing"]),
     },
     {
         "title": "Working with people",
@@ -198,7 +198,7 @@ EXPERIENCE = [
         "role": Draft("AI systems developer"),
         "org": "AI agent platform, contract",
         "dates": "June 2026 to present",
-        "text": Draft("I have built an automated code review loop, in which one agent reviews another's changes until they meet the required standard, and an interface for monitoring agent activity across a workspace. I am now moving into infrastructure work, adapting the platform to the operational needs of individual client businesses."),
+        "text": Draft("I built an independent review agent that checks proposed code changes against the existing codebase, suggests fixes and re-reviews them until they pass; a 'factory floor' view that shows the status of every agent at a glance, with an assistant agent that summarises activity on request; and an orchestration mode that divides a plan into tickets for separate agents and assembles their output. I tested this work in a separate development deployment. I am now beginning work adapting the platform to the needs of client businesses."),
     },
     {
         "role": "Arx, personal project",
