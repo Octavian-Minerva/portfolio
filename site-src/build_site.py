@@ -1,8 +1,8 @@
-# Builds Ryan O'Grady's portfolio into ../site/ from content.py (all copy) and img-src/ (image sources).
-# Run from anywhere:   .venv/bin/python build_site.py            build, and warn loudly about unfilled placeholders
-#                      .venv/bin/python build_site.py --release  refuse to build while any placeholder remains
-# Output is plain static HTML/CSS with no JavaScript and no external requests: fonts are self-hosted.
-# Deploy (later, not yet): upload the whole ../site/ folder to Netlify (publish directory = site root, no build command).
+# Builds Ryan O'Grady's portfolio into ../site/ from content.py (all copy), img-src/, fonts-src/ and ../essays-src/ (essays).
+# Run:  .venv/bin/python build_site.py --release   the publishable build; stops on placeholders, drafts, em dashes or essay mismatches
+#       .venv/bin/python build_site.py --preview   the same, with noindex for review copies
+# Output: static HTML/CSS plus one small progressive-enhancement script; fonts self-hosted, no external requests.
+# Deploy: push to main (Netlify publishes site/, see ../netlify.toml). Full guide: ../AGENTS.md
 import hashlib, html, os, re, shutil, subprocess, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
