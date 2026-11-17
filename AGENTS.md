@@ -2,7 +2,7 @@
 
 Read this before changing anything. It records what the site is, how it is built and published, and the decisions behind its content and design, so that any agent (or person) can pick the work up without the original conversation.
 
-Last updated: 16 November 2026.
+Last updated: 17 November 2026.
 
 ## 1. What this is
 
@@ -38,7 +38,7 @@ README.md, AGENTS.md, CLAUDE.md   orientation (CLAUDE.md just imports this file)
 
 ## 3. Toolchain
 
-- Python 3.11 with a virtual environment at `site-src/.venv` (not committed). Packages: `playwright`, `pillow`, `fonttools`, `brotli`.
+- Python 3.11 with a virtual environment at `site-src/.venv` (not committed). Packages: `playwright==1.64.1`, `pillow`, `fonttools`, `brotli`. Pin Playwright: 1.65 bundles a Node binary that needs the system library `libatomic.so.1`, and without it the checker and tests stop with "Connection closed while reading from the driver". 1.64.1 runs without it and works with the Chromium build at `/opt/pw-browsers/`.
 - Playwright's Chromium for the checker and tests. **Both scripts look for the browser at `/opt/pw-browsers/chromium_headless_shell-*/...`** (the original environment). On another machine, run `playwright install chromium` and change the `EXE` line in `check_site.py` and `test_interactions.py`.
 - System tools for essays: `pandoc` (tested with 2.17) for .docx sources, poppler's `pdftohtml` and `pdftotext` (tested with 22.12) for PDF sources.
 - LibreOffice is only needed if you render .docx files to check them; the site does not use it.
