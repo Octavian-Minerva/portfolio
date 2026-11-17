@@ -2,7 +2,7 @@
 # Run:  .venv/bin/python build_site.py --release   the publishable build; stops on placeholders, drafts, em dashes or essay mismatches
 #       .venv/bin/python build_site.py --preview   the same, with noindex for review copies
 # Output: static HTML/CSS plus one small progressive-enhancement script; fonts self-hosted, no external requests.
-# Deploy: push to main (Netlify publishes site/, see ../netlify.toml). Full guide: ../AGENTS.md
+# Deploy: push to main (Netlify publishes site/, see ../netlify.toml). Setup: ../README.md
 import hashlib, html, os, re, shutil, subprocess, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
